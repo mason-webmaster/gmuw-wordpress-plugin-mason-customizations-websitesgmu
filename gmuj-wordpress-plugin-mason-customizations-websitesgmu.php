@@ -122,7 +122,8 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
 
    case 'web_host_admin':
       if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-        if (get_post_meta($post_id, 'web_host', true)=='WPE') {
+
+        if (has_term('wpengine', 'web_host')) {
         //Store web host admin URL
         $web_host_admin_url='https://my.wpengine.com/installs/'.get_post_meta($post_id, 'environment_name', true).'/';
         // Output web host admin links
@@ -130,6 +131,7 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
         echo '<a href="'.$web_host_admin_url.'cache_dashboard" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __FILE__ ).'images/logo-wpengine.png'.'" /> cache</a><br />';
         echo '<a href="'.$web_host_admin_url.'advanced" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __FILE__ ).'images/logo-wpengine.png'.'" /> advanced</a><br />';
         }
+
       }
       break;
  }
