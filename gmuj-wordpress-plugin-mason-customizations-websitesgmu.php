@@ -63,13 +63,14 @@ add_filter ('manage_website_posts_columns', 'gmuw_websitesgmu_add_columns_websit
 function gmuw_websitesgmu_add_columns_website ($columns) {
  return array_merge ( $columns, array ( 
    //ACF fields
-   'environment_name'   => 'Environment Name', 
+   'environment_name'   => 'Env. Name',
    'hosting_domain' => 'Hosting Domain',
-   'production_domain'   => 'Production Domain', 
-   'wordpress_theme'   => 'Theme', 
-   'website_status'   => 'Status', 
+   'production_domain'   => 'Prod Domain',
+   'wordpress_theme'   => 'WP Theme',
+   'website_status'   => 'Status',
    //Other fields
-   'wordpress_theme_live' => 'Live Theme',
+   'wordpress_data_feeds' => 'WP Data Feeds',
+   'wordpress_theme_live' => 'Live WP Theme',
    'admin_login' => 'Admin Login',
    'web_host_admin' => 'Web Host Admin',
  ) );
@@ -97,15 +98,34 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
      echo '<a href="https://'.get_post_meta($post_id, 'production_domain', true).'" target="_blank">' . get_post_meta ($post_id, 'production_domain', true) . '</a>';
      break;
    case 'wordpress_theme':
-     echo get_post_meta($post_id, 'wordpress_theme', true);
+     if (has_term('wordpress', 'cms')) {
+      echo get_post_meta($post_id, 'wordpress_theme', true);
+     }
      break;
    case 'website_status':
      echo get_post_meta($post_id, 'website_status', true);
      break;
 
+   case 'wordpress_data_feeds':
+      if (get_post_meta($post_id, 'website_status', true)!='deleted') {
+       if (has_term('wordpress', 'cms')) {
+        if (has_term('materiell','web_host')) {
+          $hosting_domain='https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com';
+        }
+        if (has_term('wpengine','web_host')) {
+          $hosting_domain='https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com';
+        }
+        echo '<a href="'.$hosting_domain.'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
+
+       }
+      }
+     break;
+
    case 'wordpress_theme_live':
       if (get_post_meta($post_id, 'website_status', true)!='deleted') {
+       if (has_term('wordpress', 'cms')) {
         echo gmuj_websitesgmu_get_live_website_theme($post_id);
+       }
       }
      break;
 
