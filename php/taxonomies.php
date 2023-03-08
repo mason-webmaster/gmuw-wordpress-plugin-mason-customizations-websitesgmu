@@ -17,7 +17,7 @@ add_action('init', function(){
 			array(
 			'hierarchical' => true,
 			'labels' => array(
-				'name' => 'Departments',
+				'name' => 'Department(s)',
 				'singular_name' => 'Department',
 				'search_items' =>  'Search Departments',
 				'all_items' => 'All Departments',
@@ -32,6 +32,8 @@ add_action('init', function(){
 			'show_ui' => true,
 			'query_var' => true,
 			'rewrite' => array( 'slug' => 'department' ),
+			'show_admin_column' => true,
+			'show_in_rest' => true
 			)
 		);
 
