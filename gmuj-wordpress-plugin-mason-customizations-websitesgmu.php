@@ -62,8 +62,6 @@ require('php/taxonomies.php');
 add_filter ('manage_website_posts_columns', 'gmuw_websitesgmu_add_columns_website');
 function gmuw_websitesgmu_add_columns_website ($columns) {
  return array_merge ( $columns, array ( 
-   //post id
-   'post_id' => 'Post ID',
    //ACF fields
    'environment_name'   => 'Environment Name', 
    'hosting_domain' => 'Hosting Domain',
@@ -81,9 +79,6 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
 add_action ('manage_website_posts_custom_column', 'gmuw_websitesgmu_website_custom_column', 10, 2);
 function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
  switch ($column) {
-   case 'post_id':
-    echo $post_id;
-    break;
    case 'environment_name':
     echo get_post_meta($post_id, 'environment_name', true);
     break;
