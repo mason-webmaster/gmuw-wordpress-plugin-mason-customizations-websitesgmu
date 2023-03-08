@@ -167,7 +167,11 @@ function gmuj_websitesgmu_display_settings_page() {
 		// Websites using official theme
 			$websites_theme_count = gmuj_websitesgmu_websites_using_theme();
 		// Theme percentage
-			$theme_percentage = round($websites_theme_count/$websites_all_count*100,2);
+			if ($websites_all_count>0) {
+				$theme_percentage = round($websites_theme_count/$websites_all_count*100,2);
+			} else {
+				$theme_percentage=0;
+			}
 
 	// Display stats
 	echo '<p>'.$websites_all_count . ' total websites.</p>';
