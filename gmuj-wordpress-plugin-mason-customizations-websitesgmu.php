@@ -65,7 +65,6 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
    //post id
    'post_id' => 'Post ID',
    //ACF fields
-   'web_host' => 'Web Host',
    'environment_name'   => 'Environment Name', 
    'hosting_domain' => 'Hosting Domain',
    'production_domain'   => 'Production Domain', 
@@ -84,9 +83,6 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
  switch ($column) {
    case 'post_id':
     echo $post_id;
-    break;
-   case 'web_host':
-    echo get_post_meta($post_id, 'web_host', true);
     break;
    case 'environment_name':
     echo get_post_meta($post_id, 'environment_name', true);
