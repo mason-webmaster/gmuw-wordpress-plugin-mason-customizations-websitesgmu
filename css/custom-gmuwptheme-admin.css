@@ -1,0 +1,5 @@
+/* custom admin styles for site */
+
+.data_table .followup {background-color: #ffffaa;}
+.data_table .deleted {text-decoration: line-through;}
+.data_table .working {background-color: #99ffcc;}
