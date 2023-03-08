@@ -70,7 +70,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
    'website_status'   => 'Status', 
    //Other fields
    'wordpress_theme_live' => 'Live Theme',
-   'wordpress_login' => 'WP Login',
+   'wordpress_login' => 'Admin Login',
    'web_host_admin' => 'Web Host Admin',
  ) );
 }
@@ -110,12 +110,11 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
 
       if (get_post_meta($post_id, 'website_status', true)!='deleted') {
 
-        if (get_post_meta($post_id, 'web_host', true)=='WPE') {
+        if (has_term('wpengine', 'web_host')) {
             echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __FILE__ ).'images/logo-wordpress.png'.'" /></a>';
-        } elseif (get_post_meta($post_id, 'web_host', true)=='Materiell') {
+        }
+        if (has_term('materiell', 'web_host')) {
             echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __FILE__ ).'images/logo-wordpress.png'.'" /></a>';
-        } else {
-
         }
 
       }
