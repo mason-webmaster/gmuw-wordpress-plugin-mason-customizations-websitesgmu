@@ -92,12 +92,11 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
     echo get_post_meta($post_id, 'environment_name', true);
     break;
    case 'hosting_domain':
-    if (get_post_meta($post_id, 'web_host', true)=='WPE') {
-      echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com" target="_blank">' . get_post_meta($post_id, 'hosting_domain', true) . 'wpengine.com</a>';
-    } elseif (get_post_meta($post_id, 'web_host', true)=='Materiell') {
-      echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com" target="_blank">' . get_post_meta($post_id, 'hosting_domain', true) . 'materiellcloud.com</a>';
-    } else {
-
+    if (has_term('wpengine', 'web_host')) {
+      echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . 'wpengine.com</a>';
+    }
+    if (has_term('materiell', 'web_host')) {
+      echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . 'materiellcloud.com</a>';
     }
     break;
    case 'production_domain':
