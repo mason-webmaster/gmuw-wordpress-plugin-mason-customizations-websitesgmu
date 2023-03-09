@@ -43,7 +43,7 @@ add_action('init', function(){
     // Set up arguments for the register_post_type function
     $args = array(
         'labels'            => $labels,
-        'public'            => false,
+        'public'            => true,
         'show_ui'           => true,
         'query_var'         => true,
         'rewrite'           => array('slug' => 'website'),
@@ -93,7 +93,7 @@ add_action('init', function(){
     // Set up arguments for the register_post_type function
     $args = array(
         'labels'            => $labels,
-        'public'            => false,
+        'public'            => true,
         'show_ui'           => true,
         'query_var'         => true,
         'rewrite'           => array('slug' => 'ga_account'),
