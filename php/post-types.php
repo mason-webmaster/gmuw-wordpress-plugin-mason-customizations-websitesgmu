@@ -56,7 +56,7 @@ add_action('init', function(){
         'supports'          => array('title', 'editor', 'thumbnail'),
     );
 
-    // Register generic custom post type
+    // Register website custom post type
     register_post_type('website', $args);
 
 
@@ -106,7 +106,57 @@ add_action('init', function(){
         'supports'          => array('title', 'editor', 'thumbnail'),
     );
 
-    // Register generic custom post type
+    // Register ga_account custom post type
     register_post_type('ga_account', $args);
+
+
+    // Register ga_property custom post type.
+
+    // Define labels for ga_property post type
+    $labels = array(
+        'name'                  => 'GA Property',
+        'singular_name'         => 'GA Property',
+        'menu_name'             => 'GA Properties',
+        'name_admin_bar'        => 'GA Property',
+        'add_new'               => 'Add New',
+        'add_new_item'          => 'Add New GA Property',
+        'new_item'              => 'New GA Property',
+        'edit_item'             => 'Edit GA Property',
+        'view_item'             => 'View GA Property',
+        'all_items'             => 'All GA Properties',
+        'search_items'          => 'Search GA properties',
+        'parent_item_colon'     => 'Parent GA property:',
+        'not_found'             => 'No GA properties found.',
+        'not_found_in_trash'    => 'No GA properties found in Trash.',
+        'featured_image'        => 'GA Property Image',
+        'set_featured_image'    => 'Set GA property image',
+        'remove_featured_image' => 'Remove GA property image',
+        'use_featured_image'    => 'Use as GA property image',
+        'archives'              => 'GA Properties archives',
+        'insert_into_item'      => 'Insert into GA property',
+        'uploaded_to_this_item' => 'Uploaded to this GA property',
+        'filter_items_list'     => 'Filter GA property list',
+        'items_list_navigation' => 'GA property list navigation',
+        'items_list'            => 'GA property list',
+    );
+
+    // Set up arguments for the register_post_type function
+    $args = array(
+        'labels'            => $labels,
+        'public'            => true,
+        'show_ui'           => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'ga_property'),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => 20,
+        'menu_icon'         => 'dashicons-index-card',
+        'show_in_rest'      => true,
+        'supports'          => array('title', 'editor', 'thumbnail'),
+    );
+
+    // Register ga_property custom post type
+    register_post_type('ga_property', $args);
 
 });
