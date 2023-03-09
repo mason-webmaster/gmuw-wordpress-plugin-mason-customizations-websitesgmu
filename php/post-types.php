@@ -10,7 +10,7 @@
  */
 add_action('init', function(){
 
-    // Register generic custom post type. Register additional custom post types here as needed.
+    // Register website custom post type.
 
     // Define labels for website post type
     $labels = array(
@@ -39,7 +39,7 @@ add_action('init', function(){
         'items_list_navigation' => 'Website list navigation',
         'items_list'            => 'Website list',
     );
- 
+
     // Set up arguments for the register_post_type function
     $args = array(
         'labels'            => $labels,
@@ -58,5 +58,55 @@ add_action('init', function(){
 
     // Register generic custom post type
     register_post_type('website', $args);
+
+
+    // Register ga_account custom post type.
+
+    // Define labels for ga_account post type
+    $labels = array(
+        'name'                  => 'GA Account(s)',
+        'singular_name'         => 'GA Account',
+        'menu_name'             => 'GA Accounts',
+        'name_admin_bar'        => 'GA Account',
+        'add_new'               => 'Add New',
+        'add_new_item'          => 'Add New GA Account',
+        'new_item'              => 'New GA Account',
+        'edit_item'             => 'Edit GA Account',
+        'view_item'             => 'View GA Account',
+        'all_items'             => 'All GA Accounts',
+        'search_items'          => 'Search GA accounts',
+        'parent_item_colon'     => 'Parent GA account:',
+        'not_found'             => 'No GA accounts found.',
+        'not_found_in_trash'    => 'No GA accounts found in Trash.',
+        'featured_image'        => 'GA Account Image',
+        'set_featured_image'    => 'Set GA account image',
+        'remove_featured_image' => 'Remove GA account image',
+        'use_featured_image'    => 'Use as GA account image',
+        'archives'              => 'GA Accounts archives',
+        'insert_into_item'      => 'Insert into GA account',
+        'uploaded_to_this_item' => 'Uploaded to this GA account',
+        'filter_items_list'     => 'Filter GA account list',
+        'items_list_navigation' => 'GA account list navigation',
+        'items_list'            => 'GA account list',
+    );
+
+    // Set up arguments for the register_post_type function
+    $args = array(
+        'labels'            => $labels,
+        'public'            => false,
+        'show_ui'           => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'ga_account'),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => 20,
+        'menu_icon'         => 'dashicons-category',
+        'show_in_rest'      => true,
+        'supports'          => array('title', 'editor', 'thumbnail'),
+    );
+
+    // Register generic custom post type
+    register_post_type('ga_account', $args);
 
 });

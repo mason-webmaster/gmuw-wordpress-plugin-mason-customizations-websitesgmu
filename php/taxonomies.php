@@ -13,7 +13,7 @@ add_action('init', function(){
 	// Register departments taxonomy
 		register_taxonomy(
 			'department',
-			'website',
+			array('website','ga_account'),
 			array(
 			'hierarchical' => true,
 			'labels' => array(
