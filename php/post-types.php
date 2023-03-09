@@ -209,4 +209,54 @@ add_action('init', function(){
     // Register gtm_account custom post type
     register_post_type('gtm_account', $args);
 
+
+    // Register gtm_container custom post type.
+
+    // Define labels for gtm_container post type
+    $labels = array(
+        'name'                  => 'GTM Container',
+        'singular_name'         => 'GTM Container',
+        'menu_name'             => 'GTM Containers',
+        'name_admin_bar'        => 'GTM Container',
+        'add_new'               => 'Add New',
+        'add_new_item'          => 'Add New GTM Container',
+        'new_item'              => 'New GTM Container',
+        'edit_item'             => 'Edit GTM Container',
+        'view_item'             => 'View GTM Container',
+        'all_items'             => 'All GTM Containers',
+        'search_items'          => 'Search GTM containers',
+        'parent_item_colon'     => 'Parent GTM container:',
+        'not_found'             => 'No GTM containers found.',
+        'not_found_in_trash'    => 'No GTM containers found in Trash.',
+        'featured_image'        => 'GTM Container Image',
+        'set_featured_image'    => 'Set GTM container image',
+        'remove_featured_image' => 'Remove GTM container image',
+        'use_featured_image'    => 'Use as GTM container image',
+        'archives'              => 'GTM Containers archives',
+        'insert_into_item'      => 'Insert into GTM container',
+        'uploaded_to_this_item' => 'Uploaded to this GTM container',
+        'filter_items_list'     => 'Filter GTM container list',
+        'items_list_navigation' => 'GTM container list navigation',
+        'items_list'            => 'GTM container list',
+    );
+
+    // Set up arguments for the register_post_type function
+    $args = array(
+        'labels'            => $labels,
+        'public'            => true,
+        'show_ui'           => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'gtm_container'),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => 20,
+        'menu_icon'         => 'dashicons-index-card',
+        'show_in_rest'      => true,
+        'supports'          => array('title', 'editor', 'thumbnail'),
+    );
+
+    // Register gtm_container custom post type
+    register_post_type('gtm_container', $args);
+
 });
