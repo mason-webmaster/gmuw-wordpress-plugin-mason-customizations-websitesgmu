@@ -60,3 +60,24 @@ function gmuj_websitesgmu_add_sublevel_menu() {
 	);
 	
 }
+
+/**
+ * Hides 'comments' admin menu item
+ */
+add_action('admin_menu', 'gmuw_websitesgmu_remove_admin_menu_items');
+function gmuw_websitesgmu_remove_admin_menu_items() {
+
+	//adapted from: https://managewp.com/blog/wordpress-admin-sidebar-remove-unwanted-items
+
+	//set admin menu items to remove
+	$remove_menu_items = array(__('Comments'));
+
+	global $menu;
+	end($menu);
+	while(prev($menu)){
+		$item = explode(' ',$menu[key($menu)][0]);
+		if(in_array($item[0] != NULL ? $item[0] : '', $remove_menu_items)){
+			unset($menu[key($menu)]);
+		}
+	}
+}
