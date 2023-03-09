@@ -374,3 +374,34 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
     }
 
 }
+
+// GA accounts
+
+// Add additional columns to the admin list
+add_filter ('manage_ga_account_posts_columns', 'gmuw_websitesgmu_add_columns_ga_account');
+function gmuw_websitesgmu_add_columns_ga_account ($columns) {
+
+    return array_merge ( $columns, array (
+        //ACF fields
+        'ga_account_id'   => 'GA Account ID',
+        //Other fields
+        'ga_account_link' => 'GA Account Link',
+    ) );
+
+}
+
+// Generate field output for additional columns in the admin list
+add_action ('manage_ga_account_posts_custom_column', 'gmuw_websitesgmu_ga_account_custom_column', 10, 2);
+function gmuw_websitesgmu_ga_account_custom_column ($column, $post_id) {
+
+    switch ($column) {
+        case 'ga_account_id':
+            echo get_post_meta($post_id, 'ga_account_id', true);
+            break;
+        case 'ga_account_link':
+            // Output web host admin links
+            echo '<a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta($post_id, 'ga_account_id', true).'p0/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a><br />';
+            break;
+    }
+
+}
