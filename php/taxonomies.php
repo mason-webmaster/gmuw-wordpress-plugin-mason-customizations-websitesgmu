@@ -91,4 +91,31 @@ add_action('init', function(){
 			)
 		);
 
+	// Register ga_property_version taxonomy
+		register_taxonomy(
+			'ga_property_version',
+			'ga_property',
+			array(
+			'hierarchical' => true,
+			'labels' => array(
+				'name' => 'GA Property Version(s)',
+				'singular_name' => 'GA Property Version',
+				'search_items' =>  'Search GA Property Versions',
+				'all_items' => 'All GA Property Versions',
+				'parent_item' => 'Parent GA Property Version',
+				'parent_item_colon' => 'Parent GA Property Version:',
+				'edit_item' => 'Edit GA Property Version',
+				'update_item' => 'Update GA Property Version',
+				'add_new_item' => 'Add New GA Property Version',
+				'new_item_name' => 'New GA Property Version',
+				'menu_name' => 'GA Property Versions',
+				),
+			'show_ui' => true,
+			'query_var' => true,
+			'rewrite' => array( 'slug' => 'ga_property_version' ),
+			'show_admin_column' => true,
+			'show_in_rest' => true
+			)
+		);
+
 });
