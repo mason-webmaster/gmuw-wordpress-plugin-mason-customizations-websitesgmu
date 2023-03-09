@@ -124,7 +124,11 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
    case 'wordpress_theme_live':
       if (get_post_meta($post_id, 'website_status', true)!='deleted') {
        if (has_term('wordpress', 'cms')) {
-        echo gmuj_websitesgmu_get_live_website_theme($post_id);
+        if ($_GET['live_theme_check']=='1') {
+          echo gmuj_websitesgmu_get_live_website_theme($post_id);
+        } else {
+          echo '<a href="'.$_SERVER['REQUEST_URI'].'&live_theme_check=1">enable</a>';
+        }
        }
       }
      break;
