@@ -151,7 +151,7 @@ add_action('init', function(){
         'has_archive'       => true,
         'hierarchical'      => false,
         'menu_position'     => 20,
-        'menu_icon'         => 'dashicons-index-card',
+        'menu_icon'         => 'dashicons-analytics',
         'show_in_rest'      => true,
         'supports'          => array('title', 'editor', 'thumbnail'),
     );
