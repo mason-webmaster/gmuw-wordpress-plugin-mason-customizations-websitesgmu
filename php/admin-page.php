@@ -358,8 +358,8 @@ function gmuj_websitesgmu_display_settings_page() {
 
 	// Output info based on mode
 	if (empty($_GET["mode"])) {
-		echo '<h2>Website Admin</h2>';
 		echo '<p><a href="?page=gmuj_websitesgmu&mode=stats">Statistics</a></p>';
+		echo '<p><a href="edit.php?post_type=website">Websites Admin</a></p>';
 		echo '<p><a href="?page=gmuj_websitesgmu&mode=sites">List Sites</a></p>';
 	}
 
