@@ -406,6 +406,35 @@ function gmuw_websitesgmu_ga_account_custom_column ($column, $post_id) {
 
 }
 
+// GA properties
+
+// Add additional columns to the admin list
+add_filter ('manage_ga_property_posts_columns', 'gmuw_websitesgmu_add_columns_ga_property');
+function gmuw_websitesgmu_add_columns_ga_property ($columns) {
+
+    return array_merge ( $columns, array (
+        //ACF fields
+        'ga_property_id'   => 'GA Property ID',
+        'ga_measurement_id'   => 'GA4 Data Stream Measurement ID',
+    ) );
+
+}
+
+// Generate field output for additional columns in the admin list
+add_action ('manage_ga_property_posts_custom_column', 'gmuw_websitesgmu_ga_property_custom_column', 10, 2);
+function gmuw_websitesgmu_ga_property_custom_column ($column, $post_id) {
+
+    switch ($column) {
+        case 'ga_property_id':
+            echo get_post_meta($post_id, 'ga_property_id', true);
+            break;
+        case 'ga_measurement_id':
+            echo get_post_meta($post_id, 'ga_measurement_id', true);
+            break;
+    }
+
+}
+
 // GTM accounts
 
 // Add additional columns to the admin list
