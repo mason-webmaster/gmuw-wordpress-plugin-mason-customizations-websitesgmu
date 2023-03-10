@@ -474,6 +474,7 @@ function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
 
     return array_merge ( $columns, array (
         //ACF fields
+        'gtm_container_account_post_id' => 'GTM Account',
         'gtm_container_id'   => 'GTM Container ID',
     ) );
 
@@ -484,6 +485,11 @@ add_action ('manage_gtm_container_posts_custom_column', 'gmuw_websitesgmu_gtm_co
 function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
 
     switch ($column) {
+        case 'gtm_container_account_post_id':
+            echo get_the_title(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'<br />';
+            echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'">edit</a> | ';
+            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'">view</a> ';
+            break;
         case 'gtm_container_id':
             echo get_post_meta($post_id, 'gtm_container_id', true);
             break;
