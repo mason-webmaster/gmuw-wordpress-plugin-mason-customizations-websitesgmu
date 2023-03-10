@@ -416,6 +416,8 @@ function gmuw_websitesgmu_add_columns_ga_property ($columns) {
         'ga_property_account_post_id' => 'GA Account',
         'ga_property_id'   => 'GA Property ID',
         'ga_measurement_id'   => 'GA4 Data Stream Measurement ID',
+        //Other fields
+        'ga_property_link' => 'GA Property Link',
     ) );
 
 }
@@ -435,6 +437,9 @@ function gmuw_websitesgmu_ga_property_custom_column ($column, $post_id) {
             break;
         case 'ga_measurement_id':
             echo get_post_meta($post_id, 'ga_measurement_id', true);
+            break;
+        case 'ga_property_link':
+            echo '<a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a><br />';
             break;
     }
 
