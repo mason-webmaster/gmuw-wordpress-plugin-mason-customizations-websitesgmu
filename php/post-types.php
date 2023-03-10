@@ -459,3 +459,28 @@ function gmuw_websitesgmu_gtm_account_custom_column ($column, $post_id) {
     }
 
 }
+
+// GTM containers
+
+// Add additional columns to the admin list
+add_filter ('manage_gtm_container_posts_columns', 'gmuw_websitesgmu_add_columns_gtm_container');
+function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
+
+    return array_merge ( $columns, array (
+        //ACF fields
+        'gtm_container_id'   => 'GTM Container ID',
+    ) );
+
+}
+
+// Generate field output for additional columns in the admin list
+add_action ('manage_gtm_container_posts_custom_column', 'gmuw_websitesgmu_gtm_container_custom_column', 10, 2);
+function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
+
+    switch ($column) {
+        case 'gtm_container_id':
+            echo get_post_meta($post_id, 'gtm_container_id', true);
+            break;
+    }
+
+}
