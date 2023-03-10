@@ -405,3 +405,28 @@ function gmuw_websitesgmu_ga_account_custom_column ($column, $post_id) {
     }
 
 }
+
+// GTM accounts
+
+// Add additional columns to the admin list
+add_filter ('manage_gtm_account_posts_columns', 'gmuw_websitesgmu_add_columns_gtm_account');
+function gmuw_websitesgmu_add_columns_gtm_account ($columns) {
+
+    return array_merge ( $columns, array (
+        //ACF fields
+        'gtm_account_id'   => 'GTM Account ID',
+    ) );
+
+}
+
+// Generate field output for additional columns in the admin list
+add_action ('manage_gtm_account_posts_custom_column', 'gmuw_websitesgmu_gtm_account_custom_column', 10, 2);
+function gmuw_websitesgmu_gtm_account_custom_column ($column, $post_id) {
+
+    switch ($column) {
+        case 'gtm_account_id':
+            echo get_post_meta($post_id, 'gtm_account_id', true);
+            break;
+    }
+
+}
