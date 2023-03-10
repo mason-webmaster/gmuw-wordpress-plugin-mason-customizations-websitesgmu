@@ -399,7 +399,6 @@ function gmuw_websitesgmu_ga_account_custom_column ($column, $post_id) {
             echo get_post_meta($post_id, 'ga_account_id', true);
             break;
         case 'ga_account_link':
-            // Output web host admin links
             echo '<a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta($post_id, 'ga_account_id', true).'p0/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a><br />';
             break;
     }
@@ -476,6 +475,8 @@ function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
         //ACF fields
         'gtm_container_account_post_id' => 'GTM Account',
         'gtm_container_id'   => 'GTM Container ID',
+        //Other fields
+        'gtm_container_link' => 'GTM Container Link',
     ) );
 
 }
@@ -492,6 +493,9 @@ function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
             break;
         case 'gtm_container_id':
             echo get_post_meta($post_id, 'gtm_container_id', true);
+            break;
+        case 'gtm_container_link':
+            echo '<a href="https://tagmanager.google.com/#/container/accounts/'.get_post_meta(get_post_meta($post_id, 'gtm_container_account_post_id', true), 'gtm_account_id', true).'/containers/'.get_post_meta($post_id, 'gtm_container_id', true).'/" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_tag_manager.png'.'" /></a><br />';
             break;
     }
 
