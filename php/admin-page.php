@@ -465,7 +465,7 @@ function gmuj_websitesgmu_display_settings_page() {
 		foreach ( $websites_all as $post ) {
 			// Begin table row for website environment
 			echo '<tr class="';
-			echo $post->followup_flag==1 ? 'followup ' : '';
+			echo $post->follow_up==1 ? 'follow_up ' : '';
 			echo $post->website_status=='deleted' ? 'deleted ' : '';
 			echo $post->website_status=='working' ? 'working ' : '';
 			echo '">';
