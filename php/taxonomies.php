@@ -69,7 +69,7 @@ add_action('init', function(){
 			'cms',
 			'website',
 			array(
-			'hierarchical' => false,
+			'hierarchical' => true,
 			'labels' => array(
 				'name' => 'CMS(s)',
 				'singular_name' => 'Content Management System',
