@@ -298,10 +298,10 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             break;
         case 'hosting_domain':
             if (has_term('wpengine', 'web_host')) {
-            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . 'wpengine.com</a>';
+            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.wpengine.com</a>';
             }
             if (has_term('materiell', 'web_host')) {
-            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . 'materiellcloud.com</a>';
+            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.materiellcloud.com</a>';
             }
             if (has_term('acquia-cloud-site-factory', 'web_host')) {
             echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.sitemasonry.gmu.edu" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.sitemasonry.gmu.edu</a>';
