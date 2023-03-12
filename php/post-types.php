@@ -279,6 +279,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         'website_status'   => 'Status',
         //Other fields
         'website_ga_property_post_id' => 'GA Account',
+        'website_gtm_container_post_id' => 'GTM Container',
         'wordpress_data_feeds' => 'WP Data Feeds',
         'wordpress_theme_live' => 'Live WP Theme',
         'admin_login' => 'Admin Login',
@@ -322,6 +323,13 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             echo get_the_title(get_post_meta($post_id, 'website_ga_property_post_id', true)).'<br />';
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'website_ga_property_post_id', true)).'">edit</a> | ';
             echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_ga_property_post_id', true)).'">view</a> ';
+            }
+            break;
+        case 'website_gtm_container_post_id':
+            if (get_post_meta($post_id, 'website_gtm_container_post_id', true)){
+            echo get_the_title(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'<br />';
+            echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">edit</a> | ';
+            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">view</a> ';
             }
             break;
         case 'wordpress_data_feeds':
