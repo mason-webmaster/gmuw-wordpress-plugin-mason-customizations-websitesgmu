@@ -219,7 +219,7 @@ function gmuj_websitesgmu_display_settings_page() {
 			// Begin table row for website environment
 			echo '<tr class="';
 			echo $post->follow_up==1 ? 'follow_up ' : '';
-			echo $post->website_status=='deleted' ? 'deleted ' : '';
+			echo $post->deleted==1 ? 'deleted ' : '';
 			echo $post->website_status=='working' ? 'working ' : '';
 			echo '">';
 			// Output row data
@@ -249,7 +249,7 @@ function gmuj_websitesgmu_display_settings_page() {
 			echo '<td>' . $post->website_status . '</td>';
 			echo '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
 
-			if ($post->website_status=='deleted') {
+			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
 				echo '<td>' . '<a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
@@ -257,14 +257,14 @@ function gmuj_websitesgmu_display_settings_page() {
 
 			echo '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
 
-			if ($post->website_status=='deleted') {
+			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
 				echo '<td><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wordpress.png'.'" /></a></td>';
 
 			}
 
-			if ($post->website_status=='deleted') {
+			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
 				echo '<td>';
