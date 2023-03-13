@@ -58,3 +58,49 @@
 	font-family: "dashicons";
 	content: "\f464";
 }
+
+/* editor styles */
+
+/* post deleted */
+
+.post-deleted .editor-styles-wrapper {
+	background-image: url('../images/watermark-deleted.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #ffefef;
+}
+
+.post-follow-up .editor-styles-wrapper {
+	background-image: url('../images/watermark-follow-up.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #ffff99;
+}
+
+.post-deleted .wp-block-post-title {
+	text-decoration:line-through;
+}
+
+/* editor meta box styles  */
+/* meta box heading */
+.edit-post-meta-boxes-area  #poststuff h2.hndle {
+	font-size: 1.25rem;
+	padding: 8px 12px;
+}
+
+/* meta box fields */
+.acf-postbox .acf-fields > .acf-field {
+  padding: 15px 25px;
+}
+
+/* meta box deleted field */
+[data-name="deleted"] .acf-switch.-on {
+	background-color: red;
+	border-color:black;
+}
+[data-name="deleted"] .acf-switch.-on span.acf-switch-on{
+	text-shadow:none;
+}
+[data-name="deleted"] .acf-switch-slider {
+	border-color:black !important;
+}

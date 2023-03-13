@@ -55,6 +55,9 @@ require('php/taxonomies.php');
 // Dashboard
   include('php/admin-dashboard.php');
 
+// Editor
+  include('php/editor.php');
+
 function gmuj_websitesgmu_get_live_website_theme($post_id){
   //Get the real-time theme info from the WP REST API on the live site
 
