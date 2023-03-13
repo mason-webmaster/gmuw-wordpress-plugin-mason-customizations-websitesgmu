@@ -137,3 +137,8 @@ require('post-type-gtm_account.php');
 require('post-type-gtm_container.php');
 require('post-type-ga_account.php');
 require('post-type-ga_property.php');
+
+/**
+ * Custom functions related to post types
+ */
+require('post-type-website-functions.php');
