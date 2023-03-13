@@ -220,7 +220,7 @@ function gmuj_websitesgmu_display_settings_page() {
 			echo '<tr class="';
 			echo $post->follow_up==1 ? 'follow_up ' : '';
 			echo $post->deleted==1 ? 'deleted ' : '';
-			echo $post->website_status=='working' ? 'working ' : '';
+			echo $post->working==1 ? 'working ' : '';
 			echo '">';
 			// Output row data
 			echo '<td>' . $post->environment_name.'</td>';
