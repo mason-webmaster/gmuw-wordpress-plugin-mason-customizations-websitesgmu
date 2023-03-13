@@ -241,6 +241,66 @@ function gmuw_websitesgmu_get_total_non_delete_with_meta($post_type,$meta_key,$m
 }
 
 /**
+ * Get the total number of posts non-deleted where some meta key value exists
+ */
+function gmuw_websitesgmu_get_total_non_delete_with_meta_exists($post_type,$meta_key) {
+
+  //Set basic arguments for the get posts function
+  $args = array(
+      'post_type'  => $post_type,
+      'post_status' => 'publish',
+      'nopaging' => true,
+      'order' => 'ASC',
+      'orderby' => 'name'
+  );
+
+  // set meta query args
+  $args_meta = array(
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'relation' => 'AND',
+          array(
+            'key'   => $meta_key,
+            'compare' => 'EXISTS',
+          ),
+          array(
+            'key'   => $meta_key,
+            'value' => '',
+            'compare' => '!=',
+          ),
+        ),
+        array(
+          'relation' => 'OR',
+          array(
+            'key'   => 'deleted',
+            'compare' => 'NOT EXISTS',
+          ),
+          array(
+            'key'   => 'deleted',
+            'value' => '1',
+            'compare' => '!=',
+          ),
+        )
+      )
+    )
+  );
+
+  // merge arg arrays
+  $args_full = array_merge($args, $args_meta);
+
+  // Get posts
+  $posts = get_posts($args_full);
+
+  // Get count
+  $posts_count = count($posts);
+
+  return $posts_count;
+
+}
+
+/**
  * Provides format for the dashboard custom post type summary meta boxes
  */
 function gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($post_type,$content) {
