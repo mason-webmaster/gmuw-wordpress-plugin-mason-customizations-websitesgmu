@@ -5,35 +5,6 @@
 
 
 /**
- * Get totals summaries for a custom post type
- */
-function gmuw_websitesgmu_get_cpt_totals($post_type) {
-
-  // Initialize variables
-  $return_value='';
-
-  //Get numbers of deleted/non-deleted
-  $count_non_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'not-deleted');
-  $count_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'deleted');
-
-  //Start building return value
-  $return_value.='<p>';
-  $return_value.='<strong>'.$count_non_deleted.' Records</strong><br />';
-  
-  //Do we have deleted?
-  if ($count_deleted>1) {
-    $return_value.='('.$count_deleted.' deleted; '.gmuw_websitesgmu_get_cpt_total($post_type,'all').' total)';
-  }
-
-  //Finish building return value
-  $return_value.='</p>';
-
-  //Return value
-  return $return_value;
-
-}
-
-/**
  * Get the total number of posts for a custom post type
  */
 function gmuw_websitesgmu_get_cpt_total($post_type,$count_mode) {
@@ -206,5 +177,34 @@ function gmuw_websitesgmu_get_total_non_delete_with_meta_exists($post_type,$meta
   $posts_count = count($posts);
 
   return $posts_count;
+
+}
+
+/**
+ * Get totals summaries for a custom post type
+ */
+function gmuw_websitesgmu_get_cpt_totals($post_type) {
+
+  // Initialize variables
+  $return_value='';
+
+  //Get numbers of deleted/non-deleted
+  $count_non_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'not-deleted');
+  $count_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'deleted');
+
+  //Start building return value
+  $return_value.='<p>';
+  $return_value.='<strong>'.$count_non_deleted.' Records</strong><br />';
+
+  //Do we have deleted?
+  if ($count_deleted>1) {
+    $return_value.='('.$count_deleted.' deleted; '.gmuw_websitesgmu_get_cpt_total($post_type,'all').' total)';
+  }
+
+  //Finish building return value
+  $return_value.='</p>';
+
+  //Return value
+  return $return_value;
 
 }
