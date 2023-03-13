@@ -1,5 +1,60 @@
 /* custom admin styles for site */
 
+/* data table styles */
 .data_table .follow_up {background-color: #ffffaa;}
 .data_table .deleted {text-decoration: line-through;}
 .data_table .working {background-color: #99ffcc;}
+
+/* dashboard meta boxes */
+#dashboard-widgets-wrap .postbox ul ul {
+	margin-left: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
+
+.dash-meta-cpt-summary {
+	display: flex;
+}
+
+.dash-meta-cpt-summary .dashicons-before {
+	margin-right: 2rem;
+}
+.dash-meta-cpt-summary .dashicons-before::before {
+	font-size: 60px;
+	width: 60px;
+	height: 60px;
+}
+
+#dashboard-widgets-wrap .postbox .inside h3 {
+	font-weight:bold;
+}
+
+#dashboard-widgets-wrap .postbox .inside .follow_up {
+	background-color:#ffff66;
+	padding:0.5rem;
+	margin-left: -0.5rem;
+}
+
+#dashboard-widgets-wrap .admin-icon {
+	font-size: 1.25rem;
+}
+
+/* dashicons as admin icons */
+.admin-icon {
+	text-decoration:none;
+	vertical-align: middle;
+}
+
+.admin-icon:before {
+	font-family: "dashicons";
+}
+
+.admin-view:before {
+	font-family: "dashicons";
+	content: "\f177";
+}
+
+.admin-edit:before {
+	font-family: "dashicons";
+	content: "\f464";
+}

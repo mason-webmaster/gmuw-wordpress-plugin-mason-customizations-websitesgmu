@@ -181,3 +181,39 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
     }
 
 }
+
+
+/**
+ * Adds meta box to WordPress admin dashboard
+ *
+ */
+add_action('wp_dashboard_setup', 'gmuw_websitesgmu_custom_dashboard_meta_box_websites');
+function gmuw_websitesgmu_custom_dashboard_meta_box_websites() {
+
+  // Declare global variables
+  global $wp_meta_boxes;
+
+  /* Add meta box */
+  add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_websites", "Websites", "gmuw_websitesgmu_custom_dashboard_meta_box_websites_content", "dashboard","normal");
+
+}
+
+/**
+ * Provides content for the dashboard meta box
+ */
+function gmuw_websitesgmu_custom_dashboard_meta_box_websites_content() {
+
+  //Initialize variables
+  $cpt_slug='website';
+  $content='';
+
+  //basic totals
+  $content.='<p>'.gmuw_websitesgmu_get_cpt_totals($cpt_slug).'</p>';
+
+  //follow-up records
+  $content.=gmuw_websitesgmu_meta_box_display_follow_up_records($cpt_slug);
+
+  //Display meta box
+  gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($cpt_slug,$content);
+
+}
