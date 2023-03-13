@@ -65,6 +65,7 @@ function gmuw_websitesgmu_add_columns_ga_property ($columns) {
         //ACF fields
         'deleted' => 'Deleted?',
         'follow_up' => 'Follow-Up?',
+        'working' => 'Working?',
         'ga_property_account_post_id' => 'GA Account',
         'ga_property_id'   => 'GA Property ID',
         'ga_measurement_id'   => 'GA4 Data Stream Measurement ID',
@@ -84,6 +85,9 @@ function gmuw_websitesgmu_ga_property_custom_column ($column, $post_id) {
             break;
         case 'follow_up':
             echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
+        case 'working':
+            echo get_post_meta($post_id, 'working', true)==1 ? '<span class="record-status record-status-working">Working</span>' : '';
             break;
         case 'ga_property_account_post_id':
             echo get_the_title(get_post_meta($post_id, 'ga_property_account_post_id', true)).'<br />';

@@ -118,3 +118,7 @@
 	background-color:red;
 	color:white;
 }
+.wp-list-table .record-status-working {
+	background-color:green;
+	color:white;
+}

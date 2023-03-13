@@ -66,6 +66,7 @@ function gmuw_websitesgmu_add_columns_ga_account ($columns) {
         'ga_account_id'   => 'GA Account ID',
         'deleted' => 'Deleted?',
         'follow_up' => 'Follow-Up?',
+        'working' => 'Working?',
         //Other fields
         'ga_account_link' => 'GA Account Link',
     ) );
@@ -82,6 +83,9 @@ function gmuw_websitesgmu_ga_account_custom_column ($column, $post_id) {
             break;
         case 'follow_up':
             echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
+        case 'working':
+            echo get_post_meta($post_id, 'working', true)==1 ? '<span class="record-status record-status-working">Working</span>' : '';
             break;
         case 'ga_account_id':
             echo get_post_meta($post_id, 'ga_account_id', true);

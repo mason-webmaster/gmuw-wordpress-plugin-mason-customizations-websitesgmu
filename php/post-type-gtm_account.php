@@ -65,6 +65,7 @@ function gmuw_websitesgmu_add_columns_gtm_account ($columns) {
         //ACF fields
         'deleted' => 'Deleted?',
         'follow_up' => 'Follow-Up?',
+        'working' => 'Working?',
         'gtm_account_id'   => 'GTM Account ID',
     ) );
 
@@ -80,6 +81,9 @@ function gmuw_websitesgmu_gtm_account_custom_column ($column, $post_id) {
             break;
         case 'follow_up':
             echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
+        case 'working':
+            echo get_post_meta($post_id, 'working', true)==1 ? '<span class="record-status record-status-working">Working</span>' : '';
             break;
         case 'gtm_account_id':
             echo get_post_meta($post_id, 'gtm_account_id', true);

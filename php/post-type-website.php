@@ -65,6 +65,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         //ACF fields
         'deleted' => 'Deleted?',
         'follow_up' => 'Follow-Up?',
+        'working' => 'Working?',
         'environment_name'   => 'Env. Name',
         'hosting_domain' => 'Hosting Domain',
         'production_domain'   => 'Prod Domain',
@@ -91,6 +92,9 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             break;
         case 'follow_up':
             echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
+        case 'working':
+            echo get_post_meta($post_id, 'working', true)==1 ? '<span class="record-status record-status-working">Working</span>' : '';
             break;
         case 'environment_name':
             echo get_post_meta($post_id, 'environment_name', true);

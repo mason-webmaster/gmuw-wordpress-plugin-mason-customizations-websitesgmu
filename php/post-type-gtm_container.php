@@ -65,6 +65,7 @@ function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
         //ACF fields
         'deleted' => 'Deleted?',
         'follow_up' => 'Follow-Up?',
+        'working' => 'Working?',
         'gtm_container_account_post_id' => 'GTM Account',
         'gtm_container_id'   => 'GTM Container ID',
         //Other fields
@@ -83,6 +84,9 @@ function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
             break;
         case 'follow_up':
             echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
+        case 'working':
+            echo get_post_meta($post_id, 'working', true)==1 ? '<span class="record-status record-status-working">Working</span>' : '';
             break;
         case 'gtm_container_account_post_id':
             echo get_the_title(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'<br />';
