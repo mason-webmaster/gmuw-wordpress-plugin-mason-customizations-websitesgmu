@@ -104,3 +104,17 @@
 [data-name="deleted"] .acf-switch-slider {
 	border-color:black !important;
 }
+
+/*  Admin list */
+
+/* record statuses */
+.wp-list-table .record-status {
+	font-weight:bold;
+}
+.wp-list-table .record-status-follow-up {
+	background-color:yellow;
+}
+.wp-list-table .record-status-deleted {
+	background-color:red;
+	color:white;
+}

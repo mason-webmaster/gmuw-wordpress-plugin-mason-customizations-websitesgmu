@@ -63,6 +63,8 @@ function gmuw_websitesgmu_add_columns_gtm_account ($columns) {
 
     return array_merge ( $columns, array (
         //ACF fields
+        'deleted' => 'Deleted?',
+        'follow_up' => 'Follow-Up?',
         'gtm_account_id'   => 'GTM Account ID',
     ) );
 
@@ -73,6 +75,12 @@ add_action ('manage_gtm_account_posts_custom_column', 'gmuw_websitesgmu_gtm_acco
 function gmuw_websitesgmu_gtm_account_custom_column ($column, $post_id) {
 
     switch ($column) {
+        case 'deleted':
+            echo get_post_meta($post_id, 'deleted', true)==1 ? '<span class="record-status record-status-deleted">Deleted</span>' : '';
+            break;
+        case 'follow_up':
+            echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
         case 'gtm_account_id':
             echo get_post_meta($post_id, 'gtm_account_id', true);
             break;

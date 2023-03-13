@@ -63,6 +63,8 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
 
     return array_merge ( $columns, array ( 
         //ACF fields
+        'deleted' => 'Deleted?',
+        'follow_up' => 'Follow-Up?',
         'environment_name'   => 'Env. Name',
         'hosting_domain' => 'Hosting Domain',
         'production_domain'   => 'Prod Domain',
@@ -84,6 +86,12 @@ add_action ('manage_website_posts_custom_column', 'gmuw_websitesgmu_website_cust
 function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
 
     switch ($column) {
+        case 'deleted':
+            echo get_post_meta($post_id, 'deleted', true)==1 ? '<span class="record-status record-status-deleted">Deleted</span>' : '';
+            break;
+        case 'follow_up':
+            echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
         case 'environment_name':
             echo get_post_meta($post_id, 'environment_name', true);
             break;

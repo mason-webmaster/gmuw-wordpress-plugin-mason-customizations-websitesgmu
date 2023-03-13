@@ -63,6 +63,8 @@ function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
 
     return array_merge ( $columns, array (
         //ACF fields
+        'deleted' => 'Deleted?',
+        'follow_up' => 'Follow-Up?',
         'gtm_container_account_post_id' => 'GTM Account',
         'gtm_container_id'   => 'GTM Container ID',
         //Other fields
@@ -76,6 +78,12 @@ add_action ('manage_gtm_container_posts_custom_column', 'gmuw_websitesgmu_gtm_co
 function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
 
     switch ($column) {
+        case 'deleted':
+            echo get_post_meta($post_id, 'deleted', true)==1 ? '<span class="record-status record-status-deleted">Deleted</span>' : '';
+            break;
+        case 'follow_up':
+            echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
         case 'gtm_container_account_post_id':
             echo get_the_title(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'<br />';
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'gtm_container_account_post_id', true)).'">edit</a> | ';

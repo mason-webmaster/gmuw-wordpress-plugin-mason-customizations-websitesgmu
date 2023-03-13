@@ -63,6 +63,8 @@ function gmuw_websitesgmu_add_columns_ga_property ($columns) {
 
     return array_merge ( $columns, array (
         //ACF fields
+        'deleted' => 'Deleted?',
+        'follow_up' => 'Follow-Up?',
         'ga_property_account_post_id' => 'GA Account',
         'ga_property_id'   => 'GA Property ID',
         'ga_measurement_id'   => 'GA4 Data Stream Measurement ID',
@@ -77,6 +79,12 @@ add_action ('manage_ga_property_posts_custom_column', 'gmuw_websitesgmu_ga_prope
 function gmuw_websitesgmu_ga_property_custom_column ($column, $post_id) {
 
     switch ($column) {
+        case 'deleted':
+            echo get_post_meta($post_id, 'deleted', true)==1 ? '<span class="record-status record-status-deleted">Deleted</span>' : '';
+            break;
+        case 'follow_up':
+            echo get_post_meta($post_id, 'follow_up', true)==1 ? '<span class="record-status record-status-follow-up">Follow-Up</span>' : '';
+            break;
         case 'ga_property_account_post_id':
             echo get_the_title(get_post_meta($post_id, 'ga_property_account_post_id', true)).'<br />';
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'ga_property_account_post_id', true)).'">edit</a> | ';
