@@ -373,6 +373,11 @@ function gmuj_websitesgmu_display_settings_page() {
 			// Total number of websites
 				$websites_count_all = gmuj_websitesgmu_total_websites();
 
+			// Production websites
+				$websites_count_production = gmuw_websitesgmu_get_total_websites_production();
+			// Percent production websites
+				$websites_count_all>0 ? $websites_percent_production = round($websites_count_production/$websites_count_all*100,2) : $websites_percent_production=0;
+
 			// Websites using WordPress
 				$websites_count_wordpress = gmuj_websitesgmu_websites_wordpress();
 			// Percent using WordPress
@@ -395,7 +400,6 @@ function gmuj_websitesgmu_display_settings_page() {
 			// Percent using ACSF
 				$websites_count_all>0 ? $websites_percent_acsf = round($websites_count_acsf/$websites_count_all*100,2) : $websites_percent_acsf = 0;
 
-
 			// Websites using official theme
 				$websites_theme_count = gmuj_websitesgmu_websites_using_theme();
 			// Theme percentage
@@ -405,15 +409,28 @@ function gmuj_websitesgmu_display_settings_page() {
 					$wordpress_theme_percentage=0;
 				}
 
+			// Websites using GTM
+				$websites_count_gtm = gmuw_websitesgmu_get_total_non_delete_with_meta_exists('website','website_gtm_container_post_id');
+			// Percent using GTM
+				$websites_count_all>0 ? $websites_percent_gtm = round($websites_count_gtm/$websites_count_all*100,2) : $websites_percent_gtm=0;
+
+			// Websites using GA4
+				$websites_count_ga4 = gmuw_websitesgmu_get_total_non_delete_with_meta_exists('website','website_ga_property_post_id');
+			// Percent using GA4
+				$websites_count_all>0 ? $websites_percent_ga4 = round($websites_count_ga4/$websites_count_all*100,2) : $websites_percent_ga4=0;
+
 		// Display stats
 
-		echo '<h3>Content Management Systems</h3>';
 		echo '<p>'.$websites_count_all . ' total websites.</p>';
+
+		echo '<h3>Production</h3>';
+		echo '<p>'.$websites_count_production . ' production websites ('.$websites_percent_production.'%)'.'</p>';
+
+		echo '<h3>Content Management Systems</h3>';
 		echo '<p>'.$websites_count_wordpress.' using WordPress ('.$websites_percent_wordpress.'%)</p>';
 		echo '<p>'.$websites_count_drupal.' using Drupal ('.$websites_percent_drupal.'%)</p>';
 
 		echo '<h3>Web Hosts</h3>';
-		echo '<p>'.$websites_count_all . ' total websites.</p>';
 		echo '<p>'.$websites_count_materiell.' hosted on Materiell ('.$websites_percent_materiell.'%)</p>';
 		echo '<p>'.$websites_count_wpengine.' hosted on WPEngine ('.$websites_percent_wpengine.'%)</p>';
 		echo '<p>'.$websites_count_acsf.' hosted on Acquia Cloud SiteFactory('.$websites_percent_acsf.'%)</p>';
@@ -421,6 +438,10 @@ function gmuj_websitesgmu_display_settings_page() {
 		echo '<h3>WordPress Info</h3>';
 		echo '<p>'.$websites_count_wordpress.' using WordPress ('.$websites_percent_wordpress.'%)</p>';
 		echo '<p>' . $websites_theme_count . ' on official theme ('.$wordpress_theme_percentage.'%)</p>';
+
+		echo '<h3>GA/GTM Info</h3>';
+		echo '<p>'.$websites_count_gtm . ' implementing GTM ('.$websites_percent_gtm.'%)'.'</p>';
+		echo '<p>'.$websites_count_ga4 . ' implementing GA4 ('.$websites_percent_ga4.'%)'.'</p>';
 
 	}
 
