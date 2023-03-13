@@ -206,7 +206,6 @@ function gmuj_websitesgmu_display_settings_page() {
 		echo '<th>CMS</th>';
 		echo '<th>Production Domain</th>';
 		echo '<th>Theme</th>';
-		echo '<th>Status</th>';
 		echo '<th>Follow-Up</th>';
 		echo '<th>Data Feeds</th>';
 		echo '<th>Edit</th>';
@@ -246,7 +245,7 @@ function gmuj_websitesgmu_display_settings_page() {
 
 			echo '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
 			echo '<td>' . $post->wordpress_theme . '</td>';
-			echo '<td>' . $post->website_status . '</td>';
+
 			echo '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
 
 			if ($post->deleted==1) {
