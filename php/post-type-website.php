@@ -161,33 +161,12 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             break;
         case 'admin_login':
             if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                if (has_term('wpengine', 'web_host')) {
-                    echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wordpress.png'.'" /></a>';
-                }
-                if (has_term('materiell', 'web_host')) {
-                    echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wordpress.png'.'" /></a>';
-                }
-                if (has_term('acquia-cloud-site-factory', 'web_host')) {
-                    echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.sitemasonry.gmu.edu/user/login/" target="_blank" title="Drupal login"><img style="width:25px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-drupal.png'.'" /></a>';
-                }
+                echo gmuj_websitesgmu_cms_login_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
             }
             break;
         case 'web_host_admin':
             if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                if (has_term('wpengine', 'web_host')) {
-                    //Store web host admin URL
-                    $web_host_admin_url='https://my.wpengine.com/installs/'.get_post_meta($post_id, 'environment_name', true).'/';
-                    // Output web host admin links
-                    echo '<a href="'.$web_host_admin_url.'" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> overview</a><br />';
-                    echo '<a href="'.$web_host_admin_url.'cache_dashboard" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> cache</a><br />';
-                    echo '<a href="'.$web_host_admin_url.'advanced" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> advanced</a><br />';
-                }
-                if (has_term('acquia-cloud-site-factory', 'web_host')) {
-                    //Store web host admin URL
-                      $web_host_admin_url='https://www.georgemasonusf.acsitefactory.com/sites-by-group/list?field_domain_contains='.get_post_meta($post_id, 'environment_name', true).'';
-                    // Output web host admin links
-                    echo '<a href="'.$web_host_admin_url.'" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-acsf.png'.'" /></a><br />';
-                }
+                echo gmuj_websitesgmu_admin_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
             }
             break;
     }

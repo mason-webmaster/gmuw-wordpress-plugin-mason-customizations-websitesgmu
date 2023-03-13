@@ -5,27 +5,6 @@
  */
 
 
-
-/**
- * Builds hosting domain URLs
- */
-function gmuj_websitesgmu_hosting_domain_url($web_host, $environment_name) {
-
-	// Build hosting domain URL based on web host and environment name
-
-	if ($web_host=='WPE') {
-		$return_value = 'https://'.$environment_name.'.wpengine.com';
-	} elseif ($web_host=='Materiell') {
-		$return_value = 'https://'.$environment_name.'.materiellcloud.com';
-	} else {
-		$return_value = '';
-	}
-
-	// Return value
-	return $return_value;
-
-}
-
 /**
  * Action that runs where the theme value is updated
  */
@@ -203,7 +182,7 @@ function gmuj_websitesgmu_display_settings_page() {
 		echo '<th>Follow-Up</th>';
 		echo '<th>Data Feeds</th>';
 		echo '<th>Edit</th>';
-		echo '<th>WP Login</th>';
+		echo '<th>Admin Login</th>';
 		echo '<th>Web Host Admin</th>';
 		echo '</tr>';
 		echo '</thead>';
@@ -245,7 +224,7 @@ function gmuj_websitesgmu_display_settings_page() {
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td>' . '<a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+				echo '<td>' . '<a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
 			}
 
 			echo '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
@@ -253,23 +232,13 @@ function gmuj_websitesgmu_display_settings_page() {
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td><a href="'.gmuj_websitesgmu_hosting_domain_url($post->web_host,$post->environment_name).'/wp-admin/" target="_blank" title="WordPress login"><img style="width:25px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wordpress.png'.'" /></a></td>';
-
+				echo '<td>'.gmuj_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
 			}
 
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td>';
-				if ($post->web_host=='WPE') {
-				//Store web host admin URL
-				$web_host_admin_url='https://my.wpengine.com/installs/'.$post->environment_name.'/';
-				// Output web host admin links
-				echo '<a href="'.$web_host_admin_url.'" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> overview</a><br />';
-				echo '<a href="'.$web_host_admin_url.'cache_dashboard" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> cache</a><br />';
-				echo '<a href="'.$web_host_admin_url.'advanced" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-wpengine.png'.'" /> advanced</a><br />';
-				}
-				echo '</td>';
+				echo '<td>'.gmuj_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
 			}
 
 			// Finish row
