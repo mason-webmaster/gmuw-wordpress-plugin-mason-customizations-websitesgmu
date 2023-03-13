@@ -27,12 +27,6 @@ function gmuj_websitesgmu_hosting_domain_url($web_host, $environment_name) {
 }
 
 /**
- * Gets count of non-deleted website environments
- */
-
-
-
-/**
  * Action that runs where the theme value is updated
  */
 function gmuj_websitesgmu_website_action_update_theme() {
