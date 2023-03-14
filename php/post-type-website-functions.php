@@ -134,235 +134,73 @@ function gmuj_websitesgmu_admin_link($web_host, $environment_name){
 
 }
 
+/**
+ * Displays website statistical information for the custom admin page
+ */
+function gmuj_websitesgmu_websites_content_statistics() {
 
-function gmuj_websitesgmu_total_websites() {
+		//Initialize variables
+		$return_value = '';
 
-	// Get total number of websites
+		// Display heading
+		$return_value .= '<h2>Statistics</h2>';
 
-	// Get count of websites that are not explicitly deleted. (They could either not have a status at all or have a status of 'deleted'.)
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT LIKE',
-						    'value' => 'deleted',
-				        ),
-				    )
-			    )
-			)
-		)
-	);
+		// Display stats
+
+		$return_value .= '<p>' . gmuw_websitesgmu_get_cpt_total('website','not-deleted') . ' current website records.</p>';
+		$return_value .= '<p>(' . gmuw_websitesgmu_get_cpt_total('website','deleted') . ' deleted, for ' . gmuw_websitesgmu_get_cpt_total('website','all') . ' website records total).</p>';
+
+		$return_value .= '<h3>Production</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain');
+		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+		$return_value .= '<h3>Content Management Systems</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress');
+		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','drupal');
+		$return_value .= '<p>'.$count . ' Drupal websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+		$return_value .= '<h3>Web Hosts</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','materiell');
+		$return_value .= '<p>'.$count . ' Materiell websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','wpengine');
+		$return_value .= '<p>'.$count . ' WPEngine websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','acquia-cloud-site-factory');
+		$return_value .= '<p>'.$count . ' Acquia Cloud SiteFactory websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+		$return_value .= '<h3>WordPress Info</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress');
+		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+		$count=gmuj_websitesgmu_websites_using_theme();
+		$percent=round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress')*100,2).'%';
+
+		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
+
+		$return_value .= '<h3>GA/GTM Info</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_gtm_container_post_id');
+		$return_value .= '<p>'.$count . ' with GTM ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_ga_property_post_id');
+		$return_value .= '<p>'.$count . ' with GA4 ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+	// Return value
+	return $return_value;
 
 }
 
 /**
- * Gets count of website environments using wordpress
+ * Get website total percentages
  */
-function gmuj_websitesgmu_websites_wordpress() {
+function gmuw_websitesgmu_get_website_total_percentage($number) {
 
-	// Get count of website environments using wordpress
+	//Initialize variables
+	$return_value = '';
 
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    ),
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'cms',
-						'field'    => 'slug',
-						'terms'    => array('wordpress')
-					)
-				)
-			)
-		)
-	);
+	//Calculate value
+	$return_value .=  round($number/gmuw_websitesgmu_get_cpt_total('website','not-deleted')*100,2) .'%';
 
-}
-
-/**
- * Gets count of website environments using drupal
- */
-function gmuj_websitesgmu_websites_drupal() {
-
-	// Get count of website environments using drupal
-
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    ),
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'cms',
-						'field'    => 'slug',
-						'terms'    => array('drupal')
-					)
-				)
-			)
-		)
-	);
-
-}
-
-/**
- * Gets count of website environments hosted on Materiell
- */
-function gmuj_websitesgmu_websites_materiell() {
-
-	// Get count of website environments hosted on Materiell
-
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    ),
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'web_host',
-						'field'    => 'slug',
-						'terms'    => array('materiell')
-					)
-				)
-			)
-		)
-	);
-
-}
-
-/**
- * Gets count of website environments hosted on WPEngine
- */
-function gmuj_websitesgmu_websites_wpengine() {
-
-	// Get count of website environments hosted on WPEngine
-
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    ),
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'web_host',
-						'field'    => 'slug',
-						'terms'    => array('wpengine')
-					)
-				)
-			)
-		)
-	);
-
-}
-
-/**
- * Gets count of website environments hosted on ACSF
- */
-function gmuj_websitesgmu_websites_acsf() {
-
-	// Get count of website environments hosted on ACSF
-
-	return count(
-		get_posts(
-			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    ),
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'web_host',
-						'field'    => 'slug',
-						'terms'    => array('acquia-cloud-site-factory')
-					)
-				)
-			)
-		)
-	);
+	// Return value
+	return $return_value;
 
 }
 
@@ -371,34 +209,36 @@ function gmuj_websitesgmu_websites_acsf() {
  */
 function gmuj_websitesgmu_websites_using_theme() {
 
-	// Get total number of websites using the official theme
+	// Get total number of wordpress websites using the official theme
 
-	// Get count of websites that are explicitly known to use the official theme.
 	return count(
 		get_posts(
 			array(
-			    'post_type'  => 'website',
-			    'post_status' => 'publish',
-			    'nopaging' => true,
-			    'meta_query' => array(
-			        array(
-					    'key'   => 'wordpress_theme',
-					    'value' => 'gmuj|Mason Twenty Twenty Theme',
-			            'compare' => 'REGEXP',
-			        ),
-				    array(
-				        'relation' => 'OR',
-				        array(
-						    'key'   => 'website_status',
-				            'compare' => 'NOT EXISTS',
-				        ),
-				        array(
-						    'key'   => 'website_status',
-						    'value' => 'deleted',
-				            'compare' => 'NOT LIKE',
-				        ),
-				    )
-			    )
+		    'post_type'  => 'website',
+		    'post_status' => 'publish',
+		    'nopaging' => true,
+		    'meta_query' => array(
+		      array(
+		        'relation' => 'AND',
+		        array(
+		          'relation' => 'OR',
+		          array(
+		            'key'   => 'deleted',
+		            'compare' => 'NOT EXISTS',
+		          ),
+		          array(
+		            'key'   => 'deleted',
+		            'value' => '1',
+		            'compare' => '!=',
+		          ),
+		        ),
+		        array(
+							'key'   => 'wordpress_theme',
+							'value' => 'gmuj|Mason Twenty Twenty Theme',
+		          'compare' => 'REGEXP',
+		        ),
+		      )
+		    )
 			)
 		)
 	);

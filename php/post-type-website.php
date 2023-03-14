@@ -211,12 +211,3 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_websites_content() {
   gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($cpt_slug,$content);
 
 }
-
-/**
- * Get the total number of production websites
- */
-function gmuw_websitesgmu_get_total_websites_production() {
-
-  return gmuw_websitesgmu_get_total_non_delete_with_meta_exists('website','production_domain');
-
-}
