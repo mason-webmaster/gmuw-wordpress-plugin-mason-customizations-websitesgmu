@@ -202,7 +202,7 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_websites_content() {
   $content.='<p>'.gmuw_websitesgmu_get_cpt_totals($cpt_slug).'</p>';
 
   //special totals
-  $content.='<p><strong>'.gmuw_websitesgmu_get_total_websites_production().' Production (having a production domain).</strong></p>';
+  $content.='<p><strong>'.gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain').' Production (having a production domain).</strong></p>';
 
   //follow-up records
   $content.=gmuw_websitesgmu_meta_box_display_follow_up_records($cpt_slug);
