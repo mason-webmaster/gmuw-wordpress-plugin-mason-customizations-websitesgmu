@@ -398,7 +398,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			if ($post->deleted==1) {
 				$return_value .= '<td>&nbsp;</td>';
 			} else {
-				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
 			}
 
 			$return_value .= '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
