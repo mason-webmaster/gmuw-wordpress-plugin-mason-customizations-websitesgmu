@@ -175,10 +175,12 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
 
 		$return_value .= '<h3>GA/GTM Info</h3>';
+		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain');
+		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_gtm_container_post_id');
-		$return_value .= '<p>'.$count . ' with GTM ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$return_value .= '<p>'.$count . ' with GTM ('.round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain')*100,2).'%)'.'</p>';
 		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_ga_property_post_id');
-		$return_value .= '<p>'.$count . ' with GA4 ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain')*100,2).'%)'.'</p>';
 
 	// Return value
 	return $return_value;
