@@ -61,120 +61,14 @@ function gmuw_websitesgmu_display_settings_page() {
 		gmuw_websitesgmu_website_action_update_theme();
 	}
 
-	// Output info based on mode
-	if (empty($_GET["mode"])) {
-		echo '<p><a href="?page=gmuw_websitesgmu&mode=stats">Statistics</a></p>';
-		echo '<p><a href="edit.php?post_type=website">Websites Admin</a></p>';
-		echo '<p><a href="?page=gmuw_websitesgmu&mode=sites">List Sites</a></p>';
-	}
+	// Statistics
+	//echo '<h2>Statistics</h2>';
+	//echo gmuw_websitesgmu_websites_content_statistics();
 
-	// Website statistics
-	if ($_GET["mode"]=='stats') {
+	// Website list
+	echo '<h2>All Website Records</h2>';
+	echo gmuw_websitesgmu_custom_website_list();
 
-		echo gmuw_websitesgmu_websites_content_statistics();
 
-	}
-
-	// Website statistics
-	if ($_GET["mode"]=='sites') {
-
-		//Display all websites
-
-		// Display heading
-		echo '<h2>Websites</h2>';
-
-		// Get posts
-		$websites_all = get_posts(
-			array(
-				'post_type'  => 'website',
-				'nopaging' => true,
-				'order' => 'ASC',
-				'orderby' => 'name',
-			)
-		);
-
-		// Loop through theme websites
-		echo '<table class="data_table">';
-		echo '<thead>';
-		echo '<tr>';
-		echo '<th>Environment Name</th>';
-		echo '<th>Post ID</th>';
-		echo '<th>Department</th>';
-		echo '<th>Web Host</th>';
-		echo '<th>CMS</th>';
-		echo '<th>Production Domain</th>';
-		echo '<th>Theme</th>';
-		echo '<th>Follow-Up</th>';
-		echo '<th>Data Feeds</th>';
-		echo '<th>Edit</th>';
-		echo '<th>Admin Login</th>';
-		echo '<th>Web Host Admin</th>';
-		echo '</tr>';
-		echo '</thead>';
-		echo '<tbody>';
-		foreach ( $websites_all as $post ) {
-			// Begin table row for website environment
-			echo '<tr class="';
-			echo $post->follow_up==1 ? 'follow_up ' : '';
-			echo $post->deleted==1 ? 'deleted ' : '';
-			echo $post->working==1 ? 'working ' : '';
-			echo '">';
-			// Output row data
-			echo '<td>' . $post->environment_name.'</td>';
-			echo '<td>' . $post->ID . '</td>';
-
-			echo '<td>';
-			foreach ( wp_get_post_terms($post->ID,'department') as $term ) {
-				echo $term->name;
-			}
-			echo '</td>';
-
-			echo '<td>';
-			foreach ( wp_get_post_terms($post->ID,'web_host') as $term ) {
-				echo $term->name;
-			}
-			echo '</td>';
-
-			echo '<td>';
-			foreach ( wp_get_post_terms($post->ID,'cms') as $term ) {
-				echo $term->name;
-			}
-			echo '</td>';
-
-			echo '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
-			echo '<td>' . $post->wordpress_theme . '</td>';
-
-			echo '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
-
-			if ($post->deleted==1) {
-				echo '<td>&nbsp;</td>';
-			} else {
-				echo '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
-			}
-
-			echo '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
-
-			if ($post->deleted==1) {
-				echo '<td>&nbsp;</td>';
-			} else {
-				echo '<td>'.gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
-			}
-
-			if ($post->deleted==1) {
-				echo '<td>&nbsp;</td>';
-			} else {
-				echo '<td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
-			}
-
-			// Finish row
-			echo '</tr>';
-		}
-		echo '</tbody>';
-		echo '</table>';
-
-		// Finish HTML output
-		echo "</div>";
-
-	}
 
 }

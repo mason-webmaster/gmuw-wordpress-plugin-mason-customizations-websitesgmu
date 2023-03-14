@@ -142,9 +142,6 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		//Initialize variables
 		$return_value = '';
 
-		// Display heading
-		$return_value .= '<h2>Statistics</h2>';
-
 		// Display stats
 
 		$return_value .= '<p>' . gmuw_websitesgmu_get_cpt_total('website','not-deleted') . ' current website records.</p>';
@@ -322,5 +319,110 @@ function gmuw_websitesgmu_update_theme_link($post_id,$theme_name,$theme_version)
 
   //Return value
   return "<a class='button button-small' href='admin.php?page=gmuw_websitesgmu&action=update_theme&post_id=". $post_id ."&theme_name=". urlencode($theme_name) ."&theme_version=". $theme_version ."'>Update Post</a>";
+
+}
+
+function gmuw_websitesgmu_custom_website_list(){
+
+	// Initialize variables
+	$return_value='';
+
+	// Build return value
+
+		// Get posts
+		$websites_all = get_posts(
+			array(
+				'post_type'  => 'website',
+		    'post_status' => 'publish',
+				'nopaging' => true,
+				'order' => 'ASC',
+				'orderby' => 'name',
+			)
+		);
+
+		// Loop through theme websites
+		$return_value .= '<table class="data_table">';
+		$return_value .= '<thead>';
+		$return_value .= '<tr>';
+		$return_value .= '<th>Environment Name</th>';
+		$return_value .= '<th>Post ID</th>';
+		$return_value .= '<th>Department</th>';
+		$return_value .= '<th>Web Host</th>';
+		$return_value .= '<th>CMS</th>';
+		$return_value .= '<th>Production Domain</th>';
+		$return_value .= '<th>Theme</th>';
+		$return_value .= '<th>Follow-Up</th>';
+		$return_value .= '<th>Data Feeds</th>';
+		$return_value .= '<th>Edit</th>';
+		$return_value .= '<th>Admin Login</th>';
+		$return_value .= '<th>Web Host Admin</th>';
+		$return_value .= '</tr>';
+		$return_value .= '</thead>';
+		$return_value .= '<tbody>';
+		foreach ( $websites_all as $post ) {
+			// Begin table row for website environment
+			$return_value .= '<tr class="';
+			$return_value .= $post->follow_up==1 ? 'follow_up ' : '';
+			$return_value .= $post->deleted==1 ? 'deleted ' : '';
+			$return_value .= $post->working==1 ? 'working ' : '';
+			$return_value .= '">';
+			// Output row data
+			$return_value .= '<td>' . $post->environment_name.'</td>';
+			$return_value .= '<td>' . $post->ID . '</td>';
+
+			$return_value .= '<td>';
+			foreach ( wp_get_post_terms($post->ID,'department') as $term ) {
+				$return_value .= $term->name;
+			}
+			$return_value .= '</td>';
+
+			$return_value .= '<td>';
+			foreach ( wp_get_post_terms($post->ID,'web_host') as $term ) {
+				$return_value .= $term->name;
+			}
+			$return_value .= '</td>';
+
+			$return_value .= '<td>';
+			foreach ( wp_get_post_terms($post->ID,'cms') as $term ) {
+				$return_value .= $term->name;
+			}
+			$return_value .= '</td>';
+
+			$return_value .= '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
+			$return_value .= '<td>' . $post->wordpress_theme . '</td>';
+
+			$return_value .= '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
+
+			if ($post->deleted==1) {
+				$return_value .= '<td>&nbsp;</td>';
+			} else {
+				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+			}
+
+			$return_value .= '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
+
+			if ($post->deleted==1) {
+				$return_value .= '<td>&nbsp;</td>';
+			} else {
+				$return_value .= '<td>'.gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+			}
+
+			if ($post->deleted==1) {
+				$return_value .= '<td>&nbsp;</td>';
+			} else {
+				$return_value .= '<td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+			}
+
+			// Finish row
+			$return_value .= '</tr>';
+		}
+		$return_value .= '</tbody>';
+		$return_value .= '</table>';
+
+		// Finish HTML output
+		$return_value .= "</div>";
+
+	// Return value
+	return $return_value;
 
 }
