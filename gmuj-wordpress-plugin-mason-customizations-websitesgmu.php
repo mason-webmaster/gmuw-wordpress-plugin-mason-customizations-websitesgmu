@@ -58,7 +58,7 @@ require('php/taxonomies.php');
 // Editor
   include('php/editor.php');
 
-function gmuj_websitesgmu_get_live_website_theme($post_id){
+function gmuw_websitesgmu_get_live_website_theme($post_id){
   //Get the real-time theme info from the WP REST API on the live site
 
       // Get post object
@@ -94,7 +94,7 @@ function gmuj_websitesgmu_get_live_website_theme($post_id){
             // Is the post meta theme name different from the live theme name?
             if (get_post_meta($post_id, 'wordpress_theme', true ) != $mason_site_check_in_theme_info_response_json->theme_name.' ('.$mason_site_check_in_theme_info_response_json->theme_version.')') {
               $return_value.='<p>';
-              $return_value.=gmuj_websitesgmu_update_theme_link($post_id,$mason_site_check_in_theme_info_response_json->theme_name,$mason_site_check_in_theme_info_response_json->theme_version);
+              $return_value.=gmuw_websitesgmu_update_theme_link($post_id,$mason_site_check_in_theme_info_response_json->theme_name,$mason_site_check_in_theme_info_response_json->theme_version);
               $return_value.='</p>';
             }
 
@@ -106,10 +106,10 @@ function gmuj_websitesgmu_get_live_website_theme($post_id){
 
 }
 
-function gmuj_websitesgmu_update_theme_link($post_id,$theme_name,$theme_version){
+function gmuw_websitesgmu_update_theme_link($post_id,$theme_name,$theme_version){
   //Display theme update link
 
   //Return value
-  return "<a class='button button-small' href='admin.php?page=gmuj_websitesgmu&action=update_theme&post_id=". $post_id ."&theme_name=". urlencode($theme_name) ."&theme_version=". $theme_version ."'>Update Post</a>";
+  return "<a class='button button-small' href='admin.php?page=gmuw_websitesgmu&action=update_theme&post_id=". $post_id ."&theme_name=". urlencode($theme_name) ."&theme_version=". $theme_version ."'>Update Post</a>";
 
 }

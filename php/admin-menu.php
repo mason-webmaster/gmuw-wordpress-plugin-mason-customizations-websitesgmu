@@ -45,8 +45,8 @@ if (!function_exists('gmuj_add_admin_menu_mason')) {
 /**
  * Adds link to plugin settings page to Wordpress admin menu as a sub-menu item under Mason
  */
-add_action('admin_menu', 'gmuj_websitesgmu_add_sublevel_menu');
-function gmuj_websitesgmu_add_sublevel_menu() {
+add_action('admin_menu', 'gmuw_websitesgmu_add_sublevel_menu');
+function gmuw_websitesgmu_add_sublevel_menu() {
 	
 	// Add Wordpress admin menu item under Mason for this plugin's settings
 	add_submenu_page(
@@ -54,8 +54,8 @@ function gmuj_websitesgmu_add_sublevel_menu() {
 		'Mason Websites',
 		'Mason Websites',
 		'manage_options',
-		'gmuj_websitesgmu',
-		'gmuj_websitesgmu_display_settings_page',
+		'gmuw_websitesgmu',
+		'gmuw_websitesgmu_display_settings_page',
 		2
 	);
 	

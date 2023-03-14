@@ -7,7 +7,7 @@
 /**
  * Builds hosting domain URLs
  */
-function gmuj_websitesgmu_hosting_domain($web_host, $environment_name,$include_protocol=True) {
+function gmuw_websitesgmu_hosting_domain($web_host, $environment_name,$include_protocol=True) {
 
 	// Do we have required paramters?
 	if (empty($web_host) || empty($environment_name)) {
@@ -39,7 +39,7 @@ function gmuj_websitesgmu_hosting_domain($web_host, $environment_name,$include_p
 /**
  * Builds CMS login URL
  */
-function gmuj_websitesgmu_cms_login_url($web_host, $environment_name) {
+function gmuw_websitesgmu_cms_login_url($web_host, $environment_name) {
 
 	// Do we have required paramters?
 	if (empty($web_host) || empty($environment_name)) {
@@ -50,7 +50,7 @@ function gmuj_websitesgmu_cms_login_url($web_host, $environment_name) {
 	$return_value='';
 
 	// Get web hosting domain
-	$return_value.=gmuj_websitesgmu_hosting_domain($web_host, $environment_name);
+	$return_value.=gmuw_websitesgmu_hosting_domain($web_host, $environment_name);
 
 	// Build wp login URL based on web host
 	if ($web_host=='wpengine') {
@@ -69,7 +69,7 @@ function gmuj_websitesgmu_cms_login_url($web_host, $environment_name) {
 /**
  * Builds CMS login HTML link element
  */
-function gmuj_websitesgmu_cms_login_link($web_host, $environment_name) {
+function gmuw_websitesgmu_cms_login_link($web_host, $environment_name) {
 
 	// Do we have required paramters?
 	if (empty($web_host) || empty($environment_name)) {
@@ -90,14 +90,14 @@ function gmuj_websitesgmu_cms_login_link($web_host, $environment_name) {
 	}
 
 	// build link element
-	$return_value.='<a href="'.gmuj_websitesgmu_cms_login_url($web_host, $environment_name).'" target="_blank" title="CMS login"><img style="width:25px;" src="'.$image_path.'" /></a>';
+	$return_value.='<a href="'.gmuw_websitesgmu_cms_login_url($web_host, $environment_name).'" target="_blank" title="CMS login"><img style="width:25px;" src="'.$image_path.'" /></a>';
 
 	// Return value
 	return $return_value;
 
 }
 
-function gmuj_websitesgmu_admin_link($web_host, $environment_name){
+function gmuw_websitesgmu_admin_link($web_host, $environment_name){
 
 	// Do we have required paramters?
 	if (empty($web_host) || empty($environment_name)) {
@@ -137,7 +137,7 @@ function gmuj_websitesgmu_admin_link($web_host, $environment_name){
 /**
  * Displays website statistical information for the custom admin page
  */
-function gmuj_websitesgmu_websites_content_statistics() {
+function gmuw_websitesgmu_websites_content_statistics() {
 
 		//Initialize variables
 		$return_value = '';
@@ -172,7 +172,7 @@ function gmuj_websitesgmu_websites_content_statistics() {
 		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress');
 		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		$count=gmuj_websitesgmu_websites_using_theme();
+		$count=gmuw_websitesgmu_websites_using_theme();
 		$percent=round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress')*100,2).'%';
 
 		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
@@ -207,7 +207,7 @@ function gmuw_websitesgmu_get_website_total_percentage($number) {
 /**
  * Gets count of website environments using the official theme
  */
-function gmuj_websitesgmu_websites_using_theme() {
+function gmuw_websitesgmu_websites_using_theme() {
 
 	// Get total number of wordpress websites using the official theme
 

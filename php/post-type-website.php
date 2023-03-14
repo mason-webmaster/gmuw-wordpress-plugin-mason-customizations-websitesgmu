@@ -152,7 +152,7 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             if (get_post_meta($post_id, 'website_status', true)!='deleted') {
                 if (has_term('wordpress', 'cms')) {
                     if ($_GET['live_theme_check']=='1') {
-                        echo gmuj_websitesgmu_get_live_website_theme($post_id);
+                        echo gmuw_websitesgmu_get_live_website_theme($post_id);
                     } else {
                         echo '<a href="'.$_SERVER['REQUEST_URI'].'&live_theme_check=1">enable</a>';
                     }
@@ -161,12 +161,12 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             break;
         case 'admin_login':
             if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                echo gmuj_websitesgmu_cms_login_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
+                echo gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
             }
             break;
         case 'web_host_admin':
             if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                echo gmuj_websitesgmu_admin_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
+                echo gmuw_websitesgmu_admin_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
             }
             break;
     }

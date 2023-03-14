@@ -8,7 +8,7 @@
 /**
  * Action that runs where the theme value is updated
  */
-function gmuj_websitesgmu_website_action_update_theme() {
+function gmuw_websitesgmu_website_action_update_theme() {
 
 	//Set variables
 	$post_id=$_GET["post_id"];
@@ -16,7 +16,7 @@ function gmuj_websitesgmu_website_action_update_theme() {
 	$theme_version=$_GET["theme_version"];
 
 	// Start div for update theme process output
-	echo "<div id='gmuj_websitesgmu_update_theme_output' class='updated fade'>";
+	echo "<div id='gmuw_websitesgmu_update_theme_output' class='updated fade'>";
 
 	// Output debug info
 	echo "<p>Updating theme...</p>".PHP_EOL;
@@ -42,7 +42,7 @@ function gmuj_websitesgmu_website_action_update_theme() {
 /**
  * Generates the plugin settings page
  */
-function gmuj_websitesgmu_display_settings_page() {
+function gmuw_websitesgmu_display_settings_page() {
 	
 	// Only continue if this user has the 'manage options' capability
 	if (!current_user_can('manage_options')) return;
@@ -58,20 +58,20 @@ function gmuj_websitesgmu_display_settings_page() {
 
 	// Do we have a theme update action to perform
 	if ($_GET["action"]=='update_theme') { 
-		gmuj_websitesgmu_website_action_update_theme();
+		gmuw_websitesgmu_website_action_update_theme();
 	}
 
 	// Output info based on mode
 	if (empty($_GET["mode"])) {
-		echo '<p><a href="?page=gmuj_websitesgmu&mode=stats">Statistics</a></p>';
+		echo '<p><a href="?page=gmuw_websitesgmu&mode=stats">Statistics</a></p>';
 		echo '<p><a href="edit.php?post_type=website">Websites Admin</a></p>';
-		echo '<p><a href="?page=gmuj_websitesgmu&mode=sites">List Sites</a></p>';
+		echo '<p><a href="?page=gmuw_websitesgmu&mode=sites">List Sites</a></p>';
 	}
 
 	// Website statistics
 	if ($_GET["mode"]=='stats') {
 
-		echo gmuj_websitesgmu_websites_content_statistics();
+		echo gmuw_websitesgmu_websites_content_statistics();
 
 	}
 
@@ -149,7 +149,7 @@ function gmuj_websitesgmu_display_settings_page() {
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td>' . '<a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuj_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+				echo '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain($post->web_host,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
 			}
 
 			echo '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
@@ -157,13 +157,13 @@ function gmuj_websitesgmu_display_settings_page() {
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td>'.gmuj_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+				echo '<td>'.gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
 			}
 
 			if ($post->deleted==1) {
 				echo '<td>&nbsp;</td>';
 			} else {
-				echo '<td>'.gmuj_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+				echo '<td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
 			}
 
 			// Finish row
