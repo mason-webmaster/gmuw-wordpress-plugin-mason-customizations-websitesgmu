@@ -244,3 +244,27 @@ function gmuw_websitesgmu_websites_using_theme() {
 	);
 
 }
+
+/**
+ * Adds custom website statistcs meta box to WordPress admin dashboard
+ *
+ */
+add_action('wp_dashboard_setup', 'gmuw_websitesgmu_custom_dashboard_meta_box_websites_statistics');
+function gmuw_websitesgmu_custom_dashboard_meta_box_websites_statistics() {
+
+  // Declare global variables
+  global $wp_meta_boxes;
+
+  /* Add meta box */
+  add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_websites_statistics", "Website Statistics", "gmuw_websitesgmu_custom_dashboard_meta_box_websites_statistics_content", "dashboard","normal");
+
+}
+
+/**
+ * Provides content for the custom website statistics dashboard meta box
+ */
+function gmuw_websitesgmu_custom_dashboard_meta_box_websites_statistics_content() {
+
+  echo gmuw_websitesgmu_websites_content_statistics();
+
+}
