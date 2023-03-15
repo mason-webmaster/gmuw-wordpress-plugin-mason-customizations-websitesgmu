@@ -57,3 +57,15 @@ require('php/taxonomies.php');
 
 // Editor
   include('php/editor.php');
+
+// Implement custom taxonomy template for departments
+add_filter('taxonomy_template', function($template) {
+
+  $mytemplate =  __DIR__ . '/templates/taxonomy-departments.php';
+  //$mytemplate =  plugin_dir_url( __DIR__ ) . 'templates/taxonomy-departments.php';
+
+  if(is_tax('department') && is_readable($mytemplate))
+    $template = $mytemplate;
+
+  return $template;
+} );
