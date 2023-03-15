@@ -119,3 +119,27 @@ add_action('init', function(){
 		);
 
 });
+
+// Implement custom taxonomy template for taxonomy requests, if one exists for the current taxonomy
+add_filter('taxonomy_template', function($template) {
+
+	// Is the current request for a taxonomy object?
+	if(is_tax()){
+
+		// Get current object
+		$term = get_queried_object();
+
+		// Set path to custom template file for this taxonomy
+		$taxonomy_template_path =  plugin_dir_path( __DIR__ ) . 'templates/taxonomy-'.$term->taxonomy.'.php';
+
+		// Does this template file exist?
+		if(is_readable($taxonomy_template_path)) {
+			$template = $taxonomy_template_path;
+		}
+
+	}
+
+	// Return template
+	return $template;
+
+} );
