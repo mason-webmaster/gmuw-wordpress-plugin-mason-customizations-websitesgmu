@@ -29,10 +29,17 @@
 	font-weight:bold;
 }
 
-#dashboard-widgets-wrap .postbox .inside .follow_up {
-	background-color:#ffff66;
+#dashboard-widgets-wrap .postbox .inside .marked-record {
 	padding:0.5rem;
 	margin-left: -0.5rem;
+}
+
+#dashboard-widgets-wrap .postbox .inside .follow_up {
+	background-color:#ffff66;
+}
+
+#dashboard-widgets-wrap .postbox .inside .working {
+	background-color:#99ffcc;
 }
 
 #dashboard-widgets-wrap .admin-icon {

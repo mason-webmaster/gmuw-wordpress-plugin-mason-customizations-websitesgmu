@@ -124,8 +124,11 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_ga_accounts_content() {
   //basic totals
   $content.='<p>'.gmuw_websitesgmu_get_cpt_totals($cpt_slug).'</p>';
 
+  //working records
+  $content.=gmuw_websitesgmu_meta_box_display_marked_records($cpt_slug,'working');
+
   //follow-up records
-  $content.=gmuw_websitesgmu_meta_box_display_follow_up_records($cpt_slug);
+  $content.=gmuw_websitesgmu_meta_box_display_marked_records($cpt_slug,'follow_up');
 
   //Display meta box
   gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($cpt_slug,$content);

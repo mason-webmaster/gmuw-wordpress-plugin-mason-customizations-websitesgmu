@@ -18,9 +18,21 @@ function gmuw_websitesgmu_custom_dashboard_meta_boxes() {
   /* Add 'links' meta box */
   add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_links", "Links", "gmuw_websitesgmu_custom_dashboard_meta_box_links", "dashboard","normal");
 
+  /* Add 'working' meta box */
+  add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_working", "Working Records", "gmuw_websitesgmu_custom_dashboard_meta_box_working", "dashboard","normal");
 
   /* Add 'follow-up' meta box */
   add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_follow_up", "Follow-up Records", "gmuw_websitesgmu_custom_dashboard_meta_box_follow_up", "dashboard","normal");
+
+}
+
+/**
+ * Provides content for the dashboard 'working' meta box
+ */
+function gmuw_websitesgmu_custom_dashboard_meta_box_working() {
+
+  //Output links to follow-up records
+  echo gmuw_websitesgmu_display_marked_records('any','working');
 
 }
 
@@ -30,7 +42,7 @@ function gmuw_websitesgmu_custom_dashboard_meta_boxes() {
 function gmuw_websitesgmu_custom_dashboard_meta_box_follow_up() {
 
   //Output links to follow-up records
-  echo gmuw_websitesgmu_display_follow_up_records();
+  echo gmuw_websitesgmu_display_marked_records('any','follow_up');
 
 }
 
