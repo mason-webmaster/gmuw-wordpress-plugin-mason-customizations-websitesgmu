@@ -48,6 +48,20 @@ if ($post->deleted==1) {
 		echo 'Web host admin link</td><td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'';
 		echo '</td></tr>';
 
+		// Sucuri firewall link
+		if (!empty($post->production_domain)) {
+			echo '<tr><td>';
+			echo 'Sucuri firewall link</td><td>'.gmuw_websitesgmu_sucuri_link($post->ID,'firewall');
+			echo '</td></tr>';
+		}
+
+		// Sucuri monitor link
+		if (!empty($post->production_domain)) {
+			echo '<tr><td>';
+			echo 'Sucuri monitor link</td><td>'.gmuw_websitesgmu_sucuri_link($post->ID,'monitor');
+			echo '</td></tr>';
+		}
+
 		echo '</table>';
 
 	}

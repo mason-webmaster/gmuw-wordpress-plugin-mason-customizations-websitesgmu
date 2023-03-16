@@ -134,6 +134,41 @@ function gmuw_websitesgmu_admin_link($web_host, $environment_name){
 
 }
 
+function gmuw_websitesgmu_sucuri_link($post_id,$mode='firewall'){
+
+	// Get post
+	$post = get_post($post_id);
+
+	// Get production domain
+	$production_domain = get_post_meta($post_id,'production_domain',true);
+
+	// If we don't have a production domain, exit
+	if (empty($production_domain)) {
+		return $return_value;
+	}
+
+	// Initialize variables
+	$return_value='';
+	$image_path=plugin_dir_url( __DIR__ ).'images/logo-sucuri.png';;
+
+	// Get URL based on mode
+	switch ($mode) {
+		case 'firewall':
+			$link_url='https://waf.sucuri.net/?settings&site='.$production_domain;
+			break;
+		case 'monitor':
+			$link_url='https://monitor21.sucuri.net/m/site/?site='.$production_domain;
+			break;
+	}
+
+	// build link element
+	$return_value.='<a href="'.$link_url.'" target="_blank" title="sucuri '.$mode.'"><img style="width:50px;" src="'.$image_path.'" /></a>';
+
+	// Return value
+	return $return_value;
+
+}
+
 /**
  * Displays website statistical information for the custom admin page
  */
