@@ -152,18 +152,34 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$return_value .= '<h3>Content Management Systems</h3>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
-		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','drupal'));
-		$return_value .= '<p>'.$count . ' Drupal websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		// taxonomy: CMS
+		// Get all terms in taxonomy
+		$taxonomy='cms';
+		$terms=get_terms(array(
+			'taxonomy' => $taxonomy,
+			'orderby' => 'count',
+			'order' => 'DESC',
+		));
+		// Loop through terms in taxonomy
+		foreach ($terms as $term){
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$term->slug));
+			$return_value .= '<p>'.$count . ' ' .$term->name. ' websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		}
 
 		$return_value .= '<h3>Web Hosts</h3>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','materiell'));
-		$return_value .= '<p>'.$count . ' Materiell websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','wpengine'));
-		$return_value .= '<p>'.$count . ' WPEngine websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','acquia-cloud-site-factory'));
-		$return_value .= '<p>'.$count . ' Acquia Cloud SiteFactory websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		// taxonomy: web_host
+		// Get all terms in taxonomy
+		$taxonomy='web_host';
+		$terms=get_terms(array(
+			'taxonomy' => $taxonomy,
+			'orderby' => 'count',
+			'order' => 'DESC',
+		));
+		// Loop through terms in taxonomy
+		foreach ($terms as $term){
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$term->slug));
+			$return_value .= '<p>'.$count . ' ' .$term->name. ' websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		}
 
 		$return_value .= '<h3>WordPress Info</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
