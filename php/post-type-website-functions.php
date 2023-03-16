@@ -169,6 +169,34 @@ function gmuw_websitesgmu_sucuri_link($post_id,$mode='firewall'){
 
 }
 
+function gmuw_websitesgmu_google_search_console_link($post_id){
+
+	// Get post
+	$post = get_post($post_id);
+
+	// Get production domain
+	$production_domain = get_post_meta($post_id,'production_domain',true);
+
+	// If we don't have a production domain, exit
+	if (empty($production_domain)) {
+		return $return_value;
+	}
+
+	// Initialize variables
+	$return_value='';
+	$image_path=plugin_dir_url( __DIR__ ).'images/logo-google.png';;
+
+	// Get URL
+	$link_url='https://search.google.com/search-console?resource_id=https://'.$production_domain.'/';
+
+	// build link element
+	$return_value.='<a href="'.$link_url.'" target="_blank" title="sucuri '.$mode.'"><img style="width:25px;" src="'.$image_path.'" /></a>';
+
+	// Return value
+	return $return_value;
+
+}
+
 /**
  * Displays website statistical information for the custom admin page
  */

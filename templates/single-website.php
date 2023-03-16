@@ -88,6 +88,13 @@ if ($post->deleted==1) {
 		echo '</tr>';
 	}
 
+	// Google search console
+	if (!empty($post->production_domain)) {
+		echo '<tr><td>';
+		echo 'Google Search Console</td><td>'.gmuw_websitesgmu_google_search_console_link($post->ID);
+		echo '</td></tr>';
+	}
+
 	echo '</table>';
 
 	echo '<h4>Website Information</h4>';
