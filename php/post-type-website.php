@@ -214,3 +214,19 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_websites_content() {
   gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($cpt_slug,$content);
 
 }
+
+/**
+ * Setup custom template
+ */
+
+add_filter( 'template_include', 'gmuw_websitesgmu_custom_post_type_template_website' );
+function gmuw_websitesgmu_custom_post_type_template_website($template) {
+
+    $post_type = 'website';
+
+    if ( is_singular( $post_type ) && file_exists( plugin_dir_path(__DIR__) . "templates/single-$post_type.php" ) ){
+        $template = plugin_dir_path(__DIR__) . "templates/single-$post_type.php";
+    }
+
+    return $template;
+}
