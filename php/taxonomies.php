@@ -85,7 +85,7 @@ add_action('init', function(){
 				),
 			'show_ui' => true,
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'web_host' ),
+			'rewrite' => array( 'slug' => 'cms' ),
 			'show_admin_column' => true,
 			'show_in_rest' => true
 			)
