@@ -60,50 +60,7 @@ if ( $archive_title || $archive_subtitle ) {
 				<?php
 
 				// Get posts
-
-				// Set basic arguments for the get posts function
-				$args = array(
-					'post_type'  => 'ga_account',
-					'post_status' => 'publish',
-					'nopaging' => true,
-					'order' => 'ASC',
-					'orderby' => 'name'
-				);
-
-				// Set meta args to get all non-deleted records
-				$args_meta = array(
-					'meta_query' => array(
-					  array(
-					    'relation' => 'OR',
-					    array(
-					      'key'   => 'deleted',
-					      'compare' => 'NOT EXISTS',
-					    ),
-					    array(
-					      'key'   => 'deleted',
-					      'value' => '1',
-					      'compare' => '!=',
-					    ),
-					  )
-					)
-				);
-
-				// Set taxonomy args
-				$args_tax = array(
-					'tax_query' => array(
-						array(
-							'taxonomy' => $taxonomy,
-							'field'    => 'slug',
-							'terms'    => array($taxonomy_term_slug)
-						)
-					)
-				);
-
-				// merge basic arguments, meta query arguments, tax arguments arrays
-				$args_full = array_merge($args, $args_meta, $args_tax);
-
-				// Get posts
-				$ga_accounts = get_posts($args_full);
+				$ga_accounts = gmuw_websitesgmu_get_custom_posts('ga_account','not-deleted','','',$taxonomy,$taxonomy_term_slug);
 
 				// Loop through posts
 				foreach ( $ga_accounts as $ga_account ) {
@@ -116,50 +73,7 @@ if ( $archive_title || $archive_subtitle ) {
 				<?php
 
 				// Get posts
-
-				// Set basic arguments for the get posts function
-				$args = array(
-					'post_type'  => 'gtm_account',
-					'post_status' => 'publish',
-					'nopaging' => true,
-					'order' => 'ASC',
-					'orderby' => 'name'
-				);
-
-				// Set meta args to get all non-deleted records
-				$args_meta = array(
-					'meta_query' => array(
-					  array(
-					    'relation' => 'OR',
-					    array(
-					      'key'   => 'deleted',
-					      'compare' => 'NOT EXISTS',
-					    ),
-					    array(
-					      'key'   => 'deleted',
-					      'value' => '1',
-					      'compare' => '!=',
-					    ),
-					  )
-					)
-				);
-
-				// Set taxonomy args
-				$args_tax = array(
-					'tax_query' => array(
-						array(
-							'taxonomy' => $taxonomy,
-							'field'    => 'slug',
-							'terms'    => array($taxonomy_term_slug)
-						)
-					)
-				);
-
-				// merge basic arguments, meta query arguments, tax arguments arrays
-				$args_full = array_merge($args, $args_meta, $args_tax);
-
-				// Get posts
-				$gtm_accounts = get_posts($args_full);
+				$gtm_accounts = gmuw_websitesgmu_get_custom_posts('gtm_account','not-deleted','','',$taxonomy,$taxonomy_term_slug);
 
 				// Loop through posts
 				foreach ( $gtm_accounts as $gtm_account ) {
@@ -172,50 +86,7 @@ if ( $archive_title || $archive_subtitle ) {
 				<?php
 
 				// Get posts
-
-				// Set basic arguments for the get posts function
-				$args = array(
-					'post_type'  => 'website',
-					'post_status' => 'publish',
-					'nopaging' => true,
-					'order' => 'ASC',
-					'orderby' => 'name'
-				);
-
-				// Set meta args to get all non-deleted records
-				$args_meta = array(
-					'meta_query' => array(
-					  array(
-					    'relation' => 'OR',
-					    array(
-					      'key'   => 'deleted',
-					      'compare' => 'NOT EXISTS',
-					    ),
-					    array(
-					      'key'   => 'deleted',
-					      'value' => '1',
-					      'compare' => '!=',
-					    ),
-					  )
-					)
-				);
-
-				// Set taxonomy args
-				$args_tax = array(
-					'tax_query' => array(
-						array(
-							'taxonomy' => $taxonomy,
-							'field'    => 'slug',
-							'terms'    => array($taxonomy_term_slug)
-						)
-					)
-				);
-
-				// merge basic arguments, meta query arguments, tax arguments arrays
-				$args_full = array_merge($args, $args_meta, $args_tax);
-
-				// Get posts
-				$websites = get_posts($args_full);
+				$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$taxonomy_term_slug);
 
 				// Loop through posts
 				foreach ( $websites as $website ) {

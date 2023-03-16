@@ -4,7 +4,7 @@
  */
 
 
-function gmuw_websitesgmu_get_cpt_total($post_type,$count_mode,$meta_key='',$meta_value='',$tax_key='',$tax_value='') {
+function gmuw_websitesgmu_get_custom_posts($post_type,$count_mode,$meta_key='',$meta_value='',$tax_key='',$tax_value=''){
 
   //Set basic arguments for the get posts function
   $args = array(
@@ -154,10 +154,8 @@ function gmuw_websitesgmu_get_cpt_total($post_type,$count_mode,$meta_key='',$met
   // Get posts
   $posts = get_posts($args_full);
 
-  // Get count
-  $posts_count = count($posts);
-
-  return $posts_count;
+	// Return posts
+	return $posts;
 
 }
 
@@ -170,8 +168,8 @@ function gmuw_websitesgmu_get_cpt_totals($post_type) {
   $return_value='';
 
   //Get numbers of deleted/non-deleted
-  $count_non_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'not-deleted');
-  $count_deleted=gmuw_websitesgmu_get_cpt_total($post_type,'deleted');
+  $count_non_deleted=count(gmuw_websitesgmu_get_custom_posts($post_type,'not-deleted'));
+  $count_deleted=count(gmuw_websitesgmu_get_custom_posts($post_type,'deleted'));
 
   //Start building return value
   $return_value.='<p>';
@@ -179,7 +177,7 @@ function gmuw_websitesgmu_get_cpt_totals($post_type) {
 
   //Do we have deleted?
   if ($count_deleted>1) {
-    $return_value.='('.$count_deleted.' deleted; '.gmuw_websitesgmu_get_cpt_total($post_type,'all').' total)';
+    $return_value.='('.$count_deleted.' deleted; '.count(gmuw_websitesgmu_get_custom_posts($post_type,'all')).' total)';
   }
 
   //Finish building return value

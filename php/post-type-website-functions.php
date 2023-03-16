@@ -144,43 +144,43 @@ function gmuw_websitesgmu_websites_content_statistics() {
 
 		// Display stats
 
-		$return_value .= '<p>' . gmuw_websitesgmu_get_cpt_total('website','not-deleted') . ' current website records.</p>';
-		$return_value .= '<p>(' . gmuw_websitesgmu_get_cpt_total('website','deleted') . ' deleted, for ' . gmuw_websitesgmu_get_cpt_total('website','all') . ' website records total).</p>';
+		$return_value .= '<p>' . count(gmuw_websitesgmu_get_custom_posts('website','not-deleted')) . ' current website records.</p>';
+		$return_value .= '<p>(' . count(gmuw_websitesgmu_get_custom_posts('website','deleted')) . ' deleted, for ' . count(gmuw_websitesgmu_get_custom_posts('website','all')) . ' website records total).</p>';
 
 		$return_value .= '<h3>Production</h3>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$return_value .= '<h3>Content Management Systems</h3>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
 		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','drupal');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','drupal'));
 		$return_value .= '<p>'.$count . ' Drupal websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$return_value .= '<h3>Web Hosts</h3>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','materiell');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','materiell'));
 		$return_value .= '<p>'.$count . ' Materiell websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','wpengine');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','wpengine'));
 		$return_value .= '<p>'.$count . ' WPEngine websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','web_host','acquia-cloud-site-factory');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','acquia-cloud-site-factory'));
 		$return_value .= '<p>'.$count . ' Acquia Cloud SiteFactory websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$return_value .= '<h3>WordPress Info</h3>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
 		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$count=gmuw_websitesgmu_websites_using_theme();
-		$percent=round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','','','cms','wordpress')*100,2).'%';
+		$percent=round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'))*100,2).'%';
 
 		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
 
 		$return_value .= '<h3>GA/GTM Info</h3>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain');
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_gtm_container_post_id');
-		$return_value .= '<p>'.$count . ' with GTM ('.round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain')*100,2).'%)'.'</p>';
-		$count=gmuw_websitesgmu_get_cpt_total('website','not-deleted','website_ga_property_post_id');
-		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/gmuw_websitesgmu_get_cpt_total('website','not-deleted','production_domain')*100,2).'%)'.'</p>';
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_gtm_container_post_id'));
+		$return_value .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
+		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
 
 	// Return value
 	return $return_value;
@@ -196,7 +196,7 @@ function gmuw_websitesgmu_get_website_total_percentage($number) {
 	$return_value = '';
 
 	//Calculate value
-	$return_value .=  round($number/gmuw_websitesgmu_get_cpt_total('website','not-deleted')*100,2) .'%';
+	$return_value .=  round($number/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted'))*100,2) .'%';
 
 	// Return value
 	return $return_value;
