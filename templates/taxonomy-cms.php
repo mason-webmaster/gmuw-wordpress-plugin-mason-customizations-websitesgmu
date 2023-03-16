@@ -1,4 +1,4 @@
-<?php require('taxonomy-header.php'); ?>
+<?php require('header.php'); ?>
 
 <p></p>
 
@@ -21,4 +21,4 @@ foreach ( $websites as $website ) {
 }
 ?>
 
-<?php require('taxonomy-footer.php'); ?>
+<?php require('footer.php'); ?>
