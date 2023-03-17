@@ -118,6 +118,19 @@ if ($post->deleted==1) {
 
 	echo '</table>';
 
+	// Private notes
+	if (is_user_logged_in()) {
+
+		// Private notes
+		echo '<h4>Website Notes</h4>';
+		echo '<pre>';
+		if (!empty($post->notes_private)) {
+			echo $post->notes_private;
+		}
+		echo '</pre>';
+
+	}
+
 }
 
 ?>
