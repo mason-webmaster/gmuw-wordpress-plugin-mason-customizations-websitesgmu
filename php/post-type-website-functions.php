@@ -239,20 +239,15 @@ function gmuw_websitesgmu_websites_content_statistics() {
 
 		// Display stats
 
+		$return_value .= '<h3>Total Website Records</h3>';
 		$return_value .= '<p>' . count(gmuw_websitesgmu_get_custom_posts('website','not-deleted')) . ' current website records.</p>';
-		$return_value .= '<p>(' . count(gmuw_websitesgmu_get_custom_posts('website','deleted')) . ' deleted, for ' . count(gmuw_websitesgmu_get_custom_posts('website','all')) . ' website records total).</p>';
+		$return_value .= '<p>(' . count(gmuw_websitesgmu_get_custom_posts('website','deleted')) . ' deleted; ' . count(gmuw_websitesgmu_get_custom_posts('website','all')) . ' total records)</p>';
 
-		$return_value .= '<h3>Production</h3>';
+		$return_value .= '<h3>Production Websites</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		// taxonomy: cms
-		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
-
-		// taxonomy: web_host
-		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('web_host');
-
-		$return_value .= '<h3>WordPress Info</h3>';
+		$return_value .= '<h3>WordPress Websites</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
 		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
@@ -269,9 +264,14 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
 		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
 
+		// taxonomy: cms
+		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
+
+		// taxonomy: web_host
+		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('web_host');
+
 		// taxonomy: department
 		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('department');
-
 
 	// Return value
 	return $return_value;
