@@ -198,6 +198,38 @@ function gmuw_websitesgmu_google_search_console_link($post_id){
 }
 
 /**
+ * Displays prepared HTML content representing a listing of website statistics by taxonomy
+ */
+function gmuw_websitesgmu_websites_display_stats_by_taxonomy($taxonomy) {
+
+	// Initialize variables
+	$return_value = '';
+
+	// Display title
+	$return_value.='<h3>';
+	$return_value.=get_taxonomy($taxonomy)->labels->name; // Get display title from custom taxonomy registration
+	$return_value.='</h3>';
+
+	// Get all terms in taxonomy
+	$terms=get_terms(array(
+		'taxonomy' => $taxonomy,
+		'orderby' => 'count',
+		'order' => 'DESC',
+	));
+	// Loop through terms in taxonomy
+	foreach ($terms as $term){
+		// Get number of website posts which are not deleted which use this taxonomy term
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$term->slug));
+		// Display website stats
+		$return_value .= '<p>'.$count . ' ' .$term->name. ' websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+	}
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
  * Displays website statistical information for the custom admin page
  */
 function gmuw_websitesgmu_websites_content_statistics() {
@@ -214,35 +246,11 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		$return_value .= '<h3>Content Management Systems</h3>';
-		// taxonomy: CMS
-		// Get all terms in taxonomy
-		$taxonomy='cms';
-		$terms=get_terms(array(
-			'taxonomy' => $taxonomy,
-			'orderby' => 'count',
-			'order' => 'DESC',
-		));
-		// Loop through terms in taxonomy
-		foreach ($terms as $term){
-			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$term->slug));
-			$return_value .= '<p>'.$count . ' ' .$term->name. ' websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		}
+		// taxonomy: cms
+		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
 
-		$return_value .= '<h3>Web Hosts</h3>';
 		// taxonomy: web_host
-		// Get all terms in taxonomy
-		$taxonomy='web_host';
-		$terms=get_terms(array(
-			'taxonomy' => $taxonomy,
-			'orderby' => 'count',
-			'order' => 'DESC',
-		));
-		// Loop through terms in taxonomy
-		foreach ($terms as $term){
-			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$term->slug));
-			$return_value .= '<p>'.$count . ' ' .$term->name. ' websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
-		}
+		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('web_host');
 
 		$return_value .= '<h3>WordPress Info</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
@@ -260,6 +268,10 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$return_value .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
 		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
+
+		// taxonomy: department
+		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('department');
+
 
 	// Return value
 	return $return_value;
