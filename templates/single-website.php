@@ -32,7 +32,7 @@ if ($post->deleted==1) {
 
 		// Hosting domain link
 		if (!empty($post->environment_name)) {
-			$hosting_domain=gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name,false);
+			$hosting_domain=gmuw_websitesgmu_website_hosting_domain($post->ID,false);
 			echo '<tr><td>';
 			echo 'Web host link</td><td><a href="https://'.$hosting_domain.'" target="_blank">https://'.$hosting_domain.'</a>';
 			echo '</td></tr>';
@@ -40,12 +40,12 @@ if ($post->deleted==1) {
 
 		// CMS login link
 		echo '<tr><td>';
-		echo 'CMS login link</td><td>'.gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'';
+		echo 'CMS login link</td><td>'.gmuw_websitesgmu_website_cms_login_link($post->ID);
 		echo '</td></tr>';
 
 		// Web host admin link
 		echo '<tr><td>';
-		echo 'Web host admin link</td><td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'';
+		echo 'Web host admin link</td><td>'.gmuw_websitesgmu_website_web_host_admin_link($post->ID);
 		echo '</td></tr>';
 
 		// Sucuri firewall link
@@ -103,16 +103,16 @@ if ($post->deleted==1) {
 
 	// Mason Meta Information plugin API links
 	echo '<tr><td>';
-	echo '<a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info" target="_blank">Basic Site Information</a>';
+	echo '<a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-mmi/mason-site-info" target="_blank">Basic Site Information</a>';
 	echo '</td></tr>';
 
 	// Mason Site Check In plugin API links
 	if (is_user_logged_in()) {
 		echo '<tr><td>';
-		echo '<a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/theme-info" target="_blank">Current Theme Info</a>';
+		echo '<a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-sci/theme-info" target="_blank">Current Theme Info</a>';
 		echo '</td></tr>';
 		echo '<tr><td>';
-		echo '<a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications" target="_blank">Most Recent Modifications</a>';
+		echo '<a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-sci/most-recent-modifications" target="_blank">Most Recent Modifications</a>';
 		echo '</td></tr>';
 	}
 

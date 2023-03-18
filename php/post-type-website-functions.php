@@ -7,15 +7,16 @@
 /**
  * Builds hosting domain URLs
  */
-function gmuw_websitesgmu_hosting_domain($web_host, $environment_name,$include_protocol=True) {
+function gmuw_websitesgmu_website_hosting_domain($post_id,$include_protocol=True) {
 
-	// Do we have required paramters?
-	if (empty($web_host) || empty($environment_name)) {
-		return $return_value;
-	}
-
-	// Initialize return value
+	// Initialize variables
 	$return_value='';
+
+	// Get web host
+	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+
+	// Get environment name
+	$environment_name = get_post_meta($post_id,'environment_name',true );
 
 	// Build hosting domain URL based on web host and environment name
 	if ($web_host=='wpengine') {
@@ -39,26 +40,92 @@ function gmuw_websitesgmu_hosting_domain($web_host, $environment_name,$include_p
 /**
  * Builds CMS login URL
  */
-function gmuw_websitesgmu_cms_login_url($web_host, $environment_name) {
+function gmuw_websitesgmu_website_cms_login_url($post_id) {
 
-	// Do we have required paramters?
-	if (empty($web_host) || empty($environment_name)) {
-		return $return_value;
-	}
-
-	// Initialize return value
+	// Initialize variables
 	$return_value='';
 
 	// Get web hosting domain
-	$return_value.=gmuw_websitesgmu_hosting_domain($web_host, $environment_name);
+	$return_value.=gmuw_websitesgmu_website_hosting_domain($post_id);
 
-	// Build wp login URL based on web host
-	if ($web_host=='wpengine') {
+	// Get CMS
+	$cms = wp_get_post_terms($post_id,'cms')[0]->slug;
+
+	// Build CMS login URL based on CMS
+	if ($cms=='wordpress') {
 		$return_value.='/wp-admin/';
-	} elseif ($web_host=='materiell') {
-		$return_value.='/wp-admin/';
-	} elseif ($web_host=='acquia-cloud-site-factory') {
+	} elseif ($cms=='drupal') {
 		$return_value.='/user/login';
+	}
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
+ * Builds web host admin URL
+ */
+function gmuw_websitesgmu_website_web_host_admin_url($post_id) {
+
+	// Initialize variables
+	$return_value='';
+
+	// Get website web host
+	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+
+	// Get environment name
+	$environment_name = get_post_meta($post_id,'environment_name',true );
+
+	// Get URL admin URL based on web host
+	if ($web_host=='wpengine') {
+		$return_value.='https://my.wpengine.com/installs/'.$environment_name.'/';
+	} elseif ($web_host=='materiell') {
+		$return_value.='https://cloud.materiell.com/cloudsites';
+	} elseif ($web_host=='acquia-cloud-site-factory') {
+		$return_value='https://www.georgemasonusf.acsitefactory.com/sites-by-group/list?field_domain_contains='.$environment_name.'';
+	}
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
+ * Gets URL of web host logo images in plugin
+ */
+function gmuw_websitesgmu_web_host_logo_url($web_host) {
+
+	// Initialize variables
+	$return_value='';
+
+	// Get logo based on web host
+	if ($web_host=='wpengine') {
+		$return_value.=plugin_dir_url( __DIR__ ).'images/logo-wpengine.png';
+	} elseif ($web_host=='materiell') {
+		$return_value.=plugin_dir_url( __DIR__ ).'images/logo-materiell.png';
+	} elseif ($web_host=='acquia-cloud-site-factory') {
+		$return_value.=plugin_dir_url( __DIR__ ).'images/logo-acsf.png';
+	}
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
+ * Gets URL of CMS logo images in plugin
+ */
+function gmuw_websitesgmu_cms_logo_url($cms) {
+
+	// Initialize variables
+	$return_value='';
+
+	// Get logo based on CMS
+	if ($cms=='wordpress') {
+		$return_value.=plugin_dir_url( __DIR__ ).'images/logo-wordpress.png';
+	} elseif ($cms=='drupal') {
+		$return_value.=plugin_dir_url( __DIR__ ).'images/logo-drupal.png';
 	}
 
 	// Return value
@@ -69,65 +136,65 @@ function gmuw_websitesgmu_cms_login_url($web_host, $environment_name) {
 /**
  * Builds CMS login HTML link element
  */
-function gmuw_websitesgmu_cms_login_link($web_host, $environment_name) {
+function gmuw_websitesgmu_website_cms_login_link($post_id) {
+	// Supports wpengine, materiell, acquia-cloud-site-factory
 
-	// Do we have required paramters?
-	if (empty($web_host) || empty($environment_name)) {
-		return $return_value;
-	}
-
-	// Initialize return value
+	// Initialize variables
 	$return_value='';
-	$image_path='';
 
-	// Get logo based on web host
-	if ($web_host=='wpengine') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-wordpress.png';
-	} elseif ($web_host=='materiell') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-wordpress.png';
-	} elseif ($web_host=='acquia-cloud-site-factory') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-drupal.png';
+	// Get website web host
+	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+
+	// Are we using a supported web host?
+	if ($web_host != 'wpengine' && $web_host != 'materiell' && $web_host != 'acquia-cloud-site-factory') {
+
+			// Return early
+			return $return_value;
+
 	}
+
+	// Get website CMS login URL
+	$cms_login_url = gmuw_websitesgmu_website_cms_login_url($post_id);
+
+	// Get website CMS
+	$cms = wp_get_post_terms($post_id,'cms')[0]->slug;
+
+	// Get logo based on CMS
+	$logo_image_url = gmuw_websitesgmu_cms_logo_url($cms);
 
 	// build link element
-	$return_value.='<a href="'.gmuw_websitesgmu_cms_login_url($web_host, $environment_name).'" target="_blank" title="CMS login"><img style="width:25px;" src="'.$image_path.'" /></a>';
+	$return_value.='<a href="'.$cms_login_url.'" target="_blank" title="CMS login"><img style="width:25px;" src="'.$logo_image_url.'" /></a>';
 
 	// Return value
 	return $return_value;
 
 }
 
-function gmuw_websitesgmu_admin_link($web_host, $environment_name){
+function gmuw_websitesgmu_website_web_host_admin_link($post_id){
+	// Supports wpengine, materiell, acquia-cloud-site-factory
 
-	// Do we have required paramters?
-	if (empty($web_host) || empty($environment_name)) {
-		return $return_value;
+	// Initialize variables
+	$return_value='';
+
+	// Get website web host
+	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+
+	// Are we using a supported web host?
+	if ($web_host != 'wpengine' && $web_host != 'materiell' && $web_host != 'acquia-cloud-site-factory') {
+
+			// Return early
+			return $return_value;
+
 	}
 
-	// Initialize return value
-	$return_value='';
-	$image_path='';
+	// Get web host admin URL
+	$web_host_admin_url = gmuw_websitesgmu_website_web_host_admin_url($post_id);
 
 	// Get logo based on web host
-	if ($web_host=='wpengine') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-wpengine.png';
-	} elseif ($web_host=='materiell') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-materiell.png';
-	} elseif ($web_host=='acquia-cloud-site-factory') {
-		$image_path.=plugin_dir_url( __DIR__ ).'images/logo-acsf.png';
-	}
-
-	// Get URL based on host
-	if ($web_host=='wpengine') {
-		$web_host_admin_url.='https://my.wpengine.com/installs/'.$environment_name.'/';
-	} elseif ($web_host=='materiell') {
-		$web_host_admin_url.='https://cloud.materiell.com/cloudsites';
-	} elseif ($web_host=='acquia-cloud-site-factory') {
-		$web_host_admin_url='https://www.georgemasonusf.acsitefactory.com/sites-by-group/list?field_domain_contains='.$environment_name.'';
-	}
+	$logo_image_url = gmuw_websitesgmu_web_host_logo_url($web_host);
 
 	// build link element
-	$return_value.='<a href="'.$web_host_admin_url.'" target="_blank" title="web host admin"><img style="width:25px;" src="'.$image_path.'" /></a>';
+	$return_value.='<a href="'.$web_host_admin_url.'" target="_blank" title="web host admin"><img style="width:25px;" src="'.$logo_image_url.'" /></a>';
 
 	// Return value
 	return $return_value;
@@ -367,7 +434,7 @@ function gmuw_websitesgmu_get_live_website_theme($post_id){
       //$return_value.='Post ID: '.$post_id.'<br />';
 
       // Get post hosting domain=
-      $domain = gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post_id,'web_host')[0]->slug, get_post_meta($post_id, 'environment_name', true),false);
+      $domain = gmuw_websitesgmu_website_hosting_domain($post_id,false);
       //$return_value.='Domain: '.$domain.'<br />';
 
       // Set URL for REST endpoint
@@ -489,7 +556,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			if ($post->deleted==1) {
 				$return_value .= '<td>&nbsp;</td>';
 			} else {
-				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_hosting_domain(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
 			}
 
 			$return_value .= '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
@@ -497,13 +564,13 @@ function gmuw_websitesgmu_custom_website_list(){
 			if ($post->deleted==1) {
 				$return_value .= '<td>&nbsp;</td>';
 			} else {
-				$return_value .= '<td>'.gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+				$return_value .= '<td>'.gmuw_websitesgmu_website_cms_login_link($post->ID).'</td>';
 			}
 
 			if ($post->deleted==1) {
 				$return_value .= '<td>&nbsp;</td>';
 			} else {
-				$return_value .= '<td>'.gmuw_websitesgmu_admin_link(wp_get_post_terms($post->ID,'web_host')[0]->slug,$post->environment_name).'</td>';
+				$return_value .= '<td>'.gmuw_websitesgmu_website_web_host_admin_link($post->ID).'</td>';
 			}
 
 			// Finish row

@@ -160,13 +160,13 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             }
             break;
         case 'admin_login':
-            if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                echo gmuw_websitesgmu_cms_login_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
+            if (get_post_meta($post_id, 'deleted', true)!=1) {
+                echo gmuw_websitesgmu_website_cms_login_link($post_id);
             }
             break;
         case 'web_host_admin':
-            if (get_post_meta($post_id, 'website_status', true)!='deleted') {
-                echo gmuw_websitesgmu_admin_link(wp_get_post_terms($post_id,'web_host')[0]->slug,get_post_meta($post_id, 'environment_name', true));
+            if (get_post_meta($post_id, 'deleted', true)!=1) {
+                echo gmuw_websitesgmu_website_web_host_admin_link($post_id);
             }
             break;
     }
