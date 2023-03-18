@@ -136,20 +136,18 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             }
             break;
         case 'wordpress_data_feeds':
-            if (get_post_meta($post_id, 'website_status', true)!='deleted') {
+            if (get_post_meta($post_id, 'deleted', true)!=1) {
+
                 if (has_term('wordpress', 'cms')) {
-                    if (has_term('materiell','web_host')) {
-                        $hosting_domain='https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com';
-                    }
-                    if (has_term('wpengine','web_host')) {
-                        $hosting_domain='https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com';
-                }
-                echo '<a href="'.$hosting_domain.'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
+
+                    $hosting_domain=gmuw_websitesgmu_website_hosting_domain($post_id);
+
+                    echo '<a href="'.$hosting_domain.'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.$hosting_domain.'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
                 }
             }
             break;
         case 'wordpress_theme_live':
-            if (get_post_meta($post_id, 'website_status', true)!='deleted') {
+            if (get_post_meta($post_id, 'deleted', true)!=1) {
                 if (has_term('wordpress', 'cms')) {
                     if ($_GET['live_theme_check']=='1') {
                         echo gmuw_websitesgmu_get_live_website_theme($post_id);

@@ -553,11 +553,20 @@ function gmuw_websitesgmu_custom_website_list(){
 
 			$return_value .= '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
 
+			// WordPress data feeds
+			$return_value .= '<td>';
 			if ($post->deleted==1) {
-				$return_value .= '<td>&nbsp;</td>';
+				$return_value .= '&nbsp;';
 			} else {
-				$return_value .= '<td>' . '<a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-mmi/mason-site-info">site info</a></td>';
+
+				if (has_term('wordpress', 'cms', $post)) {
+
+					$return_value .= '' . '<a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
+
+				}
+
 			}
+			$return_value .= '</td>';
 
 			$return_value .= '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
 
