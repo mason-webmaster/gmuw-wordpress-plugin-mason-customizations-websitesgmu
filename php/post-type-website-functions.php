@@ -564,7 +564,7 @@ function gmuw_websitesgmu_custom_website_list(){
 
 				if (has_term('wordpress', 'cms', $post)) {
 
-					$return_value .= '' . '<a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
+					$return_value .= '' . '<a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-sci/theme-info">theme info</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-sci/most-recent-modifications">modifications</a><br /><a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'/wp-json/gmuj-mmi/mason-site-info">site info</a>';
 
 				}
 
