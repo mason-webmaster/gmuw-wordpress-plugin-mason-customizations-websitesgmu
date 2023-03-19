@@ -509,6 +509,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>Department</th>';
 		$return_value .= '<th>Web Host</th>';
 		$return_value .= '<th>CMS</th>';
+		$return_value .= '<th>Hosting Domain</th>';
 		$return_value .= '<th>Production Domain</th>';
 		$return_value .= '<th>Theme</th>';
 		$return_value .= '<th>Follow-Up</th>';
@@ -547,6 +548,8 @@ function gmuw_websitesgmu_custom_website_list(){
 				$return_value .= $term->name;
 			}
 			$return_value .= '</td>';
+
+			$return_value .= '<td><a href="'.gmuw_websitesgmu_website_hosting_domain($post->ID).'" target="_blank">' . gmuw_websitesgmu_website_hosting_domain($post->ID,false) . '</a></td>';
 
 			$return_value .= '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
 			$return_value .= '<td>' . $post->wordpress_theme . '</td>';

@@ -100,15 +100,7 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             echo get_post_meta($post_id, 'environment_name', true);
             break;
         case 'hosting_domain':
-            if (has_term('wpengine', 'web_host')) {
-            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.wpengine.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.wpengine.com</a>';
-            }
-            if (has_term('materiell', 'web_host')) {
-            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.materiellcloud.com" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.materiellcloud.com</a>';
-            }
-            if (has_term('acquia-cloud-site-factory', 'web_host')) {
-            echo '<a href="https://'.get_post_meta($post_id, 'environment_name', true).'.sitemasonry.gmu.edu" target="_blank">' . get_post_meta($post_id, 'environment_name', true) . '.sitemasonry.gmu.edu</a>';
-            }
+            echo '<a href="'.gmuw_websitesgmu_website_hosting_domain($post_id).'" target="_blank">' . gmuw_websitesgmu_website_hosting_domain($post_id,false) . '</a>';
             break;
         case 'production_domain':
             echo '<a href="https://'.get_post_meta($post_id, 'production_domain', true).'" target="_blank">' . get_post_meta ($post_id, 'production_domain', true) . '</a>';
