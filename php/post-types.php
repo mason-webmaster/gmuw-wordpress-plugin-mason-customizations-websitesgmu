@@ -89,7 +89,7 @@ function gmuw_websitesgmu_display_marked_records($post_type='any',$mark_type){
 
 }
 
-//Display Links to working records
+//Display Links to marked records
 function gmuw_websitesgmu_display_marked_record($post_id,$show_post_type=0,$mark_type){
 
     //Initialize variables
@@ -107,14 +107,28 @@ function gmuw_websitesgmu_display_marked_record($post_id,$show_post_type=0,$mark
             break;
     }
 
-    //Build return value
+    //Begin return value
     $return_value.='<p class="marked-record '.$css_class.'">';
+
     $return_value.='<a href="'.get_permalink($post_id).'">';
     if ($show_post_type==1) $return_value.=get_post_type($post_id).': ';
     $return_value.=get_the_title($post_id);
     //$return_value.=' ('.$post_id.')';
     $return_value.=' <a class="admin-icon admin-view" href="'.get_permalink($post_id).'"></a><a class="admin-icon admin-edit" href="/wp-admin/post.php?post='.$post_id.'&action=edit"></a>';
     $return_value.='</a>';
+
+    // Content specific to 'working' records
+    if ($mark_type=='working'){
+
+        // Who is working this record?
+        $working_user=get_post_meta($post_id,'working_user',true);
+        if (!empty($working_user)){
+            $return_value.=' ('.get_userdata($working_user)->user_login.')';
+        }
+
+    }
+
+    //Finish return value
     $return_value.='</p>';
 
     //Return value
