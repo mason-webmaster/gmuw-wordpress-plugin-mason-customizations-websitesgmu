@@ -70,7 +70,6 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         'hosting_domain' => 'Hosting Domain',
         'production_domain'   => 'Prod Domain',
         'wordpress_theme'   => 'WP Theme',
-        'website_status'   => 'Status',
         //Other fields
         'website_ga_property_post_id' => 'GA Account',
         'website_gtm_container_post_id' => 'GTM Container',
@@ -109,9 +108,6 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             if (has_term('wordpress', 'cms')) {
                 echo get_post_meta($post_id, 'wordpress_theme', true);
             }
-            break;
-        case 'website_status':
-            echo get_post_meta($post_id, 'website_status', true);
             break;
         case 'website_ga_property_post_id':
             if (get_post_meta($post_id, 'website_ga_property_post_id', true)){
