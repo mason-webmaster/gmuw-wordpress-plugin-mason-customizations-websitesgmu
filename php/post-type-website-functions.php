@@ -514,6 +514,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>Theme</th>';
 		$return_value .= '<th>Follow-Up</th>';
 		$return_value .= '<th>Data Feeds</th>';
+		$return_value .= '<th>View</th>';
 		$return_value .= '<th>Edit</th>';
 		$return_value .= '<th>Admin Login</th>';
 		$return_value .= '<th>Web Host Admin</th>';
@@ -571,7 +572,9 @@ function gmuw_websitesgmu_custom_website_list(){
 			}
 			$return_value .= '</td>';
 
-			$return_value .= '<td>' . '<a href="/wp-admin/post.php?post='.$post->ID.'&action=edit">Edit</a></td>';
+			$return_value .= '<td>' . gmuw_websitesgmu_record_get_utility_link($post->ID,'view') .'</td>';
+
+			$return_value .= '<td>' . gmuw_websitesgmu_record_get_utility_link($post->ID,'edit') .'</td>';
 
 			if ($post->deleted==1) {
 				$return_value .= '<td>&nbsp;</td>';

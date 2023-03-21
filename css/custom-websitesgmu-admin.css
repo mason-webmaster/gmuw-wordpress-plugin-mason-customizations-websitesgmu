@@ -42,12 +42,9 @@
 	background-color:#99ffcc;
 }
 
-#dashboard-widgets-wrap .admin-icon {
-	font-size: 1.25rem;
-}
-
 /* dashicons as admin icons */
 .admin-icon {
+	font-size: 1.25rem;
 	text-decoration:none;
 	vertical-align: middle;
 }
