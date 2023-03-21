@@ -89,6 +89,27 @@ function gmuw_websitesgmu_display_marked_records($post_type='any',$mark_type){
 
 }
 
+// Get record utility link
+function gmuw_websitesgmu_record_get_utility_link($post_id,$link_type){
+
+    // Initialize variables
+    $return_value='';
+
+    // Build link based on link_type
+    switch($link_type) {
+        case 'view';
+            $return_value.='<a class="admin-icon admin-view" href="'.get_permalink($post_id).'"></a>';
+            break;
+        case 'edit':
+            $return_value.=' <a class="admin-icon admin-edit" href="/wp-admin/post.php?post='.$post_id.'&action=edit"></a>';
+            break;
+    }
+
+    // Return value
+    return $return_value;
+
+}
+
 //Display Links to marked records
 function gmuw_websitesgmu_display_marked_record($post_id,$show_post_type=0,$mark_type){
 
@@ -114,8 +135,9 @@ function gmuw_websitesgmu_display_marked_record($post_id,$show_post_type=0,$mark
     if ($show_post_type==1) $return_value.=get_post_type($post_id).': ';
     $return_value.=get_the_title($post_id);
     //$return_value.=' ('.$post_id.')';
-    $return_value.=' <a class="admin-icon admin-view" href="'.get_permalink($post_id).'"></a><a class="admin-icon admin-edit" href="/wp-admin/post.php?post='.$post_id.'&action=edit"></a>';
     $return_value.='</a>';
+    $return_value.=' '.gmuw_websitesgmu_record_get_utility_link($post_id,'view');
+    $return_value.=' '.gmuw_websitesgmu_record_get_utility_link($post_id,'edit');
 
     // Content specific to 'working' records
     if ($mark_type=='working'){
