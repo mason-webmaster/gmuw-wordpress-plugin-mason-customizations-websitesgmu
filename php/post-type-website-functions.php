@@ -323,6 +323,12 @@ function gmuw_websitesgmu_websites_content_statistics() {
 
 		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
 
+		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
+		$percent=round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'))*100,2).'%';
+
+		$return_value .= '<p>'.$count . ' using Elementor ('.$percent.')'.'</p>';
+
+
 		$return_value .= '<h3>GA/GTM Info</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
