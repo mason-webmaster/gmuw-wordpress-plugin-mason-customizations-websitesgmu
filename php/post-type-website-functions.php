@@ -518,6 +518,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>Hosting Domain</th>';
 		$return_value .= '<th>Production Domain</th>';
 		$return_value .= '<th>Theme</th>';
+		$return_value .= '<th>Notes</th>';
 		$return_value .= '<th>Follow-Up</th>';
 		$return_value .= '<th>Data Feeds</th>';
 		$return_value .= '<th>View</th>';
@@ -560,6 +561,12 @@ function gmuw_websitesgmu_custom_website_list(){
 
 			$return_value .= '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
 			$return_value .= '<td>' . $post->wordpress_theme . '</td>';
+
+			$return_value .= '<td>';
+			if ($post->uses_elementor) {
+				$return_value .= 'Uses Elementor<br />';
+			}
+			$return_value .= '</td>';
 
 			$return_value .= '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
 
