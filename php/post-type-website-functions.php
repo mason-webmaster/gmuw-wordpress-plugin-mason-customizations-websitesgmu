@@ -315,19 +315,29 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
 		$return_value .= '<h3>WordPress Websites</h3>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
-		$return_value .= '<p>'.$count . ' WordPress websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		$count=gmuw_websitesgmu_websites_using_theme();
-		$percent=round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'))*100,2).'%';
+		// calculate stats
+			//how many instances are wordpress?
+				$wordpress_instances = count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
+			//how many wordpress instances are production?
+				$production_wordpress_instances=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','','cms','wordpress'));
+			//how many instances are using official wordpress theme?
+				$wordpress_instances_using_theme=gmuw_websitesgmu_websites_using_theme();
+			// how many wordpress instances using the theme are production?
+				$wordpress_production_instances_using_theme=gmuw_websitesgmu_websites_using_theme_only_production();
+			//how many instances are using Elementor?
+				$wordpress_instances_using_elementor=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
 
-		$return_value .= '<p>'.$count . ' on official theme ('.$percent.')'.'</p>';
+		// display stats
+		$return_value .= '<p>'.$wordpress_instances . ' WordPress instances ('.gmuw_websitesgmu_get_website_total_percentage($wordpress_instances).')'.'</p>';
 
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
-		$percent=round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'))*100,2).'%';
+		$return_value .= '<p>'.$production_wordpress_instances . ' WordPress instances are production ('.round($production_wordpress_instances/$wordpress_instances*100,2).'%)'.'</p>';
 
-		$return_value .= '<p>'.$count . ' using Elementor ('.$percent.')'.'</p>';
+		$return_value .= '<p>'.$wordpress_instances_using_theme . ' WordPress instances on official theme ('.round($wordpress_instances_using_theme/$wordpress_instances*100,2).'%)'.'</p>';
 
+		$return_value .= '<p>'.$wordpress_production_instances_using_theme . ' <em>production</em> WordPress instances on official theme ('.round($wordpress_production_instances_using_theme/$production_wordpress_instances*100,2).'%)'.'</p>';
+
+		$return_value .= '<p>'.$wordpress_instances_using_elementor . ' WordPress instances are using Elementor ('.round($wordpress_instances_using_elementor/$wordpress_instances*100,2).'%)'.'</p>';
 
 		$return_value .= '<h3>GA/GTM Info</h3>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
@@ -398,7 +408,57 @@ function gmuw_websitesgmu_websites_using_theme() {
 		        array(
 							'key'   => 'wordpress_theme',
 							'value' => 'gmuj|Mason Twenty Twenty Theme',
+							'compare' => 'REGEXP',
+		        ),
+		      )
+		    )
+			)
+		)
+	);
+
+}
+
+/**
+ * Gets count of website environments using the official theme
+ */
+function gmuw_websitesgmu_websites_using_theme_only_production() {
+
+	// Get total number of production wordpress websites using the official theme
+
+	return count(
+		get_posts(
+			array(
+		    'post_type'  => 'website',
+		    'post_status' => 'publish',
+		    'nopaging' => true,
+		    'meta_query' => array(
+		      array(
+		        'relation' => 'AND',
+		        array(
+		          'relation' => 'OR',
+		          array(
+		            'key'   => 'deleted',
+		            'compare' => 'NOT EXISTS',
+		          ),
+		          array(
+		            'key'   => 'deleted',
+		            'value' => '1',
+		            'compare' => '!=',
+		          ),
+		        ),
+		        array(
+							'key'   => 'wordpress_theme',
+							'value' => 'gmuj|Mason Twenty Twenty Theme',
 		          'compare' => 'REGEXP',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'compare' => 'EXISTS',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'value' => '',
+		          'compare' => '!=',
 		        ),
 		      )
 		    )
