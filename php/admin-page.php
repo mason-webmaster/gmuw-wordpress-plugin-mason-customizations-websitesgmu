@@ -87,60 +87,96 @@ function gmuw_websitesgmu_display_wpe_audit_tool_page() {
 	// Page title
 	echo "<h1>" . esc_html(get_admin_page_title()) . "</h1>";
 
-	// Output basic plugin info
-	//echo "<p>Mason WordPress database</p>";
+	// step 1
+	echo '<h2>Get List of Installs (Environments) from WPE API</h2>';
 
-	if ($_POST['submit']=='submit'){
-
-		$initial_content=str_replace('\"','"',$_POST['wpe_api_output']);
-
-	}
-
-	# input form
-	echo '<h2>Output from WPE API:</h2>';
+	// input form 1
 	echo '<form method="post" action="admin.php?page=gmuw_websitesgmu_wpe_audit">';
-	echo '<textarea name="wpe_api_output" style="width:100%; height:10em;">'.$initial_content.'</textarea>';
-	echo '<br />';
-	echo '<input name="submit" type="submit" value="submit" />';
+
+		echo '<h3>WPE API Credentials:</h3>';
+		echo '<p>User: <input type="text" name="wpe_api_user" placeholder="WPE API user ID" value="'.$_POST['wpe_api_user'].'" /></p>';
+		echo '<p>Pass: <input type="password" name="wpe_api_pass" placeholder="WPE API password" value="'.$_POST['wpe_api_pass'].'" /></p>';
+
+		echo '<p><input name="submit" type="submit" value="submit" /></p>';
+
 	echo '</form>';
 
+	// result 1
 	if ($_POST['submit']=='submit'){
 
-		#echo '<p>We have a form submission!</p>';
-		#echo '<p>The content to process is:</p>';
-		#echo '<textarea style="width:100%; height:10em;">'.$initial_content.'</textarea>';
+		$api_user=$_POST['wpe_api_user'];
+		$api_pass=$_POST['wpe_api_pass'];
 
-		# first pass
+		// make cURL request
+		$result = gmuw_websitesgmu_wpe_api_request($api_user,$api_pass,'https://api.wpengineapi.com/v1/installs?offset=0');
+
+		// append this batch of results to full results (there may be many pages of results)
+		$full_result = $result . PHP_EOL;
+
+		// parse resulting JSON
+        $json = json_decode($result);
+
+		// do we have a "next" element in the results?
+        while ($json->next) {
+
+			//echo '<p>We have more records!</p>';
+			//echo '<p>The next request should be: '.$json->next.'</p>';
+
+			// get next 'page' of results
+			$result = gmuw_websitesgmu_wpe_api_request($api_user,$api_pass,$json->next);
+
+			// append this batch of results to full results (there may be many pages of results)
+			$full_result .= $result . PHP_EOL;
+
+			// parse resulting JSON
+			$json = json_decode($result);
+
+        }
+
+        // format result (pretty-print)
+        $full_result=gmuw_websitesgmu_json_pretty_print($full_result);
+
+		// display results
+		echo '<h3>WPE API Output:</h3>';
+		echo '<textarea style="width:100%; height:10em;">'.$full_result.'</textarea>';
+
+		// processing api results - first pass
 		$pattern = '/.*"name": "([^"]*)".*/i';
-		$content_processed_1= preg_replace($pattern, 'keep\1', $initial_content);
+		$api_result_processed_step_1= preg_replace($pattern, 'keep\1', $full_result);
 
-		#echo '<p>First pass:</p>';
-		#echo '<textarea style="width:100%; height:10em;">'.$content_processed_1.'</textarea>';
+		//echo '<p>First pass:</p>';
+		//echo '<textarea style="width:100%; height:10em;">'.$api_result_processed_step_1.'</textarea>';
 
-		# second pass
+		// processing api results - second pass
 		$pattern = '/[}{ \t].*\n?/i';
-		$content_processed_2= preg_replace($pattern, '', $content_processed_1);
+		$api_result_processed_step_2= preg_replace($pattern, '', $api_result_processed_step_1);
 
-		#echo '<p>Second pass:</p>';
-		#echo '<textarea style="width:100%; height:10em;">'.$content_processed_2.'</textarea>';
+		//echo '<p>Second pass:</p>';
+		//echo '<textarea style="width:100%; height:10em;">'.$api_result_processed_step_2.'</textarea>';
 
-		# third pass
+		// processing api results - third pass
 		$pattern = '/keep/i';
-		$content_processed_3=trim(preg_replace($pattern, '', $content_processed_2));
+		$api_result_processed_step_3=trim(preg_replace($pattern, '', $api_result_processed_step_2));
 
-		#echo '<p>Third pass:</p>';
-		#echo '<textarea style="width:100%; height:10em;">'.$content_processed_3.'</textarea>';
+		//echo '<p>Third pass:</p>';
+		//echo '<textarea style="width:100%; height:10em;">'.$api_result_processed_step_3.'</textarea>';
 
-		echo '<h2>Found WPE Installs:</h2>';
-		echo '<textarea style="width:100%; height:10em;">'.$content_processed_3.'</textarea>';
+		// put processed results representing list of WPE installs into array
+		$wpe_installs = explode(PHP_EOL,$api_result_processed_step_3);
 
-		# put into array
-		$wpe_installs = explode(PHP_EOL,$content_processed_3);
+		// output array
+		//print_r($wpe_installs);
 
-		# output array
-		#print_r($wpe_installs);
+		// get count of WPE installs from API
+		$wpe_installs_count=count($wpe_installs);
 
-		echo '<h2>Scanning for Issues:</h2>';
+		echo '<h2>Found '.$wpe_installs_count.' WPE Installs:</h2>';
+		echo '<textarea style="width:100%; height:10em;">'.$api_result_processed_step_3.'</textarea>';
+
+		echo '<h2>Scanning for Issues...</h2>';
+
+		// look for WPE installs that are missing records in database
+		echo '<h3>Looking for any environments in WPE that are not listed in our database...</h3>';
 
 		# loop through array
 		foreach ($wpe_installs as $wpe_install) {
@@ -154,11 +190,25 @@ function gmuw_websitesgmu_display_wpe_audit_tool_page() {
 			# do we have an install by that name?
 
 			if ($count==0) {
-				echo 'Missing WPE install: '.$wpe_install.'<br />';
+				echo 'Missing WPE install in database: '.$wpe_install.'<br />';
 			}
 
 			if ($count>1) {
-				echo 'Duplicate WPE install: '.$wpe_install.'<br />';
+				echo 'Duplicate WPE install in database: '.$wpe_install.'<br />';
+			}
+
+		}
+
+		// look for records in database that don't have corresponding installs in WPE
+		echo '<h3>Looking for any environments listed in our database that are not found in WPE...</h3>';
+
+		$wpe_environment_records = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','web_host','wpengine');
+
+		foreach ($wpe_environment_records as $wpe_environment_record) {
+
+			//echo '<p>'.$wpe_environment_record->environment_name.'</p>';
+			if( !in_array( $wpe_environment_record->environment_name ,$wpe_installs ) ){
+				echo 'Install listed in database doesn\'t exist in WPE: '.$wpe_environment_record->environment_name.'<br />';
 			}
 
 		}

@@ -57,3 +57,9 @@ require('php/taxonomies.php');
 
 // Editor
   include('php/editor.php');
+
+// JSON
+  include('php/json.php');
+
+// WPE API
+  include('php/wpe-api.php');
