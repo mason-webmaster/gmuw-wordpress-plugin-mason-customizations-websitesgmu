@@ -63,3 +63,6 @@ require('php/taxonomies.php');
 
 // WPE API
   include('php/wpe-api.php');
+
+// ACSF API
+  include('php/acsf-api.php');

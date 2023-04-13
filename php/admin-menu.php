@@ -59,17 +59,16 @@ function gmuw_websitesgmu_add_sublevel_menu() {
 		2
 	);
 
-	// Add Wordpress admin menu item under Mason for this plugin's wpe site audit tool
+	// Add Wordpress admin menu item under Mason for this plugin's website site audit tool
 	add_submenu_page(
 		'gmuw',
-		'Mason Websites WPE Audit Tool',
-		'Mason Websites WPE Audit Tool',
+		'Mason Website Audit Tool',
+		'Mason Website Audit Tool',
 		'manage_options',
-		'gmuw_websitesgmu_wpe_audit',
-		'gmuw_websitesgmu_display_wpe_audit_tool_page',
+		'gmuw_websitesgmu_website_audit',
+		'gmuw_websitesgmu_display_website_audit_tool_page',
 		2
 	);
-
 
 }
 
