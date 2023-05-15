@@ -71,7 +71,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         'production_domain'   => 'Prod Domain',
         'wordpress_theme'   => 'WP Theme',
         //Other fields
-        'website_ga_property_post_id' => 'GA Account',
+        'website_ga_property_post_id' => 'GA Property',
         'website_gtm_container_post_id' => 'GTM Container',
         'wordpress_data_feeds' => 'WP Data Feeds',
         'wordpress_theme_live' => 'Live WP Theme',
