@@ -340,12 +340,17 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$return_value .= '<p>'.$wordpress_instances_using_elementor . ' WordPress instances are using Elementor ('.round($wordpress_instances_using_elementor/$wordpress_instances*100,2).'%)'.'</p>';
 
 		$return_value .= '<h3>GA/GTM Info</h3>';
+
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
+		$count=count(gmuw_websitesgmu_production_websites_needing_analytics());
+		$return_value .= '<p>'.$count . ' production websites need analytics ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_gtm_container_post_id'));
-		$return_value .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
+		$return_value .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
-		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'))*100,2).'%)'.'</p>';
+		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
 
 		// taxonomy: cms
 		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
@@ -672,5 +677,71 @@ function gmuw_websitesgmu_custom_website_list(){
 
 	// Return value
 	return $return_value;
+
+}
+
+function gmuw_websitesgmu_production_websites_needing_analytics(){
+
+  //Set basic arguments for the get posts function
+  $args = array(
+      'post_type'  => 'website',
+      'post_status' => 'publish',
+      'nopaging' => true,
+      'order' => 'ASC',
+      'orderby' => 'name'
+  );  
+
+  $args_meta = array(
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'relation' => 'OR',
+          array(
+            'key'   => 'deleted',
+            'compare' => 'NOT EXISTS',
+          ),
+          array(
+            'key'   => 'deleted',
+            'value' => '1',
+            'compare' => '!=',
+          ),
+        ),
+        array(
+          'relation' => 'AND',
+          array(
+            'key'   => 'production_domain',
+            'compare' => 'EXISTS',
+          ),
+          array(
+            'key'   => 'production_domain',
+            'value' => '',
+            'compare' => '!=',
+          ),
+        ),
+        array(
+          'relation' => 'OR',
+          array(
+            'key'   => 'doesnt_need_analytics',
+            'compare' => 'NOT EXISTS',
+          ),
+          array(
+            'key'   => 'doesnt_need_analytics',
+            'value' => '1',
+            'compare' => '!=',
+          ),
+        ),
+      )
+    )
+  );
+
+  // merge arg and tax arrays
+  $args_full = array_merge($args, $args_meta);
+
+  // Get posts
+  $posts = get_posts($args_full);
+
+	// Return posts
+	return $posts;
 
 }

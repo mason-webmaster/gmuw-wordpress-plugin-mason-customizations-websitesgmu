@@ -71,6 +71,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         'production_domain'   => 'Prod Domain',
         'wordpress_theme'   => 'WP Theme',
         //Other fields
+        'doesnt_need_analytics' => 'Analytics Not Needed',
         'website_ga_property_post_id' => 'GA Property',
         'website_gtm_container_post_id' => 'GTM Container',
         'wordpress_data_feeds' => 'WP Data Feeds',
@@ -108,6 +109,9 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             if (has_term('wordpress', 'cms')) {
                 echo get_post_meta($post_id, 'wordpress_theme', true);
             }
+            break;
+        case 'doesnt_need_analytics':
+            echo get_post_meta($post_id, 'doesnt_need_analytics', true)==1 ? 'True' : '';
             break;
         case 'website_ga_property_post_id':
             if (get_post_meta($post_id, 'website_ga_property_post_id', true)){
