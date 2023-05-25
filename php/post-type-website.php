@@ -117,14 +117,16 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             if (get_post_meta($post_id, 'website_ga_property_post_id', true)){
             echo get_the_title(get_post_meta($post_id, 'website_ga_property_post_id', true)).'<br />';
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'website_ga_property_post_id', true)).'">edit</a> | ';
-            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_ga_property_post_id', true)).'">view</a> ';
+            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_ga_property_post_id', true)).'">view</a> | ';
+            echo gmuw_websitesgmu_ga_property_admin_link(get_post_meta($post_id, 'website_ga_property_post_id', true));
             }
             break;
         case 'website_gtm_container_post_id':
             if (get_post_meta($post_id, 'website_gtm_container_post_id', true)){
             echo get_the_title(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'<br />';
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">edit</a> | ';
-            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">view</a> ';
+            echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">view</a> | ';
+            echo gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($post_id, 'website_gtm_container_post_id', true));
             }
             break;
         case 'wordpress_data_feeds':

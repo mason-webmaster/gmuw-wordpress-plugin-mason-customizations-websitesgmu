@@ -97,7 +97,7 @@ function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
             echo get_post_meta($post_id, 'gtm_container_id', true);
             break;
         case 'gtm_container_link':
-            echo '<a href="https://tagmanager.google.com/#/container/accounts/'.get_post_meta(get_post_meta($post_id, 'gtm_container_account_post_id', true), 'gtm_account_id', true).'/containers/'.get_post_meta($post_id, 'gtm_container_id', true).'/" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_tag_manager.png'.'" /></a><br />';
+            echo gmuw_websitesgmu_gtm_container_admin_link($post_id);
             break;
     }
 

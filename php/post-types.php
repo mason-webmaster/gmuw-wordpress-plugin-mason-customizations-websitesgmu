@@ -205,3 +205,5 @@ require('post-type-ga_property.php');
  * Custom functions related to post types
  */
 require('post-type-website-functions.php');
+require('post-type-gtm_container-functions.php');
+require('post-type-ga_property-functions.php');

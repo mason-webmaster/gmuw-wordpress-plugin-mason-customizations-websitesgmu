@@ -101,7 +101,7 @@ function gmuw_websitesgmu_ga_property_custom_column ($column, $post_id) {
             echo get_post_meta($post_id, 'ga_measurement_id', true);
             break;
         case 'ga_property_link':
-            echo '<a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a><br />';
+            echo gmuw_websitesgmu_ga_property_admin_link($post_id);
             break;
     }
 
