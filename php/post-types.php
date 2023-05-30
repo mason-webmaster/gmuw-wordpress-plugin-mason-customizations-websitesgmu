@@ -206,4 +206,5 @@ require('post-type-ga_property.php');
  */
 require('post-type-website-functions.php');
 require('post-type-gtm_container-functions.php');
+require('post-type-ga_account-functions.php');
 require('post-type-ga_property-functions.php');
