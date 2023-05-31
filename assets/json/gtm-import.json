@@ -1,0 +1,2455 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2022-07-20 17:19:52",
+    "containerVersion": {
+        "path": "accounts/4701084790/containers/50119144/versions/6",
+        "accountId": "4701084790",
+        "containerId": "50119144",
+        "containerVersionId": "6",
+        "name": "20220720-02",
+        "description": "Adds non-functional informational tags to the \"01 material unique to this website\" and \"02 third-party additions\" folders, both to provide information about the purpose of these folders and to ensure that these folders will be included in the JSON export file. Empty folders will not export.",
+        "container": {
+            "path": "accounts/4701084790/containers/50119144",
+            "accountId": "4701084790",
+            "containerId": "50119144",
+            "name": "Mason Standard GTM Container V3.4",
+            "publicId": "GTM-PJF66DG",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1629218524713",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/4701084790/containers/50119144/workspaces?apiLink=container"
+        },
+        "tag": [
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "10",
+                "name": "rollup01 - event - catch-all",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "{{Event Category}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Event Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Event Label}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - rollup01}}"
+                    }
+                ],
+                "fingerprint": "1629218695451",
+                "firingTriggerId": [
+                    "7"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "23",
+                "name": "rollup02 - event - download link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "download"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup02}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695454",
+                "firingTriggerId": [
+                    "21"
+                ],
+                "blockingTriggerId": [
+                    "22"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "28",
+                "name": "rollup01 - pageview - custom",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_PAGEVIEW"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup01}}"
+                    }
+                ],
+                "fingerprint": "1629218695456",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "blockingTriggerId": [
+                    "25"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "33",
+                "name": "rollup02 - GA4",
+                "type": "gaawc",
+                "notes": "This variable stores the Google Analytics 4 Measurement ID of the second roll-up property intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendPageView",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableSendToServerContainer",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA4 measurement ID - rollup02}}"
+                    }
+                ],
+                "fingerprint": "1657305312236",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "34",
+                "name": "local - GA4",
+                "type": "gaawc",
+                "notes": "This configuration stores the Google Analytics 4 Measurement ID intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendPageView",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableSendToServerContainer",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA4 measurement ID - local}}"
+                    }
+                ],
+                "fingerprint": "1657305205866",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "36",
+                "name": "debug - output container info to console",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  console.log(\"Mason Template Container Version: {{Mason GTM Container Version}}\");\n  console.log(\"GTM Container ID: {{Container ID}}\");\n  console.log(\"Hostname: {{Hostname - local}}\");\n  console.log(\"UAID-Local: {{UAID - local}}\");\n  console.log(\"UAID-Roll-Up 01: {{UAID - rollup01}}\");\n  console.log(\"UAID-Roll-Up 02: {{UAID - rollup02}}\");\n  console.log(\"GA4 Measurement ID - Local: {{GA4 measurement ID - local}}\");\n  console.log(\"GA4 Measurement ID - Roll-Up 01: {{GA4 measurement ID - rollup01}}\");\n  console.log(\"GA4 Measurement ID - Roll-Up 02: {{GA4 measurement ID - rollup02}}\");  \n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1657305768682",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "parentFolderId": "35",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "39",
+                "name": "local - event - catch-all",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "{{Event Category}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Event Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Event Label}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - local}}"
+                    }
+                ],
+                "fingerprint": "1629218695459",
+                "firingTriggerId": [
+                    "7"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "42",
+                "name": "rollup01 - event - download link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "download"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup01}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695459",
+                "firingTriggerId": [
+                    "21"
+                ],
+                "blockingTriggerId": [
+                    "41"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "44",
+                "name": "local - event - expandable content",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "expandable content"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - local}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Expandable Area Click Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Expandable Area Click Label}}"
+                    }
+                ],
+                "fingerprint": "1629218695459",
+                "firingTriggerId": [
+                    "29"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "46",
+                "name": "rollup01 - GA4",
+                "type": "gaawc",
+                "notes": "This variable stores the Google Analytics 4 Measurement ID of the first roll-up property intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendPageView",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableSendToServerContainer",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "{{GA4 measurement ID - rollup01}}"
+                    }
+                ],
+                "fingerprint": "1657305286794",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "47",
+                "name": "rollup01 - event - email link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "email"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup01}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695460",
+                "firingTriggerId": [
+                    "24"
+                ],
+                "blockingTriggerId": [
+                    "41"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "48",
+                "name": "rollup01 - event - expandable content",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "expandable content"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup01}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Expandable Area Click Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Expandable Area Click Label}}"
+                    }
+                ],
+                "fingerprint": "1629218695461",
+                "firingTriggerId": [
+                    "29"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "50",
+                "name": "local - event - outbound link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "outbound link"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - local}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695462",
+                "firingTriggerId": [
+                    "49"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "51",
+                "name": "local - pageview - custom",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_PAGEVIEW"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - local}}"
+                    }
+                ],
+                "fingerprint": "1629218695462",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "52",
+                "name": "rollup02 - event - email link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "email"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup02}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695462",
+                "firingTriggerId": [
+                    "24"
+                ],
+                "blockingTriggerId": [
+                    "22"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "53",
+                "name": "rollup02 - event - catch-all",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "{{Event Category}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Event Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Event Label}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - rollup02}}"
+                    }
+                ],
+                "fingerprint": "1629218695463",
+                "firingTriggerId": [
+                    "7"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "55",
+                "name": "rollup02 - event - outbound link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "outbound link"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup02}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695463",
+                "firingTriggerId": [
+                    "49"
+                ],
+                "blockingTriggerId": [
+                    "22"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "56",
+                "name": "rollup02 - event - expandable content",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "expandable content"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup02}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Expandable Area Click Action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Expandable Area Click Label}}"
+                    }
+                ],
+                "fingerprint": "1629218695464",
+                "firingTriggerId": [
+                    "29"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "57",
+                "name": "rollup01 - event - outbound link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "outbound link"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup01}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695464",
+                "firingTriggerId": [
+                    "49"
+                ],
+                "blockingTriggerId": [
+                    "41"
+                ],
+                "parentFolderId": "9",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "58",
+                "name": "local - event - download link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "download"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - local}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695464",
+                "firingTriggerId": [
+                    "21"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "59",
+                "name": "YouTube tracker",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script type=\"text/javascript\">\n/*\n                    .ooooo.          ooo. .oo.     .ooooo.    oooo d8b\n                   d88\" `88b         `888P\"Y88b   d88\" `88b   `888\"\"8P\n                   888888888  88888   888   888   888   888    888\n                   888        88888   888   888   888   888    888       \n                   `\"88888\"          o888o o888o  `Y8bod8P\"   d888b      \n\n********************************************************************************\nCopyright 2014 by E-Nor Inc.\nAuthor Mohamed Adel\nAutomatically tag youtube videos for Google Tag Manager to Play / Pause / Watch to End / Progress. \nVersion: 5.1 : Enhanced\nLast Updated: 06/19/2015\n********************************************************************************/\n\nvar tag = document.createElement('script');\ntag.src = document.location.protocol + \"//www.youtube.com/iframe_api\";\nvar firstScriptTag = document.getElementsByTagName('script')[0];\nfirstScriptTag.parentNode.insertBefore(tag, firstScriptTag);\nvar videoArray = new Array();\nvar playerArray = new Array();\nvar Settings_HitType = \"gtm\" // This setup can handle classic/gtm/universal\n\nfunction _sendYouTubeProgressEvent(videoTitle, percentage, hittype) {\n    if (hittype == 'classic') {\n        _gaq.push(['_trackEvent', 'video', '' + percentage + '%', videoTitle, percentage]);\n    } else if (hittype == 'universal') {\n        ga('send', 'event', 'video', + percentage + '%', videoTitle, percentage);\n    } else if (hittype == 'gtm') {\n        dataLayer.push({\n            'event': 'eventTracker',\n            'eventCat': 'video',\n            'eventAct': '' + percentage + '%',\n            'eventLbl': videoTitle,\n            'eventVal': percentage\n        });\n    }\n}\n\n(function(jQuery) {\n    function trackYouTube() {\n        var i = 0;\n        jQuery('iframe').each(function() {\n            var video = jQuery(this);\n            var _thisSrc = this.src;\n            if (IsYouTube(_thisSrc)) {\n                this.src = YTUrlHandler(_thisSrc);\n                var youtubeid = youtube_parser(_thisSrc);\n                videoArray[i] = youtubeid;\n                this.setAttribute('id', youtubeid);\n                i++;\n            }\n\n        });\n    }\n    jQuery(document).ready(function() {\n        trackYouTube();\n    });\n})(jQuery);\n\nfunction onYouTubeIframeAPIReady() {\n    for (var i = 0; i < videoArray.length; i++) {\n        playerArray[i] = new YT.Player(videoArray[i], {\n            events: {\n                'onReady': onPlayerReady,\n                'onStateChange': onPlayerStateChange\n            }\n        });\n    }\n}\n\n\n\n\nfunction onPlayerReady(event) {}\ncCi = 1;\nfunction onPlayerStateChange(event) {\n\n    var videotitle = event.target.getVideoData().title;\n    var played_percentage = 0;\n    var vidId =  event.target.getVideoData().video_id;\n    var videoIndex = 0;\n    for (var o=0; o < videoArray.length; o++)\n    {\n        if (videoArray[o]==vidId){videoIndex=o;}\n        }\n    played_percentage  = ((parseInt(event.target.getCurrentTime()) / parseInt(event.target.getDuration())) * 100).toFixed();\n    if (event.data == YT.PlayerState.PLAYING && played_percentage==0){\n        \n        eval(\"(function() {  \" +\n            \"var flag_\" + cCi + \"_25 = false;\" +\n            \"var flag_\" + cCi + \"_50 = false;\" +\n            \"var flag_\" + cCi + \"_75 = false;\" +\n            \"var flag_\" + cCi + \"_95 = false;\" +\n            \"function xx\" + cCi + \"(vindx){ \" +\n            \"var percentage = ((parseInt(playerArray[vindx].getCurrentTime()) / parseInt(playerArray[vindx].getDuration())) * 100).toFixed();\" +\n            \"var videotitle = playerArray[vindx].getVideoData().title; \" +\n            \"if (percentage < 100) { \" +\n            \"if (percentage > 25 && percentage <= 50 && flag_\" + cCi + \"_25 == false) { _sendYouTubeProgressEvent(videotitle,25,Settings_HitType); flag_\" + cCi + \"_25=true; }\" +\n            \"if (percentage > 50 && percentage <= 75 && flag_\" + cCi + \"_50 == false) {_sendYouTubeProgressEvent(videotitle,50,Settings_HitType);flag_\" + cCi + \"_50=true;}\" +\n            \"if (percentage > 75 && percentage <= 95 && flag_\" + cCi + \"_75 == false) {_sendYouTubeProgressEvent(videotitle,75,Settings_HitType);flag_\" + cCi + \"_75=true;}\" +\n            \"if (percentage > 95 && flag_\" + cCi + \"_95 == false) {_sendYouTubeProgressEvent(videotitle,95,Settings_HitType);flag_\" + cCi + \"_95=true;}\" +\n            \"}\" +\n            \" }\" +\n            \"setInterval(function(){  xx\" + cCi + \"(\"+videoIndex+\"); }, parseInt(\"+event.target.getDuration()+\")/10); \" +\n            \"})();\");\n        cCi++;\n    }\n\n\n\n\n    if (event.data == YT.PlayerState.PLAYING) {\n        if (Settings_HitType == 'classic') {\n            _gaq.push(['_trackEvent', 'video', 'play', videotitle, 0]);\n        } else if (Settings_HitType == 'universal') {\n            ga('send', 'event', 'video', 'play', videotitle);\n        } else if (Settings_HitType == 'gtm') {\n            dataLayer.push({\n                'event': 'eventTracker',\n                'eventCat': 'video',\n                'eventAct': 'play',\n                'eventLbl': videotitle,\n                'eventVal': 0\n            });\n        }\n\n\n\n    }\n    if (event.data == YT.PlayerState.ENDED) {\n        if (Settings_HitType == 'classic') {\n            _gaq.push(['_trackEvent', 'video', 'complete', videotitle, 100]);\n        } else if (Settings_HitType == 'universal') {\n            ga('send', 'event', 'video', 'complete', videotitle, 100);\n        } else if (Settings_HitType == 'gtm') {\n            dataLayer.push({\n                'event': 'eventTracker',\n                'eventCat': 'video',\n                'eventAct': 'complete',\n                'eventLbl': videotitle,\n                'eventVal': 100\n            });\n        }\n    }\n    if (event.data == YT.PlayerState.PAUSED) {\n        if (Settings_HitType == 'classic') {\n            _gaq.push(['_trackEvent', 'video', 'pause', videotitle, 0]);\n        } else if (Settings_HitType == 'universal') {\n            ga('send', 'event', 'video', 'pause', videotitle, 0);\n        } else if (Settings_HitType == 'gtm') {\n            dataLayer.push({\n                'event': 'eventTracker',\n                'eventCat': 'video',\n                'eventAct': 'pause',\n                'eventLbl': videotitle,\n                'eventVal': 0\n            });\n        }\n\n\n    }\n\n\n}\n\nfunction youtube_parser(url) {\n    var regExp = /^.*(youtu.be\\/|v\\/|u\\/\\w\\/|embed\\/|watch\\?v=|\\&v=)([^#\\&\\?]*).*/;\n    var match = url.match(regExp);\n    if (match && match[2].length == 11) {\n        return match[2];\n    } else {\n        //error\n    }\n}\n\n\n\nfunction IsYouTube(url) {\n    var YouTubeLink_regEx = /^.*((youtu.be\\/)|(v\\/)|(\\/u\\/\\w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*/;\n    var match = url.match(YouTubeLink_regEx);\n    if (match != null && match.length > 0) {\n        return true;\n    } else {\n        return false;\n    }\n}\n\nfunction YTUrlHandler(url) {\n    url = url.replace(/origin\\=(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})\\&?/ig, 'origin=' + document.location.protocol + '//' + document.location.host);\n\n    stAdd = '';\n    adFlag = false;\n    if (url.indexOf('https') == -1) {\n        url = url.replace('http', 'https');\n    }\n    if (url.indexOf('?') == -1) {\n        stAdd = '?flag=1';\n    }\n    if (url.indexOf('enablejsapi') == -1) {\n        stAdd += '&enablejsapi=1';\n        adFlag = true;\n    }\n    if (url.indexOf('origin') == -1) {\n        stAdd += '&origin=' + document.location.protocol + '//' + document.location.host;\n        adFlag = true;\n    }\n\n\n    if (adFlag == true) {\n        return url + stAdd;\n    } else {\n        return url;\n    }\n\n}\n    \n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1629218695467",
+                "firingTriggerId": [
+                    "54"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "60",
+                "name": "rollup02 - pageview - custom",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_PAGEVIEW"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - rollup02}}"
+                    }
+                ],
+                "fingerprint": "1629218695464",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "blockingTriggerId": [
+                    "45"
+                ],
+                "parentFolderId": "11",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "61",
+                "name": "local - event - email link",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "email"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "gaSettings",
+                        "value": "{{GA Settings - local}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{Click URL}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{Click Text}}"
+                    }
+                ],
+                "fingerprint": "1629218695465",
+                "firingTriggerId": [
+                    "24"
+                ],
+                "parentFolderId": "38",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "68",
+                "name": "01 material unique to this website folder info",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<!--\nThis folder is used to keep track of site-specific customizations to the Mason standard GTM container.\n\nThis tag is included here both to provide information about the purpose of this folder and to ensure that this folder will be included in the JSON export file. Empty folders will not export.\n-->"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1658337303387",
+                "parentFolderId": "66",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "tagId": "69",
+                "name": "02 third-party additions folder info",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<!--\nThis folder is used to keep track of marketing tags and/or other customizations made to this container by third-parties (outside marketing firms, etc.).\nAny third-party additions to this container should be placed in this folder and prefixed with the name or abbreviation of the third-party.\n\nThis tag is included here both to provide information about the purpose of this folder and to ensure that this folder will be included in the JSON export file. Empty folders will not export.\n-->"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1658337471040",
+                "parentFolderId": "67",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "7",
+                "name": "eventTracker",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "eventTracker"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1629218695450"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "21",
+                "name": "link click - download",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "\\.(pdf|xlsx?|docx?|txt|csv|json)$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "autoEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{IsLocalWebsite}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{visitorLoginState}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "logged-in"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "true"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1629218695453"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "22",
+                "name": "link click - rollup02 UAID invalid",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{UAID - rollup02}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "^UA-\\d{7,9}-\\d{1,2}$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "autoEventFilter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Page URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": ".*"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "true"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1629218695454",
+                "parentFolderId": "19",
+                "notes": "This trigger fires on link clicks and checks whether the UAID - rollup02 variable is a valid GA property ID.\nThis trigger is used as a exception to prevent tags from sending data to rollup02 if the property ID is not valid.\nThis trigger is enabled on all pages. Since no tags depend on this trigger to send data, it doesn't matter if it fires on the 'wrong' pages."
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "24",
+                "name": "link click - email",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "STARTS_WITH",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "mailto:"
+                            }
+                        ]
+                    }
+                ],
+                "autoEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{IsLocalWebsite}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{visitorLoginState}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "logged-in"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "true"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1629218695454"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "25",
+                "name": "page view - rollup01 UAID invalid",
+                "type": "PAGEVIEW",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{UAID - rollup01}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "^UA-\\d{7,9}-\\d{1,2}$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1629218695455",
+                "parentFolderId": "19",
+                "notes": "This trigger fires on pages views and checks whether the UAID - rollup01 variable is a valid GA property ID.\nThis trigger is used as a exception to prevent tags from sending data to rollup01 if the property ID is not valid.\nThis trigger is enabled on all pages. Since no tags depend on this trigger to send data, it doesn't matter if it fires on the 'wrong' pages."
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "27",
+                "name": "page view - custom",
+                "type": "PAGEVIEW",
+                "filter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{IsLocalWebsite}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{visitorLoginState}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "logged-in"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1629218695455"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "29",
+                "name": "click - expandable area",
+                "type": "CLICK",
+                "filter": [
+                    {
+                        "type": "CSS_SELECTOR",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click Element}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": ".collapseomatic"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1629218695456",
+                "parentFolderId": "3"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "41",
+                "name": "link click - rollup01 UAID invalid",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{UAID - rollup01}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "^UA-\\d{7,9}-\\d{1,2}$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "autoEventFilter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Page URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": ".*"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "true"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1629218695459",
+                "parentFolderId": "19",
+                "notes": "This trigger fires on link clicks and checks whether the UAID - rollup01 variable is a valid GA property ID.\nThis trigger is used as a exception to prevent tags from sending data to rollup01 if the property ID is not valid.\nThis trigger is enabled on all pages. Since no tags depend on this trigger to send data, it doesn't matter if it fires on the 'wrong' pages."
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "45",
+                "name": "page view - rollup02 UAID invalid",
+                "type": "PAGEVIEW",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{UAID - rollup02}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "^UA-\\d{7,9}-\\d{1,2}$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1629218695460",
+                "parentFolderId": "19",
+                "notes": "This trigger fires on pages views and checks whether the UAID - rollup02 variable is a valid GA property ID.\nThis trigger is used as a exception to prevent tags from sending data to rollup02 if the property ID is not valid.\nThis trigger is enabled on all pages. Since no tags depend on this trigger to send data, it doesn't matter if it fires on the 'wrong' pages."
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "49",
+                "name": "link click - outbound",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "^https?://"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{IsInternalLink}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "false"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "\\.(pdf|xlsx?|docx?|txt|csv)$"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "ignore_case",
+                                "value": "true"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "autoEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{IsLocalWebsite}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{visitorLoginState}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "logged-in"
+                            },
+                            {
+                                "type": "BOOLEAN",
+                                "key": "negate",
+                                "value": "true"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "true"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1629218695462"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "54",
+                "name": "DOM Ready",
+                "type": "DOM_READY",
+                "fingerprint": "1629218695463"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "triggerId": "62",
+                "name": "window loaded",
+                "type": "WINDOW_LOADED",
+                "fingerprint": "1629218695465"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "4",
+                "name": "UAID - rollup01",
+                "type": "c",
+                "notes": "This variable stores the Google Analytics Property ID of the first roll-up property intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "UA-1007599-1"
+                    }
+                ],
+                "fingerprint": "1629218695449",
+                "parentFolderId": "3"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "5",
+                "name": "Event Category",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventCat"
+                    }
+                ],
+                "fingerprint": "1629218695449"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "6",
+                "name": "Event Label",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventLbl"
+                    }
+                ],
+                "fingerprint": "1629218695449"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "8",
+                "name": "Event Action",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventAct"
+                    }
+                ],
+                "fingerprint": "1629218695450"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "12",
+                "name": "UAID - rollup02",
+                "type": "c",
+                "notes": "This variable stores the Google Analytics Property ID of the second roll-up property intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[[[uaidrollup2]]]"
+                    }
+                ],
+                "fingerprint": "1629466667971",
+                "parentFolderId": "3",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "14",
+                "name": "Auto Link Domains",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "masongrad.hobsonsradius.com"
+                    }
+                ],
+                "fingerprint": "1629218695452",
+                "parentFolderId": "13"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "15",
+                "name": "GA Settings - rollup02",
+                "type": "gas",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "doubleClick",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setTrackerName",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useDebugVersion",
+                        "value": "false"
+                    },
+                    {
+                        "type": "LIST",
+                        "key": "fieldsToSet",
+                        "list": [
+                            {
+                                "type": "MAP",
+                                "map": [
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "fieldName",
+                                        "value": "allowLinker"
+                                    },
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "value",
+                                        "value": "true"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useHashAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "decorateFormsAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "autoLinkDomains",
+                        "value": "{{Auto Link Domains}}"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableLinkId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableEcommerce",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - rollup02}}"
+                    }
+                ],
+                "fingerprint": "1629218695452",
+                "parentFolderId": "13"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "17",
+                "name": "visitorLoginState",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "defaultValue",
+                        "value": "logged-out"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "visitorLoginState"
+                    }
+                ],
+                "fingerprint": "1629218695453",
+                "parentFolderId": "16"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "18",
+                "name": "Hostname - local",
+                "type": "c",
+                "notes": "This variable stores the hostname intended for use with this container. If this container is used on a different hostname, the tags will not fire. This must be modified when using this container on a different hostname.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[[[domainname]]]"
+                    }
+                ],
+                "fingerprint": "1629218695453",
+                "parentFolderId": "3"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "20",
+                "name": "IsLocalWebsite",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n\t// What: isLocalWebsite - Function to determine whether the GTM Page Hostname (built-in variable) for the current page represents the local website hostname (as defined by the GTM Local Website Hostname custom constant variable).\n\t// Who: Jan Macario\n  \t// When: 20180208\n  \t//\n  \t//Change log:\n  \t//20170622: initial regex to check for the precise hostname, optionally prepended with a \"www.\"\n  \t//20180208: modified regex make it less restrictive\n\n    // Build regex string\n    var strRegex = \"{{Hostname - local}}$\";\n\n    // Create regex variable\n    var regex = new RegExp(strRegex,\"gi\");\n\n    //Test page hostname against regex\n    if (regex.test(\"{{Page Hostname}}\")) { return \"true\"; }\n\n    //If no match, return false\n        return \"false\";\n}"
+                    }
+                ],
+                "fingerprint": "1629218695465",
+                "parentFolderId": "19"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "26",
+                "name": "GA Settings - rollup01",
+                "type": "gas",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "doubleClick",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setTrackerName",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useDebugVersion",
+                        "value": "false"
+                    },
+                    {
+                        "type": "LIST",
+                        "key": "fieldsToSet",
+                        "list": [
+                            {
+                                "type": "MAP",
+                                "map": [
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "fieldName",
+                                        "value": "allowLinker"
+                                    },
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "value",
+                                        "value": "true"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useHashAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "decorateFormsAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "autoLinkDomains",
+                        "value": "{{Auto Link Domains}}"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableLinkId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableEcommerce",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - rollup01}}"
+                    }
+                ],
+                "fingerprint": "1629218695455",
+                "parentFolderId": "13"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "30",
+                "name": "UAID - local",
+                "type": "c",
+                "notes": "This variable stores the Google Analytics Property ID intended for use with the website on which this container is deployed.",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[[[uaidlocal]]]"
+                    }
+                ],
+                "fingerprint": "1629218695456",
+                "parentFolderId": "3"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "31",
+                "name": "GA Settings - local",
+                "type": "gas",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "cookieDomain",
+                        "value": "auto"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "doubleClick",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setTrackerName",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useDebugVersion",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useHashAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "decorateFormsAutoLink",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableLinkId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableEcommerce",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{UAID - local}}"
+                    }
+                ],
+                "fingerprint": "1629218695457",
+                "parentFolderId": "13"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "32",
+                "name": "Mason GTM Container Version",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "3.4.1"
+                    }
+                ],
+                "fingerprint": "1658333281067",
+                "parentFolderId": "13",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "37",
+                "name": "Expandable Area Click Action",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  //Get the text of the element which was clicked\n  var clickText = {{Click Text}};\n  //Get last four characters of click text  \n  var lastFourCharsInClickText=clickText.slice(-4);\n  //Set action appropriately based on last four chars (Drupal websites include \"LESS\" or \"MORE\" automatically at the end of the element text.)\n  if (lastFourCharsInClickText=='LESS') {\n  \tvar returnValue = \"close\";\n  } else if (lastFourCharsInClickText=='MORE') {\n  \tvar returnValue = \"open\";\n  } else {\n    //Last four characters are neither \"LESS\" nor \"MORE\". Probably not a Mason standard Drupal website. We can't determine whether this was an open or close action. Return \"indeterminate\".\n  \tvar returnValue = \"indeterminate\";\n  }\n  return returnValue;\n}"
+                    }
+                ],
+                "fingerprint": "1629218695466"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "40",
+                "name": "IsInternalLink",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n\t// What: IsInternalLink - Function to determine whether the GTM Page Hostname (built-in variable) occurs within the Click URL . If it does, return true; otherwise return false.\n\t// Who: https://www.simoahava.com/gtm-tips/10-useful-custom-javascript-tricks/#4\n\t// When: 20170622\n\n\t// Does the page hostname occurs within the click URL . If it does, return true; otherwise return false.\n\treturn {{Click URL}}.indexOf({{Page Hostname}}) > -1;\n}"
+                    }
+                ],
+                "fingerprint": "1629218695466",
+                "parentFolderId": "19"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "43",
+                "name": "Expandable Area Click Label",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  //Get the text of the element which was clicked\n  var clickText = {{Click Text}};\n  //Get last four characters of click text  \n  var lastFourCharsInClickText=clickText.slice(-4);\n  //Are the last four characters \"MORE\" or \"LESS\" (as they would be for our Mason standard Drupal websites)?  \n  if (lastFourCharsInClickText=='MORE' || lastFourCharsInClickText=='LESS') {\n    //If so, strip them\n  \tvar returnValue = clickText.slice(0, clickText.length-4);\n  } else {\n    //Text value doesn't include \"LESS\" or \"MORE\" indicator. Therefore, return the unedited click text.\n  \tvar returnValue = clickText;\n  }\n  return returnValue;\n}"
+                    }
+                ],
+                "fingerprint": "1629218695467"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "63",
+                "name": "GA4 measurement ID - local",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[[[measurementidlocal]]]"
+                    }
+                ],
+                "fingerprint": "1657304874845",
+                "parentFolderId": "3",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "64",
+                "name": "GA4 measurement ID - rollup01",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "G-HT824NR8GX"
+                    }
+                ],
+                "fingerprint": "1657305263860",
+                "parentFolderId": "3",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "variableId": "65",
+                "name": "GA4 measurement ID - rollup02",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[[[measurementidrollup2]]]"
+                    }
+                ],
+                "fingerprint": "1657305114125",
+                "parentFolderId": "3",
+                "formatValue": {}
+            }
+        ],
+        "folder": [
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "3",
+                "name": "00 standard configuration settings",
+                "fingerprint": "1629218695448"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "9",
+                "name": "tags - rollup01",
+                "fingerprint": "1629218695450"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "11",
+                "name": "tags - rollup02",
+                "fingerprint": "1629218695451"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "13",
+                "name": "settings",
+                "fingerprint": "1629218695451"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "16",
+                "name": "WordPress plugin variables",
+                "fingerprint": "1629218695452"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "19",
+                "name": "validation",
+                "fingerprint": "1629218695453"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "35",
+                "name": "debug and testing",
+                "fingerprint": "1629218695458"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "38",
+                "name": "tags - local",
+                "fingerprint": "1629218695458"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "66",
+                "name": "01 material unique to this website",
+                "fingerprint": "1658335628897"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "folderId": "67",
+                "name": "02 third-party additions",
+                "fingerprint": "1658335644425"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "EVENT",
+                "name": "Event"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "CLICK_ELEMENT",
+                "name": "Click Element"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "CLICK_CLASSES",
+                "name": "Click Classes"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "CLICK_URL",
+                "name": "Click URL"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "CLICK_TEXT",
+                "name": "Click Text"
+            },
+            {
+                "accountId": "4701084790",
+                "containerId": "50119144",
+                "type": "CONTAINER_ID",
+                "name": "Container ID"
+            }
+        ],
+        "fingerprint": "1658337571251",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/4701084790/containers/50119144/versions/6?apiLink=version"
+    }
+}

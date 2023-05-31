@@ -74,6 +74,7 @@ function gmuw_websitesgmu_add_columns_website ($columns) {
         'doesnt_need_analytics' => 'Analytics Not Needed',
         'website_ga_property_post_id' => 'GA Property',
         'website_gtm_container_post_id' => 'GTM Container',
+        'ga4wf' => 'GA4WF',
         'wordpress_data_feeds' => 'WP Data Feeds',
         'wordpress_theme_live' => 'Live WP Theme',
         'admin_login' => 'Admin Login',
@@ -127,6 +128,15 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
             echo '<a href="'.get_edit_post_link(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">edit</a> | ';
             echo '<a href="'.get_post_permalink(get_post_meta($post_id, 'website_gtm_container_post_id', true)).'">view</a> | ';
             echo gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($post_id, 'website_gtm_container_post_id', true));
+            }
+            break;
+        case 'ga4wf':
+            if (get_post_meta($post_id, 'deleted', true)!=1) {
+                if (!empty(get_post_meta($post_id, 'production_domain', true))) {
+                    if (get_post_meta($post_id, 'doesnt_need_analytics', true)!=1) {
+                        echo '<a href="https://websitesgmu.wpengine.com/wp-admin/admin.php?page=gmuw_websitesgmu_website_analytics_implementation_tool&ga4wf-website-post-id='.$post_id.'" target="_blank">GA4WF</a>';
+                    }
+                }
             }
             break;
         case 'wordpress_data_feeds':

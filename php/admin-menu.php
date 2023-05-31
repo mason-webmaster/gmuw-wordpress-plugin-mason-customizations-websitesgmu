@@ -70,6 +70,17 @@ function gmuw_websitesgmu_add_sublevel_menu() {
 		2
 	);
 
+	// Add admin menu item under Mason for this plugin's GTM import file generator
+	add_submenu_page(
+		'gmuw',
+		'Website Analytics Implementation Tool',
+		'Analytics Implementation Tool',
+		'manage_options',
+		'gmuw_websitesgmu_website_analytics_implementation_tool',
+		'gmuw_websitesgmu_website_analytics_implementation_tool_page',
+		2
+	);
+
 }
 
 /**
