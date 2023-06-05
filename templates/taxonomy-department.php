@@ -11,7 +11,14 @@ $ga_accounts = gmuw_websitesgmu_get_custom_posts('ga_account','not-deleted','','
 
 // Loop through posts
 foreach ( $ga_accounts as $ga_account ) {
-	echo '<p><a href="'.get_permalink($ga_account->ID).'">'. $ga_account->post_title .'</a> ('. $ga_account->ga_account_id .')</p>';
+	echo '<p>';
+	//echo '<a href="'.gmuw_websitesgmu_ga_account_admin_link_url($ga_account->ID).'">';
+	echo $ga_account->post_title;
+	//echo '</a>';
+	echo ' ('. $ga_account->ga_account_id .')';
+	echo gmuw_websitesgmu_ga_account_admin_link($ga_account->ID);
+	echo '</p>';
+
 }
 ?>
 
