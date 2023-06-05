@@ -68,6 +68,7 @@ function gmuw_websitesgmu_add_columns_gtm_container ($columns) {
         'working' => 'Working?',
         'gtm_container_account_post_id' => 'GTM Account',
         'gtm_container_id'   => 'GTM Container ID',
+        'gtm_container_id_public'   => 'Public Container ID',
         //Other fields
         'gtm_container_link' => 'GTM Container Link',
     ) );
@@ -95,6 +96,9 @@ function gmuw_websitesgmu_gtm_container_custom_column ($column, $post_id) {
             break;
         case 'gtm_container_id':
             echo get_post_meta($post_id, 'gtm_container_id', true);
+            break;
+        case 'gtm_container_id_public':
+            echo get_post_meta($post_id, 'gtm_container_id_public', true);
             break;
         case 'gtm_container_link':
             echo gmuw_websitesgmu_gtm_container_admin_link($post_id);

@@ -516,6 +516,7 @@ function gmuw_websitesgmu_website_analytics_implementation_tool_page() {
 			//echo '<p>gtm container name: '.$_POST['ga4wf-domain-name'].'</p>';
 			//echo '<p>gtm account post: '.$_POST['ga4wf-gtm-account-post-id'].'</p>';
 			//echo '<p>ga container id: '.$_POST['ga4wf-gtm-container-id'].'</p>';
+			//echo '<p>ga container id (public): '.$_POST['ga4wf-gtm-container-id-public'].'</p>';
 
 			// Create post object
 			$post_arr = array(
@@ -528,6 +529,8 @@ function gmuw_websitesgmu_website_analytics_implementation_tool_page() {
 					'_gtm_container_id' => 'field_64095b002bfeb',
 					'gtm_container_account_post_id' => $_POST['ga4wf-gtm-account-post-id'],
 					'_gtm_container_account_post_id' => 'field_640aa575a9b1c',
+					'gtm_container_id_public' => $_POST['ga4wf-gtm-container-id-public'],
+					'_gtm_container_id_public' => 'field_6478d4899eafe',
 				),
 			);
 
