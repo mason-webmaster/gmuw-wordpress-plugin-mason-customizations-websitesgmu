@@ -35,7 +35,60 @@ foreach ( $gtm_accounts as $gtm_account ) {
 }
 ?>
 
-<h3>Website(s)</h3>
+<h3>Live/Production Website(s)</h3>
+
+<?php
+
+// Get posts
+$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','',$taxonomy,$taxonomy_term_slug);
+
+// setup display
+echo '<table>';
+echo '<thead>';
+echo '<tr>';
+echo '<td>Website</td>';
+echo '<td>GTM Container</td>';
+echo '<td>GA4 Property</td>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
+
+// Loop through posts
+foreach ( $websites as $website ) {
+	echo '<tr>';
+	//echo '<a href="'.get_permalink($website->ID).'">'. $website->post_title .'</a>';
+	echo '<td>';
+	echo '<a href="https://'.$website->production_domain.'/">'. $website->production_domain .'</a>';
+	if ($website->post_title!=$website->production_domain) {
+		echo ' ('.$website->post_title.')';
+	}
+	echo '</td>';
+
+	echo '<td>';
+	if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
+        echo get_the_title(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+        echo '<br />';
+        echo gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+	}
+	echo '</td>';
+	echo '<td>';
+	if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
+        echo get_the_title(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+        echo '<br />';
+        echo gmuw_websitesgmu_ga_property_admin_link(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+	}
+	echo '</td>';
+	echo '</tr>';
+}
+
+// finish display
+echo '</tbody>';
+echo '</table>';
+
+
+?>
+
+<h3>Other Website Instances</h3>
 
 <?php
 
@@ -44,14 +97,13 @@ $websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$tax
 
 // Loop through posts
 foreach ( $websites as $website ) {
-	echo '<p>';
-	echo '<a href="'.get_permalink($website->ID).'">'. $website->post_title .'</a>';
-	echo '</a>';
-	if (!empty($website->production_domain)) {
-		echo ' ('. $website->production_domain .')';
+	if (empty($website->production_domain)) {
+		echo '<p>';
+		echo '<a href="'.get_permalink($website->ID).'">'. $website->post_title .'</a>';
+		echo '</p>';
 	}
-	echo '</p>';
 }
+
 ?>
 
 <?php require('footer.php'); ?>
