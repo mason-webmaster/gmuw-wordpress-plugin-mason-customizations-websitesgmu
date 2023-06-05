@@ -575,12 +575,17 @@ function gmuw_websitesgmu_website_analytics_implementation_tool_page() {
 
 	echo '<tr>';
 	echo '<td>Deactivate other WP analytics plugins</td>';
-	echo '<td><input class="ga4wf" type="text" style="width:40em;" value="wp plugin deactivate google-analytics-dashboard-for-wp google-analyticator" /></td>';
+	echo '<td><input class="ga4wf" type="text" style="width:40em;" value="wp plugin deactivate ga-google-analytics google-analytics-dashboard google-analytics-dashboard-for-wp google-analyticator google-analytics-for-wordpress" /></td>';
 	echo '</tr>';
 
 	echo '<tr>';
 	echo '<td>Install and activate GTM4WP plugin</td>';
 	echo '<td><input class="ga4wf" type="text" style="width:30em;" value="wp plugin install duracelltomi-google-tag-manager --activate" /></td>';
+	echo '</tr>';
+
+	echo '<tr>';
+	echo '<td>Check database prefix</td>';
+	echo '<td><input class="ga4wf" type="text" style="width:30em;" value="wp db prefix" /></td>';
 	echo '</tr>';
 
 	//get sql content
