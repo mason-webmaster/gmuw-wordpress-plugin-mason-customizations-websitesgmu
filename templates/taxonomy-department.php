@@ -31,7 +31,12 @@ $gtm_accounts = gmuw_websitesgmu_get_custom_posts('gtm_account','not-deleted',''
 
 // Loop through posts
 foreach ( $gtm_accounts as $gtm_account ) {
-	echo '<p><a href="'.get_permalink($gtm_account->ID).'">'. $gtm_account->post_title .'</a> ('. $gtm_account->gtm_account_id .')</p>';
+	echo '<p>';
+	//echo '<a href="'.get_permalink($gtm_account->ID).'">';
+	echo $gtm_account->post_title;
+	//echo '</a>';
+	echo ' ('. $gtm_account->gtm_account_id .')';
+	echo '</p>';
 }
 ?>
 
