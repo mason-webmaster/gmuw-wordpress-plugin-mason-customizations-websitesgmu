@@ -62,6 +62,20 @@ if ($post->deleted==1) {
 			echo '</td></tr>';
 		}
 
+		// Dubbot link
+		if (!empty($post->dubbot_site_id)) {
+			echo '<tr><td>';
+			echo 'Dubbot link</td><td>'.gmuw_websitesgmu_dubbot_link($post->ID);
+			echo '</td></tr>';
+		}
+
+		// Dubbot admin link
+		if (!empty($post->dubbot_site_id)) {
+			echo '<tr><td>';
+			echo 'Dubbot admin link</td><td>'.gmuw_websitesgmu_dubbot_link($post->ID,'admin');
+			echo '</td></tr>';
+		}
+
 		echo '</table>';
 
 	}

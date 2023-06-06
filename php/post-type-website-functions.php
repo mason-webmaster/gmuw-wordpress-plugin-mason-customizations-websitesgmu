@@ -251,13 +251,45 @@ function gmuw_websitesgmu_google_search_console_link($post_id){
 
 	// Initialize variables
 	$return_value='';
-	$image_path=plugin_dir_url( __DIR__ ).'images/logo-google.png';;
+	$image_path=plugin_dir_url( __DIR__ ).'images/logo-google.png';
 
 	// Get URL
 	$link_url='https://search.google.com/search-console?resource_id=https://'.$production_domain.'/';
 
 	// build link element
 	$return_value.='<a href="'.$link_url.'" target="_blank" title="sucuri '.$mode.'"><img style="width:25px;" src="'.$image_path.'" /></a>';
+
+	// Return value
+	return $return_value;
+
+}
+
+function gmuw_websitesgmu_dubbot_link($post_id,$mode=''){
+
+	// Get post
+	$post = get_post($post_id);
+
+	// get dubbot site id
+	$dubbot_site_id=get_post_meta($post_id,'dubbot_site_id',true);
+
+	// If we don't have a production domain, exit
+	if (empty($dubbot_site_id)) {
+		return $return_value;
+	}
+
+	// Initialize variables
+	$return_value='';
+	$image_path=plugin_dir_url( __DIR__ ).'images/logo-dubbot.png';
+
+	// Get URL
+	if ($mode=='admin') {
+		$link_url='https://app.dubbot.com/account/sites/'.$dubbot_site_id;
+	} else {
+		$link_url='https://app.dubbot.com/sites/'.$dubbot_site_id;
+	}
+
+	// build link element
+	$return_value.='<a href="'.$link_url.'" target="_blank" title="DubBot '.$mode.'"><img style="width:25px;" src="'.$image_path.'" /></a>';
 
 	// Return value
 	return $return_value;

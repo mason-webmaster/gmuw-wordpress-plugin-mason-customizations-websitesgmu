@@ -89,14 +89,13 @@ echo '</table>';
 echo '<table>';
 echo '<thead>';
 echo '<tr>';
-echo '<td colspan="2"></td>';
+echo '<td></td>';
 echo '<td colspan="3">Google Tag Manager (GTM)</td>';
 echo '<td colspan="3">Google Analytics (GA)</td>';
 echo '<td colspan="2"></td>';
 echo '</tr>';
 echo '<tr>';
 echo '<td>Domain</td>';
-echo '<td>Instance/Environment Name</td>';
 echo '<td>Container Name</td>';
 echo '<td>ID</td>';
 echo '<td>Link</td>';
@@ -104,6 +103,7 @@ echo '<td>GA4 Property Name</td>';
 echo '<td>ID</td>';
 echo '<td>Link</td>';
 echo '<td>Search Console</td>';
+echo '<td>DubBot</td>';
 echo '<td>More details</td>';
 echo '</tr>';
 echo '</thead>';
@@ -120,10 +120,6 @@ foreach ( $websites as $website ) {
 	echo '<a href="https://'.$website->production_domain.'/" target="_blank">';
 	echo $website->production_domain;
 	echo '</a>';
-	echo '</td>';
-
-	echo '<td>';
-	echo $website->environment_name;
 	echo '</td>';
 
 	if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
@@ -155,6 +151,10 @@ foreach ( $websites as $website ) {
 
 	echo '<td>';
 	echo gmuw_websitesgmu_google_search_console_link($website->ID);
+	echo '</td>';
+
+	echo '<td>';
+	echo gmuw_websitesgmu_dubbot_link($website->ID);
 	echo '</td>';
 
 	echo '<td>';
