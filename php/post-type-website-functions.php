@@ -871,3 +871,41 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 	// Return value
 	return $return_value;
 }
+
+function gmuw_websitesgmu_non_production_website_listing_by_taxonomy($taxonomy,$taxonomy_term_slug){
+
+	// Initialize variables
+	$return_value='';
+
+	// setup display
+	$return_value.='<table>';
+	$return_value.='<thead>';
+	$return_value.='<tr>';
+	$return_value.='<td>Environment/Instance Name</td>';
+	$return_value.='</tr>';
+	$return_value.='</thead>';
+	$return_value.='<tbody>';
+
+	// Get posts
+	$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$taxonomy_term_slug);
+
+	// Loop through posts
+	foreach ( $websites as $website ) {
+		if (empty($website->production_domain)) {
+			$return_value.='<tr>';
+			$return_value.='<td>';
+			$return_value.='<a href="'.get_permalink($website->ID).'">';
+			$return_value.=$website->post_title;
+			$return_value.='</a>';
+			$return_value.='</td>';
+			$return_value.='</tr>';
+		}
+	}
+
+	// finish display
+	$return_value.='</tbody>';
+	$return_value.='</table>';
+
+	// Return value
+	return $return_value;
+}

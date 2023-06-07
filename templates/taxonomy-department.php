@@ -90,40 +90,9 @@ echo gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxonomy
 <h3>Other Website Instances</h3>
 
 <?php
-
 if (is_user_logged_in()) {
-
-	// setup display
-	echo '<table>';
-	echo '<thead>';
-	echo '<tr>';
-	echo '<td>Environment/Instance Name</td>';
-	echo '</tr>';
-	echo '</thead>';
-	echo '<tbody>';
-
-	// Get posts
-	$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$taxonomy_term_slug);
-
-	// Loop through posts
-	foreach ( $websites as $website ) {
-		if (empty($website->production_domain)) {
-			echo '<tr>';
-			echo '<td>';
-			echo '<a href="'.get_permalink($website->ID).'">';
-			echo $website->post_title;
-			echo '</a>';
-			echo '</td>';
-			echo '</tr>';
-		}
-	}
-
-	// finish display
-	echo '</tbody>';
-	echo '</table>';
-
+	echo gmuw_websitesgmu_non_production_website_listing_by_taxonomy($taxonomy,$taxonomy_term_slug);
 }
-
 ?>
 
 <?php require('footer.php'); ?>
