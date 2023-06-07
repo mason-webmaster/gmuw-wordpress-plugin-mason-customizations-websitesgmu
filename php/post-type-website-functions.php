@@ -777,3 +777,97 @@ function gmuw_websitesgmu_production_websites_needing_analytics(){
 	return $posts;
 
 }
+
+function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxonomy_term_slug){
+
+	// Initialize variables
+	$return_value='';
+
+	// setup display
+	$return_value.='<table>';
+	$return_value.='<thead>';
+	$return_value.='<tr>';
+	$return_value.='<td></td>';
+	$return_value.='<td colspan="3">Google Tag Manager (GTM)</td>';
+	$return_value.='<td colspan="3">Google Analytics (GA)</td>';
+	$return_value.='<td colspan="2"></td>';
+	$return_value.='</tr>';
+	$return_value.='<tr>';
+	$return_value.='<td>Domain</td>';
+	$return_value.='<td>Container Name</td>';
+	$return_value.='<td>ID</td>';
+	$return_value.='<td>Link</td>';
+	$return_value.='<td>GA4 Property Name</td>';
+	$return_value.='<td>ID</td>';
+	$return_value.='<td>Link</td>';
+	$return_value.='<td>Search Console</td>';
+	$return_value.='<td>DubBot</td>';
+	$return_value.='<td>More details</td>';
+	$return_value.='</tr>';
+	$return_value.='</thead>';
+	$return_value.='<tbody>';
+
+	// Get posts
+	$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','',$taxonomy,$taxonomy_term_slug);
+
+	// Loop through posts
+	foreach ( $websites as $website ) {
+		$return_value.='<tr>';
+
+		$return_value.='<td>';
+		$return_value.='<a href="https://'.$website->production_domain.'/" target="_blank">';
+		$return_value.=$website->production_domain;
+		$return_value.='</a>';
+		$return_value.='</td>';
+
+		if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
+			$return_value.='<td>';
+	        $return_value.=get_the_title(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+	        $return_value.='</td>';
+			$return_value.='<td>';
+	        $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
+	        $return_value.='</td>';
+	        $return_value.='<td>';
+	        $return_value.=gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+			$return_value.='</td>';
+		} else {
+			$return_value.='<td></td><td></td><td></td>';
+		}
+		if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
+			$return_value.='<td>';
+	        $return_value.=get_the_title(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+	        $return_value.='</td>';
+			$return_value.='<td>';
+	        $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
+	        $return_value.='</td>';
+	        $return_value.='<td>';
+	        $return_value.=gmuw_websitesgmu_ga_property_admin_link(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+			$return_value.='</td>';
+		} else {
+			$return_value.='<td></td><td></td><td></td>';
+		}
+
+		$return_value.='<td>';
+		$return_value.=gmuw_websitesgmu_google_search_console_link($website->ID);
+		$return_value.='</td>';
+
+		$return_value.='<td>';
+		$return_value.=gmuw_websitesgmu_dubbot_link($website->ID);
+		$return_value.='</td>';
+
+		$return_value.='<td>';
+		$return_value.='<a href="'.get_permalink($website->ID).'">';
+		$return_value.='more details';
+		$return_value.='</a>';
+		$return_value.='</td>';
+
+		$return_value.='</tr>';
+	}
+
+	// finish display
+	$return_value.='</tbody>';
+	$return_value.='</table>';
+
+	// Return value
+	return $return_value;
+}
