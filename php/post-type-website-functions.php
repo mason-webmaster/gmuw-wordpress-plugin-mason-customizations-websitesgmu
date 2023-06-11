@@ -788,7 +788,7 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 	$return_value.='<thead>';
 	$return_value.='<tr>';
 	$return_value.='<td></td>';
-	$return_value.='<td colspan="3">Google Tag Manager (GTM)</td>';
+	$return_value.='<td colspan="4">Google Tag Manager (GTM)</td>';
 	$return_value.='<td colspan="3">Google Analytics (GA)</td>';
 	$return_value.='<td colspan="2"></td>';
 	$return_value.='</tr>';
@@ -796,6 +796,7 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 	$return_value.='<td>Domain</td>';
 	$return_value.='<td>Container Name</td>';
 	$return_value.='<td>ID</td>';
+	$return_value.='<td>Non-Standard?</td>';
 	$return_value.='<td>Link</td>';
 	$return_value.='<td>GA4 Property Name</td>';
 	$return_value.='<td>ID</td>';
@@ -822,26 +823,29 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 
 		if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
 			$return_value.='<td>';
-	        $return_value.=get_the_title(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
-	        $return_value.='</td>';
+      $return_value.=get_the_title(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+      $return_value.='</td>';
 			$return_value.='<td>';
-	        $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
-	        $return_value.='</td>';
-	        $return_value.='<td>';
-	        $return_value.=gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
+      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
+      $return_value.='</td>';
+			$return_value.='<td>';
+      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? 'yes' : '';
+      $return_value.='</td>';
+      $return_value.='<td>';
+      $return_value.=gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
 			$return_value.='</td>';
 		} else {
-			$return_value.='<td></td><td></td><td></td>';
+			$return_value.='<td></td><td></td><td></td><td></td>';
 		}
 		if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
 			$return_value.='<td>';
-	        $return_value.=get_the_title(get_post_meta($website->ID, 'website_ga_property_post_id', true));
-	        $return_value.='</td>';
+      $return_value.=get_the_title(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+      $return_value.='</td>';
 			$return_value.='<td>';
-	        $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
-	        $return_value.='</td>';
-	        $return_value.='<td>';
-	        $return_value.=gmuw_websitesgmu_ga_property_admin_link(get_post_meta($website->ID, 'website_ga_property_post_id', true));
+      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
+      $return_value.='</td>';
+      $return_value.='<td>';
+      $return_value.=gmuw_websitesgmu_ga_property_admin_link(get_post_meta($website->ID, 'website_ga_property_post_id', true));
 			$return_value.='</td>';
 		} else {
 			$return_value.='<td></td><td></td><td></td>';
