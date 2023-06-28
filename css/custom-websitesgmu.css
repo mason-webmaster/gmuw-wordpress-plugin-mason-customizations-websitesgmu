@@ -1,2 +1,21 @@
 /* custom styles for site */
 
+/* dashicons as admin icons */
+.admin-icon {
+	text-decoration:none;
+	vertical-align: middle;
+}
+
+.admin-icon:before {
+	font-family: "dashicons";
+}
+
+.admin-view:before {
+	font-family: "dashicons";
+	content: "\f177";
+}
+
+.admin-edit:before {
+	font-family: "dashicons";
+	content: "\f464";
+}

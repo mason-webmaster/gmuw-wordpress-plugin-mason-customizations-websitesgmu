@@ -783,94 +783,104 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 	// Initialize variables
 	$return_value='';
 
-	// setup display
-	$return_value.='<table>';
-	$return_value.='<thead>';
-	$return_value.='<tr>';
-	$return_value.='<td></td>';
-	$return_value.='<td colspan="4">Google Tag Manager (GTM)</td>';
-	$return_value.='<td colspan="3">Google Analytics (GA)</td>';
-	$return_value.='<td colspan="2"></td>';
-	$return_value.='</tr>';
-	$return_value.='<tr>';
-	$return_value.='<td>Domain</td>';
-	$return_value.='<td>Container Name</td>';
-	$return_value.='<td>ID</td>';
-	$return_value.='<td>Non-Standard?</td>';
-	$return_value.='<td>Link</td>';
-	$return_value.='<td>GA4 Property Name</td>';
-	$return_value.='<td>ID</td>';
-	$return_value.='<td>Link</td>';
-	$return_value.='<td>Search Console</td>';
-	$return_value.='<td>DubBot</td>';
-	$return_value.='<td>More details</td>';
-	$return_value.='</tr>';
-	$return_value.='</thead>';
-	$return_value.='<tbody>';
-
 	// Get posts
 	$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','',$taxonomy,$taxonomy_term_slug);
 
-	// Loop through posts
-	foreach ( $websites as $website ) {
+	// Do we have posts?
+	if (empty($websites)) {
+		echo '<p>There are no live/production websites associated with this department.</p>';
+	} else {
+		// setup display
+		$return_value.='<table>';
+		$return_value.='<thead>';
 		$return_value.='<tr>';
-
-		$return_value.='<td>';
-		$return_value.='<a href="https://'.$website->production_domain.'/" target="_blank">';
-		$return_value.=$website->production_domain;
-		$return_value.='</a>';
-		$return_value.='</td>';
-
-		if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
-			$return_value.='<td>';
-      $return_value.=get_the_title(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
-      $return_value.='</td>';
-			$return_value.='<td>';
-      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
-      $return_value.='</td>';
-			$return_value.='<td>';
-      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? 'yes' : '';
-      $return_value.='</td>';
-      $return_value.='<td>';
-      $return_value.=gmuw_websitesgmu_gtm_container_admin_link(get_post_meta($website->ID, 'website_gtm_container_post_id', true));
-			$return_value.='</td>';
-		} else {
-			$return_value.='<td></td><td></td><td></td><td></td>';
-		}
-		if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
-			$return_value.='<td>';
-      $return_value.=get_the_title(get_post_meta($website->ID, 'website_ga_property_post_id', true));
-      $return_value.='</td>';
-			$return_value.='<td>';
-      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
-      $return_value.='</td>';
-      $return_value.='<td>';
-      $return_value.=gmuw_websitesgmu_ga_property_admin_link(get_post_meta($website->ID, 'website_ga_property_post_id', true));
-			$return_value.='</td>';
-		} else {
-			$return_value.='<td></td><td></td><td></td>';
-		}
-
-		$return_value.='<td>';
-		$return_value.=gmuw_websitesgmu_google_search_console_link($website->ID);
-		$return_value.='</td>';
-
-		$return_value.='<td>';
-		$return_value.=gmuw_websitesgmu_dubbot_link($website->ID);
-		$return_value.='</td>';
-
-		$return_value.='<td>';
-		$return_value.='<a href="'.get_permalink($website->ID).'">';
-		$return_value.='more details';
-		$return_value.='</a>';
-		$return_value.='</td>';
-
+		$return_value.='<th class="department">Department</th>';
+		$return_value.='<th class="web_host">Web Host</th>';
+		$return_value.='<th class="cms">CMS</th>';
+		$return_value.='<th>Domain</th>';
+		$return_value.='<th>GTM Container</th>';
+		$return_value.='<th>GA4 Property</th>';
+		$return_value.='<th>Details</th>';
+	  if (is_user_logged_in()) {
+	  	$return_value.='<th>Edit</th>';
+	  	$return_value.='<th>Analytics Workflow</th>';
+	  }
 		$return_value.='</tr>';
-	}
+		$return_value.='</thead>';
+		$return_value.='<tbody>';
 
-	// finish display
-	$return_value.='</tbody>';
-	$return_value.='</table>';
+		// Loop through posts
+		foreach ( $websites as $website ) {
+			$return_value.='<tr>';
+
+			$return_value.='<td class="department">';
+			foreach (wp_get_post_terms($website->ID, 'department') as $department) {
+				$return_value.=$department->name;
+			}
+			$return_value.='</td>';
+
+			$return_value.='<td class="web_host">';
+			foreach (wp_get_post_terms($website->ID, 'web_host') as $web_host) {
+				$return_value.=$web_host->name;
+			}
+			$return_value.='</td>';
+
+			$return_value.='<td class="cms">';
+			foreach (wp_get_post_terms($website->ID, 'cms') as $cms) {
+				$return_value.=$cms->name;
+			}
+			$return_value.='</td>';
+
+			$return_value.='<td>';
+			$return_value.='<a href="https://'.$website->production_domain.'/" target="_blank">';
+			$return_value.=$website->production_domain;
+			$return_value.='</a>';
+			$return_value.='</td>';
+
+			$return_value.='<td style="white-space: nowrap;">';
+			if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
+	  		$return_value.= '<a href="'.gmuw_websitesgmu_gtm_container_admin_link_url(get_post_meta($website->ID, 'website_gtm_container_post_id', true)).'" target="_blank">';
+	      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
+	  		$return_value.= '</a>';
+	      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? ' *' : '';
+			} else {
+				if (get_post_meta($website->ID, 'doesnt_need_analytics', true)==1) {
+					$return_value.= 'NA';
+				}
+			}
+	    $return_value.='</td>';
+
+			$return_value.='<td>';
+			if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
+	      $return_value.='<a href="'.gmuw_websitesgmu_ga_property_admin_link_url(get_post_meta($website->ID, 'website_ga_property_post_id', true)).'" target="_blank">';
+	      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
+	      $return_value.='</a>';
+			} else {
+				if (get_post_meta($website->ID, 'doesnt_need_analytics', true)==1) {
+					$return_value.= 'NA';
+				}
+			}
+			$return_value.='</td>';
+
+	    $return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'view').'</td>';
+
+			if (is_user_logged_in()) {
+	    	$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'edit').'</td>';
+	    	$return_value.='<td>';
+        if (get_post_meta($website->ID, 'doesnt_need_analytics', true)!=1) {
+            $return_value.= '<a href="https://websitesgmu.wpengine.com/wp-admin/admin.php?page=gmuw_websitesgmu_website_analytics_implementation_tool&ga4wf-website-post-id='.$website->ID.'" target="_blank">launch</a>';
+        }	    	
+	    	$return_value.='</td>';
+	    }
+
+			$return_value.='</tr>';
+		}
+
+		// finish display
+		$return_value.='</tbody>';
+		$return_value.='</table>';
+
+	}
 
 	// Return value
 	return $return_value;
@@ -881,34 +891,49 @@ function gmuw_websitesgmu_non_production_website_listing_by_taxonomy($taxonomy,$
 	// Initialize variables
 	$return_value='';
 
-	// setup display
-	$return_value.='<table>';
-	$return_value.='<thead>';
-	$return_value.='<tr>';
-	$return_value.='<td>Environment/Instance Name</td>';
-	$return_value.='</tr>';
-	$return_value.='</thead>';
-	$return_value.='<tbody>';
-
 	// Get posts
 	$websites = gmuw_websitesgmu_get_custom_posts('website','not-deleted','','',$taxonomy,$taxonomy_term_slug);
 
-	// Loop through posts
-	foreach ( $websites as $website ) {
-		if (empty($website->production_domain)) {
-			$return_value.='<tr>';
-			$return_value.='<td>';
-			$return_value.='<a href="'.get_permalink($website->ID).'">';
-			$return_value.=$website->post_title;
-			$return_value.='</a>';
-			$return_value.='</td>';
-			$return_value.='</tr>';
-		}
-	}
+	// do we have posts?
+	if (empty($websites)) {
+		echo '<p>There are no other website instances associated with this department.</p>';
+	} else {
 
-	// finish display
-	$return_value.='</tbody>';
-	$return_value.='</table>';
+		// setup display
+		$return_value.='<table>';
+		$return_value.='<thead>';
+		$return_value.='<tr>';
+		$return_value.='<th>Environment/Instance Name</th>';
+		$return_value.='<th>Details</th>';
+	  if (is_user_logged_in()) {
+	  	$return_value.='<th>Edit</th>';
+	  }
+		$return_value.='</tr>';
+		$return_value.='</thead>';
+		$return_value.='<tbody>';
+
+		// Loop through posts
+		foreach ( $websites as $website ) {
+			if (empty($website->production_domain)) {
+				$return_value.='<tr>';
+				$return_value.='<td>';
+				$return_value.='<a href="'.get_permalink($website->ID).'">';
+				$return_value.=$website->post_title;
+				$return_value.='</a>';
+				$return_value.='</td>';
+		    $return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'view').'</td>';
+				if (is_user_logged_in()) {
+		    	$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'edit').'</td>';
+		    }
+				$return_value.='</tr>';
+			}
+		}
+
+		// finish display
+		$return_value.='</tbody>';
+		$return_value.='</table>';
+
+	}
 
 	// Return value
 	return $return_value;
