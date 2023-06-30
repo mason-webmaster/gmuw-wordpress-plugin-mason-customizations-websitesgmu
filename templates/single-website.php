@@ -76,100 +76,116 @@ if ($post->deleted==1) {
 
 	echo '<h4>Web Analytics</h4>';
 
-	echo '<h5>Google Tag Manager (GTM)</h5>';
+	if ($post->doesnt_need_analytics==1) {
 
-	if (!empty($post->website_gtm_container_post_id)) {
-
-		echo '<p>Information about the GTM container associated with this website is shown below:</p>';
-
-		echo '<table>';
-
-		echo '<tr>';
-		echo '<th>Container Name</th>';
-		echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_gtm_container_post_id', true)).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Container ID</th>';
-		echo '<td>'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id_public', true).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Internal Container ID</th>';
-		echo '<td>'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id', true).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Link</th>';
-		echo '<td><a href="https://tagmanager.google.com/#/container/accounts/'.get_post_meta(get_post_meta($post->website_gtm_container_post_id, 'gtm_container_account_post_id', true), 'gtm_account_id', true).'/containers/'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id', true).'/" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_tag_manager.png'.'" /></a></td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Notes</th>';
-		echo '<td>';
-		echo get_post_meta(get_post_meta($post->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? '<p>This container is not Mason-standard.</p>' : '';
-		echo '</td>';
-		echo '</tr>';
-
-		echo '</table>';
+		echo '<p>This website is marked as not needing web analytics implementation.</p>';
 
 	} else {
-		echo '<p>Website does not have an associated GTM container.</p>';
-	}
 
-	echo '<h5>Google Analytics (GA)</h5>';
+		if (empty($post->website_gtm_container_post_id) || empty($post->website_ga_property_post_id)) {
 
-	if (!empty($post->website_ga_property_post_id)) {
+			if (is_user_logged_in()) {
+		    	echo '<p><a href="https://websitesgmu.wpengine.com/wp-admin/admin.php?page=gmuw_websitesgmu_website_analytics_implementation_tool&ga4wf-website-post-id='.$post->ID.'" target="_blank">Launch the analytics implementation workflow for this website</a></p>';
+			}
 
-		echo '<p>Information about the GA property associated with this website is shown below:</p>';
+		}
 
-		echo '<table>';
+		echo '<h5>Google Tag Manager (GTM)</h5>';
 
-		echo '<tr>';
-		echo '<th>Property Name</th>';
-		echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_ga_property_post_id', true)).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Property ID</th>';
-		echo '<td>'.get_post_meta($post->website_ga_property_post_id, 'ga_property_id', true).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Measurement ID</th>';
-		echo '<td>'.get_post_meta($post->website_ga_property_post_id, 'ga_measurement_id', true).'</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<th>Link</th>';
-		echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
-		echo '</tr>';
+		if (!empty($post->website_gtm_container_post_id)) {
 
-		echo '</table>';
+			echo '<p>Information about the GTM container associated with this website is shown below:</p>';
 
-		if (!empty($post->website_ga_property_rollup_post_id)) {
-			echo '<p>This website also sends analytics data to a roll-up property:</p>';
+			echo '<table>';
+
+			echo '<tr>';
+			echo '<th>Container Name</th>';
+			echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_gtm_container_post_id', true)).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Container ID</th>';
+			echo '<td>'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id_public', true).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Internal Container ID</th>';
+			echo '<td>'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id', true).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Link</th>';
+			echo '<td><a href="https://tagmanager.google.com/#/container/accounts/'.get_post_meta(get_post_meta($post->website_gtm_container_post_id, 'gtm_container_account_post_id', true), 'gtm_account_id', true).'/containers/'.get_post_meta($post->website_gtm_container_post_id, 'gtm_container_id', true).'/" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_tag_manager.png'.'" /></a></td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Notes</th>';
+			echo '<td>';
+			echo get_post_meta(get_post_meta($post->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? '<p>This container is not Mason-standard.</p>' : '';
+			echo '</td>';
+			echo '</tr>';
+
+			echo '</table>';
+
+		} else {
+			echo '<p>Website does not have an associated GTM container.</p>';
+		}
+
+		echo '<h5>Google Analytics (GA)</h5>';
+
+		if (!empty($post->website_ga_property_post_id)) {
+
+			echo '<p>Information about the GA property associated with this website is shown below:</p>';
 
 			echo '<table>';
 
 			echo '<tr>';
 			echo '<th>Property Name</th>';
-			echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_ga_property_rollup_post_id', true)).'</td>';
+			echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_ga_property_post_id', true)).'</td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<th>Property ID</th>';
-			echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'</td>';
+			echo '<td>'.get_post_meta($post->website_ga_property_post_id, 'ga_property_id', true).'</td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<th>Measurement ID</th>';
-			echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_measurement_id', true).'</td>';
+			echo '<td>'.get_post_meta($post->website_ga_property_post_id, 'ga_measurement_id', true).'</td>';
 			echo '</tr>';
 			echo '<tr>';
 			echo '<th>Link</th>';
-			echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
+			echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
 			echo '</tr>';
 
 			echo '</table>';
 
+			if (!empty($post->website_ga_property_rollup_post_id)) {
+				echo '<p>This website also sends analytics data to a roll-up property:</p>';
+
+				echo '<table>';
+
+				echo '<tr>';
+				echo '<th>Property Name</th>';
+				echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_ga_property_rollup_post_id', true)).'</td>';
+				echo '</tr>';
+				echo '<tr>';
+				echo '<th>Property ID</th>';
+				echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'</td>';
+				echo '</tr>';
+				echo '<tr>';
+				echo '<th>Measurement ID</th>';
+				echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_measurement_id', true).'</td>';
+				echo '</tr>';
+				echo '<tr>';
+				echo '<th>Link</th>';
+				echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
+				echo '</tr>';
+
+				echo '</table>';
+
+			}
+
+		} else {
+			echo '<p>This website does not have an associated GA property.</p>';
 		}
 
-	} else {
-		echo '<p>This website does not have an associated GA property.</p>';
 	}
-
+	
 	echo '<h4>Google Search Console</h4>';
 
 	// Google search console
