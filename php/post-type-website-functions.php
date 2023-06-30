@@ -800,6 +800,7 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		$return_value.='<th>Domain</th>';
 		$return_value.='<th>GTM Container</th>';
 		$return_value.='<th>GA4 Property</th>';
+		$return_value.='<th>GA4 Roll-Up Property</th>';
 		$return_value.='<th>Details</th>';
 	  if (is_user_logged_in()) {
 	  	$return_value.='<th>Edit</th>';
@@ -854,6 +855,18 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 			if (!empty(get_post_meta($website->ID, 'website_ga_property_post_id', true))) {
 	      $return_value.='<a href="'.gmuw_websitesgmu_ga_property_admin_link_url(get_post_meta($website->ID, 'website_ga_property_post_id', true)).'" target="_blank">';
 	      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_measurement_id',true);
+	      $return_value.='</a>';
+			} else {
+				if (get_post_meta($website->ID, 'doesnt_need_analytics', true)==1) {
+					$return_value.= 'NA';
+				}
+			}
+			$return_value.='</td>';
+
+			$return_value.='<td>';
+			if (!empty(get_post_meta($website->ID, 'website_ga_property_rollup_post_id', true))) {
+	      $return_value.='<a href="'.gmuw_websitesgmu_ga_property_admin_link_url(get_post_meta($website->ID, 'website_ga_property_rollup_post_id', true)).'" target="_blank">';
+	      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_ga_property_rollup_post_id', true),'ga_measurement_id',true);
 	      $return_value.='</a>';
 			} else {
 				if (get_post_meta($website->ID, 'doesnt_need_analytics', true)==1) {

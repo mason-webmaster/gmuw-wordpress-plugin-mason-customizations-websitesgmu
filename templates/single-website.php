@@ -138,10 +138,36 @@ if ($post->deleted==1) {
 		echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
 		echo '</tr>';
 
-	echo '</table>';
+		echo '</table>';
+
+		if (!empty($post->website_ga_property_rollup_post_id)) {
+			echo '<p>This website also sends analytics data to a roll-up property:</p>';
+
+			echo '<table>';
+
+			echo '<tr>';
+			echo '<th>Property Name</th>';
+			echo '<td>'.get_the_title(get_post_meta($post->ID, 'website_ga_property_rollup_post_id', true)).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Property ID</th>';
+			echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Measurement ID</th>';
+			echo '<td>'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_measurement_id', true).'</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<th>Link</th>';
+			echo '<td><a href="https://analytics.google.com/analytics/web/#/a'.get_post_meta(get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_account_post_id', true), 'ga_account_id', true).'p'.get_post_meta($post->website_ga_property_rollup_post_id, 'ga_property_id', true).'/admin" target="_blank"><img style="width:25px; vertical-align: middle; margin-bottom:1px;" src="'.plugin_dir_url( __DIR__ ).'images/logo-google_analytics.png'.'" /></a></td>';
+			echo '</tr>';
+
+			echo '</table>';
+
+		}
 
 	} else {
-		echo '<p>Website does not have an associated GA property.</p>';
+		echo '<p>This website does not have an associated GA property.</p>';
 	}
 
 	echo '<h4>Google Search Console</h4>';
