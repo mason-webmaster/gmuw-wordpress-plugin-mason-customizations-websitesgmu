@@ -663,6 +663,9 @@ function gmuw_websitesgmu_custom_website_list(){
 			if ($post->uses_elementor) {
 				$return_value .= 'Uses Elementor<br />';
 			}
+			if ($post->uses_amr_shortcode_any_widget) {
+				$return_value .= 'Uses AMR Shortcode Any Widget<br />';
+			}
 			$return_value .= '</td>';
 
 			$return_value .= '<td>' . ($post->followup_flag==1 ? 'follow-up' : '').'</td>';
@@ -844,6 +847,9 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 				}
 				if (!empty(get_post_meta($website->ID, 'uses_elementor', true))) {
 					$return_value.=' <span class="admin-icon admin-warning" title="Website uses the Elementor plugin"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'uses_amr_shortcode_any_widget', true))) {
+					$return_value.=' <span class="admin-icon admin-warning" title="Website uses the AMR Shortcode Any Widget plugin"></span> ';
 				}
 				if (get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_property_account_post_id',true)==1) {
 					$return_value.=' <span class="admin-icon admin-non-standard" title="non-standard GTM container"></span> ';
