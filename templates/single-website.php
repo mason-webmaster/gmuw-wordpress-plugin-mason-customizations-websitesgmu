@@ -82,7 +82,7 @@ if ($post->deleted==1) {
 
 	} else {
 
-		if (empty($post->website_gtm_container_post_id) || empty($post->website_ga_property_post_id)) {
+		if (empty($post->website_gtm_container_post_id) || empty($post->website_ga_property_post_id) || empty($post->website_ga_property_rollup_post_id)) {
 
 			if (is_user_logged_in()) {
 		    	echo '<p><a href="https://websitesgmu.wpengine.com/wp-admin/admin.php?page=gmuw_websitesgmu_website_analytics_implementation_tool&ga4wf-website-post-id='.$post->ID.'" target="_blank">Launch the analytics implementation workflow for this website</a></p>';
