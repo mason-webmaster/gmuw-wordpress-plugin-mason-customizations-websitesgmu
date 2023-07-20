@@ -346,6 +346,8 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
 		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
+		$return_value .= '<p>' . gmuw_websitesgmu_websites_using_php7_only_production() . ' production websites using PHP 7.x';
+
 		$return_value .= '<h3>WordPress Websites</h3>';
 
 		// calculate stats
@@ -486,6 +488,56 @@ function gmuw_websitesgmu_websites_using_theme_only_production() {
 		        array(
 							'key'   => 'wordpress_theme',
 							'value' => 'gmuj|Mason Twenty Twenty Theme',
+		          'compare' => 'REGEXP',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'compare' => 'EXISTS',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'value' => '',
+		          'compare' => '!=',
+		        ),
+		      )
+		    )
+			)
+		)
+	);
+
+}
+
+/**
+ * Gets count of website environments using PHP 7.x
+ */
+function gmuw_websitesgmu_websites_using_php7_only_production() {
+
+	// Get total number of production wordpress websites using PHP 7
+
+	return count(
+		get_posts(
+			array(
+		    'post_type'  => 'website',
+		    'post_status' => 'publish',
+		    'nopaging' => true,
+		    'meta_query' => array(
+		      array(
+		        'relation' => 'AND',
+		        array(
+		          'relation' => 'OR',
+		          array(
+		            'key'   => 'deleted',
+		            'compare' => 'NOT EXISTS',
+		          ),
+		          array(
+		            'key'   => 'deleted',
+		            'value' => '1',
+		            'compare' => '!=',
+		          ),
+		        ),
+		        array(
+							'key'   => 'php_version',
+							'value' => '^7',
 		          'compare' => 'REGEXP',
 		        ),
 		        array(
