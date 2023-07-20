@@ -38,36 +38,47 @@ tr.hidden {
 
 .admin-follow-up:before {
 	content: "\f223";
-	color:#9e9d24;
 }
 
 .admin-working:before {
 	content: "\f308";
-	color:#1b5e20;
 }
 
-.admin-non-standard:before {
+.admin-code1:before {
 	content: "\f499";
-	color:#ff7043;
+}
+
+.admin-code2:before {
+	content: "\f13a";
 }
 
 .admin-warning:before {
 	content: "\f534";
-	color:#bf360c;
-}
-
-.admin-code:before {
-	content: "\f13a";
-	color:#ff7043;
 }
 
 .admin-info:before {
 	content: "\f348";
-	color:#1565c0;
 }
 
 .admin-hidden:before {
 	content: "\f530";
-	color:#ab47bc;
 }
 
+.admin-plugin:before {
+	content: "\f106";
+}
+
+.admin-lock:before {
+	content: "\f160";
+}
+
+.admin-config:before {
+	content: "\f111";
+}
+
+.gmuw-info {color:#1565c0;}
+.gmuw-warning {color:#ff7043;}
+.gmuw-alert {color:#bf360c;}
+.gmuw-caution {color:#9e9d24;}
+.gmuw-good {color:#1b5e20;}
+.gmuw-special {color:#ab47bc;}
