@@ -56,6 +56,11 @@ tr.hidden {
 	color:#bf360c;
 }
 
+.admin-code:before {
+	content: "\f13a";
+	color:#ff7043;
+}
+
 .admin-info:before {
 	content: "\f348";
 	color:#1565c0;

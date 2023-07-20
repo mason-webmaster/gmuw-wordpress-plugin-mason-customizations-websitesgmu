@@ -608,6 +608,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<thead>';
 		$return_value .= '<tr>';
 		$return_value .= '<th>Environment Name</th>';
+		$return_value .= '<th>PHP Version</th>';
 		$return_value .= '<th>Post ID</th>';
 		$return_value .= '<th>Department</th>';
 		$return_value .= '<th>Web Host</th>';
@@ -634,6 +635,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '">';
 			// Output row data
 			$return_value .= '<td>' . $post->environment_name.'</td>';
+			$return_value .= '<td>' . $post->php_version.'</td>';
 			$return_value .= '<td>' . $post->ID . '</td>';
 
 			$return_value .= '<td>';
@@ -660,6 +662,9 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>' . $post->wordpress_theme . '</td>';
 
 			$return_value .= '<td>';
+			if (substr($post->php_version, 0, 1)=='7') {
+				$return_value .= 'PHP 7.x<br />';
+			}
 			if ($post->uses_elementor) {
 				$return_value .= 'Uses Elementor<br />';
 			}
@@ -844,6 +849,9 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 				if (get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1) {
 					$return_value.=' <span class="admin-icon admin-non-standard" title="non-standard GTM container"></span> ';
 
+				}
+				if (!empty(get_post_meta($website->ID, 'php_version', true)) && substr(get_post_meta($website->ID, 'php_version', true), 0, 1)=='7') {
+					$return_value.=' <span class="admin-icon admin-code" title="Website uses PHP 7.x"></span> ';
 				}
 				if (!empty(get_post_meta($website->ID, 'uses_elementor', true))) {
 					$return_value.=' <span class="admin-icon admin-warning" title="Website uses the Elementor plugin"></span> ';
