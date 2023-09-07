@@ -241,6 +241,21 @@ if ($post->deleted==1) {
 		echo '</table>';
 	}
 
+	// Contact info
+	if (is_user_logged_in()) {
+
+		echo '<h4>Contact Information</h4>';
+		echo '<p>';
+		if (!empty($post->contact_person_email_primary) || !empty($post->contact_person_email_secondary)) {
+			echo 'Primary: '.$post->contact_person_email_primary.'<br />';
+			echo 'Secondary: '.$post->contact_person_email_secondary.'<br />';
+		} else {
+			echo 'There is no contact information available for this website.';
+		}
+		echo '</p>';
+
+	}
+
 	// Private notes
 	if (is_user_logged_in()) {
 
