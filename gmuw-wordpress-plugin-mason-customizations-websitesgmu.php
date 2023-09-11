@@ -66,3 +66,6 @@ require('php/taxonomies.php');
 
 // ACSF API
   include('php/acsf-api.php');
+
+// custom URL handling
+  include('php/custom-urls.php');

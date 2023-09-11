@@ -1056,3 +1056,68 @@ function gmuw_websitesgmu_non_production_website_listing_by_taxonomy($taxonomy,$
 	// Return value
 	return $return_value;
 }
+
+//function to display links to website homepages by taxonomy and term
+function gmuw_websitesgmu_websites_display_homepage_links_by_taxonomy($taxonomy,$term) {
+
+  // Initialize variables
+  $return_value = '';
+
+  // is taxonomy specified?
+  if (empty($taxonomy)) {
+    //no taxonomy specified
+
+    //get taxonomies that apply to websites
+    $taxonomy_objects = get_object_taxonomies( 'website' );
+    //loop through taxonomies and display links to current page with that taxonomy specified as a query parameter
+    foreach ($taxonomy_objects as $taxonomy_object) {
+      $return_value .= '<p><a href="?taxonomy='.$taxonomy_object.'">'.$taxonomy_object .'</a></p>';
+
+    }
+
+  } else {
+    //we have a taxonomy
+
+    // Display title
+    $return_value.='<h3>';
+    $return_value.=get_taxonomy($taxonomy)->labels->name; // Get display title from custom taxonomy registration
+    $return_value.='</h3>';
+
+    //do we have a term
+    if (empty($term)) {
+      //we do not have a term, show all
+
+      // Get all terms in taxonomy
+      $terms=get_terms(array(
+        'taxonomy' => $taxonomy,
+        'orderby' => 'count',
+        'order' => 'DESC',
+      ));
+      // Loop through terms in taxonomy
+      foreach ($terms as $term){
+        // Get number of website posts which are not deleted which use this taxonomy term
+        $count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','',$taxonomy,$term->slug));
+        // Display website stats
+        $return_value .= '<p><a href="?taxonomy='.$taxonomy.'&term='.$term->slug.'">'.$count . ' ' .$term->name. ' websites'.'</a></p>';
+      }
+
+    } else {
+      //we do have a term
+
+      // Get number of website posts which are not deleted which use this taxonomy term
+      $myposts=gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','',$taxonomy,$term);
+      // Display website stats
+      $return_value .= '<p>'.count($myposts) . ' ' .$term. ' websites'.'</p>';
+
+      // loop through posts
+      foreach ($myposts as $mypost){
+        // display website link
+        $return_value .= '<p><a href="https://'.$mypost->production_domain.'">'.$mypost->production_domain .'</a></p>';
+      }
+    }
+  }
+
+  // Return value
+  return $return_value;
+
+}
