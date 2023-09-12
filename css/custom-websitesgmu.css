@@ -76,6 +76,10 @@ tr.hidden {
 	content: "\f111";
 }
 
+.admin-theme-conversion:before {
+	content: "\f227";
+}
+
 .gmuw-info {color:#1565c0;}
 .gmuw-warning {color:#ff7043;}
 .gmuw-alert {color:#bf360c;}
