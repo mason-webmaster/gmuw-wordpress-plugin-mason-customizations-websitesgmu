@@ -891,6 +891,17 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 				$return_value.='</td>';
 
 				$return_value.='<td class="whitespace-nowrap">';
+				//is this a wordpress website?
+				if( has_term( 'wordpress', 'cms', $website->ID ) ) {
+					//does it have a production domain?
+					if (!empty($website->production_domain)) {
+						//is it our theme?
+						if (preg_match("/gmuj|Mason Twenty Twenty/i", $website->wordpress_theme)==0) {
+							$return_value.=' <span class="admin-icon admin-theme-conversion gmuw-info" title="theme conversion candidate"></span> ';
+						}
+					}
+
+				}
 				if (!empty($website->notes_private)) {
 					$return_value.=' <span class="admin-icon admin-info gmuw-info" title="Has additional notes"></span> ';
 				}
