@@ -80,6 +80,10 @@ tr.hidden {
 	content: "\f227";
 }
 
+.admin-good-example:before {
+	content: "\f155";
+}
+
 .gmuw-info {color:#1565c0;}
 .gmuw-warning {color:#ff7043;}
 .gmuw-alert {color:#bf360c;}

@@ -902,6 +902,11 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 					}
 
 				}
+				//good example of our official theme?
+				if ($website->good_example_official_theme == 1) {
+					$return_value.=' <span class="admin-icon admin-good-example gmuw-good" title="good example of official WordPress theme"></span> ';
+
+				}
 				if (!empty($website->notes_private)) {
 					$return_value.=' <span class="admin-icon admin-info gmuw-info" title="Has additional notes"></span> ';
 				}
