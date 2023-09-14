@@ -129,3 +129,19 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_gtm_accounts_content() {
   gmuw_websitesgmu_custom_dashboard_meta_box_cpt_summary($cpt_slug,$content);
 
 }
+
+/**
+ * Setup custom template
+ */
+
+add_filter( 'template_include', 'gmuw_websitesgmu_custom_post_type_template_gtm_account' );
+function gmuw_websitesgmu_custom_post_type_template_gtm_account($template) {
+
+    $post_type = 'gtm_account';
+
+    if ( is_singular( $post_type ) && file_exists( plugin_dir_path(__DIR__) . "templates/single-$post_type.php" ) ){
+        $template = plugin_dir_path(__DIR__) . "templates/single-$post_type.php";
+    }
+
+    return $template;
+}
