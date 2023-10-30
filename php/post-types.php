@@ -98,10 +98,10 @@ function gmuw_websitesgmu_record_get_utility_link($post_id,$link_type){
     // Build link based on link_type
     switch($link_type) {
         case 'view';
-            $return_value.='<a class="admin-icon admin-view" href="'.get_permalink($post_id).'"></a>';
+            $return_value.='<a class="admin-icon admin-view" target="_blank" href="'.get_permalink($post_id).'"></a>';
             break;
         case 'edit':
-            $return_value.=' <a class="admin-icon admin-edit" href="/wp-admin/post.php?post='.$post_id.'&action=edit"></a>';
+            $return_value.=' <a class="admin-icon admin-edit" target="_blank" href="/wp-admin/post.php?post='.$post_id.'&action=edit"></a>';
             break;
     }
 
