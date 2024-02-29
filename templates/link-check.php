@@ -6,7 +6,7 @@ $term = ( isset( $_GET['term'] ) ) ? sanitize_text_field( $_GET['term'] ) : '';
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<title><?php echo get_bloginfo('name') ?>: Link Check</title>
