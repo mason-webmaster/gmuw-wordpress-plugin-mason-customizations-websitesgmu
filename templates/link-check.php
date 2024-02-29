@@ -5,7 +5,7 @@ $taxonomy = ( isset( $_GET['taxonomy'] ) ) ? sanitize_text_field( $_GET['taxonom
 $term = ( isset( $_GET['term'] ) ) ? sanitize_text_field( $_GET['term'] ) : '';
 
 ?>
-
+<!DOCTYPE html>
 <html>
 
 <head>
