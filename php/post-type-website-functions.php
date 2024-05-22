@@ -858,13 +858,13 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		$return_value.='<tr>';
 		$return_value.='<th>Domain</th>';
 		$return_value.='<th class="department">Department</th>';
-		$return_value.='<th class="web_host">Web Host</th>';
 		$return_value.='<th class="cms">CMS</th>';
 		$return_value.='<th>GTM Container</th>';
 		$return_value.='<th>GA4 Property</th>';
 		$return_value.='<th>GA4 Roll-Up Property</th>';
 		//$return_value.='<th>Details</th>';
 	  if (is_user_logged_in()) {
+		$return_value.='<th class="web_host">Web Host</th>';
 		$return_value.='<th>Status</th>';
 	  	$return_value.='<th>Edit</th>';
 	  }
@@ -893,12 +893,6 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 				$return_value.='<td class="department">';
 				foreach (wp_get_post_terms($website->ID, 'department') as $department) {
 					$return_value.=$department->name;
-				}
-				$return_value.='</td>';
-
-				$return_value.='<td class="web_host">';
-				foreach (wp_get_post_terms($website->ID, 'web_host') as $web_host) {
-					$return_value.=$web_host->name;
 				}
 				$return_value.='</td>';
 
@@ -948,6 +942,13 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		    //$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'view').'</td>';
 
 				if (is_user_logged_in()) {
+
+				//web host
+				$return_value.='<td class="web_host">';
+				foreach (wp_get_post_terms($website->ID, 'web_host') as $web_host) {
+					$return_value.=$web_host->name;
+				}
+				$return_value.='</td>';
 
 				//status
 				$return_value.='<td class="whitespace-nowrap">';
