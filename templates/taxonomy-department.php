@@ -50,7 +50,7 @@ if (empty($ga_accounts)) {
 
 ?>
 
-<h3>Google Tag Manager Account(s)</h3>
+<h3>Google Tag Manager Account</h3>
 
 <?php
 
@@ -95,7 +95,7 @@ if (empty($gtm_accounts)) {
 
 ?>
 
-<h3>Live/Production Website(s)</h3>
+<h3>Websites</h3>
 
 <?php
 echo gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxonomy_term_slug);
