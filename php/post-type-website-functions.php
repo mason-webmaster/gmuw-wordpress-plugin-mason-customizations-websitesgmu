@@ -904,9 +904,9 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 
 				$return_value.='<td style="white-space: nowrap;">';
 				if (!empty(get_post_meta($website->ID, 'website_gtm_container_post_id', true))) {
-		  		$return_value.= '<a href="'.gmuw_websitesgmu_gtm_container_admin_link_url(get_post_meta($website->ID, 'website_gtm_container_post_id', true)).'" target="_blank">';
+				if (is_user_logged_in()) $return_value.= '<a href="'.gmuw_websitesgmu_gtm_container_admin_link_url(get_post_meta($website->ID, 'website_gtm_container_post_id', true)).'" target="_blank">';
 		      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_id_public',true);
-		  		$return_value.= '</a>';
+				if (is_user_logged_in()) $return_value.= '</a>';
 		      $return_value.=get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1 ? ' <span class="admin-icon admin-code1 gmuw-warning" title="non-standard GTM container"></span>' : '';
 				} else {
 					if (get_post_meta($website->ID, 'doesnt_need_analytics', true)==1) {
