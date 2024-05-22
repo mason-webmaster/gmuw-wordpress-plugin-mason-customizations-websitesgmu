@@ -857,7 +857,6 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		$return_value.='<thead>';
 		$return_value.='<tr>';
 		$return_value.='<th>Domain</th>';
-		$return_value.='<th>Status</th>';
 		$return_value.='<th class="department">Department</th>';
 		$return_value.='<th class="web_host">Web Host</th>';
 		$return_value.='<th class="cms">CMS</th>';
@@ -866,6 +865,7 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		$return_value.='<th>GA4 Roll-Up Property</th>';
 		//$return_value.='<th>Details</th>';
 	  if (is_user_logged_in()) {
+		$return_value.='<th>Status</th>';
 	  	$return_value.='<th>Edit</th>';
 	  }
 		$return_value.='</tr>';
@@ -888,57 +888,6 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 				$return_value.=$website->production_domain;
 				$return_value.='</a>';
 				$return_value.=' <a class="admin-icon admin-external-link" href="https://'.$website->production_domain.'/" target="_blank"></a>';
-				$return_value.='</td>';
-
-				$return_value.='<td class="whitespace-nowrap">';
-				//is this a wordpress website?
-				if( has_term( 'wordpress', 'cms', $website->ID ) ) {
-					//does it have a production domain?
-					if (!empty($website->production_domain)) {
-						//is it our theme?
-						if (preg_match("/gmuj|Mason Twenty Twenty/i", $website->wordpress_theme)==0) {
-							$return_value.=' <span class="admin-icon admin-theme-conversion gmuw-info" title="theme conversion candidate"></span> ';
-						}
-					}
-
-				}
-				//good example of our official theme?
-				if ($website->good_example_official_theme == 1) {
-					$return_value.=' <span class="admin-icon admin-good-example gmuw-good" title="good example of official WordPress theme"></span> ';
-
-				}
-				if (!empty($website->notes_private)) {
-					$return_value.=' <span class="admin-icon admin-info gmuw-info" title="Has additional notes"></span> ';
-				}
-				if (!empty(get_post_meta($website->ID, 'working', true))) {
-					$return_value.=' <span class="admin-icon admin-working gmuw-good" title="currently working on this website"></span> ';
-				}
-				if (!empty(get_post_meta($website->ID, 'follow_up', true))) {
-					$return_value.=' <span class="admin-icon admin-follow-up gmuw-caution" title="needs follow-up"></span> ';
-				}
-				if (get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1) {
-					$return_value.=' <span class="admin-icon admin-code1 gmuw-warning" title="non-standard GTM container"></span> ';
-
-				}
-				if (!empty(get_post_meta($website->ID, 'php_version', true)) && substr(get_post_meta($website->ID, 'php_version', true), 0, 1)=='7') {
-					$return_value.=' <span class="admin-icon admin-config gmuw-warning" title="Website uses PHP 7.x"></span> ';
-				}
-				if (!empty(get_post_meta($website->ID, 'uses_elementor', true))) {
-					$return_value.=' <span class="admin-icon admin-plugin gmuw-alert" title="Website uses the Elementor plugin"></span> ';
-				}
-				if (!empty(get_post_meta($website->ID, 'uses_amr_shortcode_any_widget', true))) {
-					$return_value.=' <span class="admin-icon admin-plugin gmuw-alert" title="Website uses the AMR Shortcode Any Widget plugin"></span> ';
-				}
-				if (get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_property_account_post_id',true)==1) {
-					$return_value.=' <span class="admin-icon admin-code1" title="non-standard GTM container"></span> ';
-
-				}
-				if (get_post_meta(get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_property_account_post_id',true),'ga_account_permissions_missing',true)==1) {
-					$return_value.=' <span class="admin-icon admin-lock gmuw-alert" title="missing GA account permissions"></span> ';
-				}
-				if (!empty(get_post_meta($website->ID, 'website_hide', true))) {
-					$return_value.=' <span class="admin-icon admin-hidden gmuw-special" title="Website is hidden on the front-end from non-admins"></span> ';
-				}
 				$return_value.='</td>';
 
 				$return_value.='<td class="department">';
@@ -999,12 +948,64 @@ function gmuw_websitesgmu_production_website_listing_by_taxonomy($taxonomy,$taxo
 		    //$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'view').'</td>';
 
 				if (is_user_logged_in()) {
-		    	$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'edit').'</td>';
-		    }
+
+				//status
+				$return_value.='<td class="whitespace-nowrap">';
+				//is this a wordpress website?
+				if( has_term( 'wordpress', 'cms', $website->ID ) ) {
+					//does it have a production domain?
+					if (!empty($website->production_domain)) {
+						//is it our theme?
+						if (preg_match("/gmuj|Mason Twenty Twenty/i", $website->wordpress_theme)==0) {
+							$return_value.=' <span class="admin-icon admin-theme-conversion gmuw-info" title="theme conversion candidate"></span> ';
+						}
+					}
+
+				}
+				//good example of our official theme?
+				if ($website->good_example_official_theme == 1) {
+					$return_value.=' <span class="admin-icon admin-good-example gmuw-good" title="good example of official WordPress theme"></span> ';
+
+				}
+				if (!empty($website->notes_private)) {
+					$return_value.=' <span class="admin-icon admin-info gmuw-info" title="Has additional notes"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'working', true))) {
+					$return_value.=' <span class="admin-icon admin-working gmuw-good" title="currently working on this website"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'follow_up', true))) {
+					$return_value.=' <span class="admin-icon admin-follow-up gmuw-caution" title="needs follow-up"></span> ';
+				}
+				if (get_post_meta(get_post_meta($website->ID, 'website_gtm_container_post_id', true),'gtm_container_non_standard',true)==1) {
+					$return_value.=' <span class="admin-icon admin-code1 gmuw-warning" title="non-standard GTM container"></span> ';
+
+				}
+				if (!empty(get_post_meta($website->ID, 'php_version', true)) && substr(get_post_meta($website->ID, 'php_version', true), 0, 1)=='7') {
+					$return_value.=' <span class="admin-icon admin-config gmuw-warning" title="Website uses PHP 7.x"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'uses_elementor', true))) {
+					$return_value.=' <span class="admin-icon admin-plugin gmuw-alert" title="Website uses the Elementor plugin"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'uses_amr_shortcode_any_widget', true))) {
+					$return_value.=' <span class="admin-icon admin-plugin gmuw-alert" title="Website uses the AMR Shortcode Any Widget plugin"></span> ';
+				}
+				if (get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_property_account_post_id',true)==1) {
+					$return_value.=' <span class="admin-icon admin-code1" title="non-standard GTM container"></span> ';
+
+				}
+				if (get_post_meta(get_post_meta(get_post_meta($website->ID, 'website_ga_property_post_id', true),'ga_property_account_post_id',true),'ga_account_permissions_missing',true)==1) {
+					$return_value.=' <span class="admin-icon admin-lock gmuw-alert" title="missing GA account permissions"></span> ';
+				}
+				if (!empty(get_post_meta($website->ID, 'website_hide', true))) {
+					$return_value.=' <span class="admin-icon admin-hidden gmuw-special" title="Website is hidden on the front-end from non-admins"></span> ';
+				}
+				$return_value.='</td>';
+
+				//edit
+				$return_value.='<td>'.gmuw_websitesgmu_record_get_utility_link($website->ID,'edit').'</td>';
+				}
 
 				$return_value.='</tr>';
-
-
 
 			}
 
