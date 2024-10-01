@@ -165,7 +165,11 @@ function gmuw_websitesgmu_website_cms_login_link($post_id) {
 	$cms_login_url = gmuw_websitesgmu_website_cms_login_url($post_id);
 
 	// Get website CMS
-	$cms = wp_get_post_terms($post_id,'cms')[0]->slug;
+	if(count(wp_get_post_terms($post_id,'cms')) > 0) {
+		$cms = wp_get_post_terms($post_id,'cms')[0]->slug;
+	} else {
+		$cms = 'Unknown';
+	}
 
 	// Get logo based on CMS
 	$logo_image_url = gmuw_websitesgmu_cms_logo_url($cms);
