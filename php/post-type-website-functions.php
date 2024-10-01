@@ -731,7 +731,9 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>';
 			if (substr($post->php_version, 0, 1)=='7') {
 				$return_value .= 'PHP 7.x';
-				$return_value .= ' ('.get_userdata($post->website_task_upgrade_php_user)->user_login.')';
+				if(get_userdata($post->website_task_upgrade_php_user) !== FALSE){
+					$return_value .= ' ('.get_userdata($post->website_task_upgrade_php_user)->user_login.')';
+				}
 				$return_value .= '<br />';
 			}
 			if ($post->uses_elementor) {
