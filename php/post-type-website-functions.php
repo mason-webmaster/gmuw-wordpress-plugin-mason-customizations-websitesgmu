@@ -13,7 +13,7 @@ function gmuw_websitesgmu_website_hosting_domain($post_id,$include_protocol=True
 	$return_value='';
 
 	// Get web host
-	$web_host = ( count(wp_get_post_terms($post_id,'web_host')) > 0 ) ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'Unknown';
+	$web_host = wp_get_post_terms($post_id,'web_host') ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'unknown';
 
 	// Get environment name
 	$environment_name = get_post_meta($post_id,'environment_name',true );
@@ -49,7 +49,7 @@ function gmuw_websitesgmu_website_cms_login_url($post_id) {
 	$return_value.=gmuw_websitesgmu_website_hosting_domain($post_id);
 
 	// Get CMS
-	$cms = ( count(wp_get_post_terms($post_id,'cms')) > 0 ) ? wp_get_post_terms($post_id,'cms')[0]->slug : 'Unknown';
+	$cms = wp_get_post_terms($post_id,'cms') ? wp_get_post_terms($post_id,'cms')[0]->slug : 'unknown';
 
 	// Build CMS login URL based on CMS
 	if ($cms=='wordpress') {
@@ -72,7 +72,7 @@ function gmuw_websitesgmu_website_web_host_admin_url($post_id) {
 	$return_value='';
 
 	// Get website web host
-	$web_host = ( count(wp_get_post_terms($post_id,'web_host')) > 0 ) ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'Unknown';
+	$web_host = wp_get_post_terms($post_id,'web_host') ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'unknown';
 
 
 	// Get environment name
@@ -144,7 +144,7 @@ function gmuw_websitesgmu_website_cms_login_link($post_id) {
 	$return_value='';
 
 	// Get website web host
-	$web_host = ( count(wp_get_post_terms($post_id,'web_host')) > 0 ) ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'Unknown';
+	$web_host = wp_get_post_terms($post_id,'web_host') ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'unknown';
 
 
 	// Are we using a supported web host?
@@ -159,8 +159,7 @@ function gmuw_websitesgmu_website_cms_login_link($post_id) {
 	$cms_login_url = gmuw_websitesgmu_website_cms_login_url($post_id);
 
 	// Get website CMS
-	$cms = ( count(wp_get_post_terms($post_id,'cms')) > 0 ) ? wp_get_post_terms($post_id,'cms')[0]->slug : 'Unknown';
-
+	$cms = wp_get_post_terms($post_id,'cms') ? wp_get_post_terms($post_id,'cms')[0]->slug : 'unknown';
 
 	// Get logo based on CMS
 	$logo_image_url = gmuw_websitesgmu_cms_logo_url($cms);
@@ -180,7 +179,7 @@ function gmuw_websitesgmu_website_web_host_admin_link($post_id){
 	$return_value='';
 
 	// Get website web host
-	$web_host = ( count(wp_get_post_terms($post_id,'web_host')) > 0 ) ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'Unknown';
+	$web_host = wp_get_post_terms($post_id,'web_host') ? wp_get_post_terms($post_id,'web_host')[0]->slug : 'inknown';
 
 
 	// Are we using a supported web host?
@@ -723,9 +722,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>';
 			if (substr($post->php_version, 0, 1)=='7') {
 				$return_value .= 'PHP 7.x';
-				if(get_userdata($post->website_task_upgrade_php_user) !== FALSE){
-					$return_value .= ' ('.get_userdata($post->website_task_upgrade_php_user)->user_login.')';
-				}
+				$return_value .= get_userdata($post->website_task_upgrade_php_user) ? ' ('.get_userdata($post->website_task_upgrade_php_user)->user_login.')' : '';
 				$return_value .= '<br />';
 			}
 			if ($post->uses_elementor) {
