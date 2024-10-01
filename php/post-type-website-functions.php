@@ -13,7 +13,11 @@ function gmuw_websitesgmu_website_hosting_domain($post_id,$include_protocol=True
 	$return_value='';
 
 	// Get web host
-	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	if(count(wp_get_post_terms($post_id,'web_host')) > 0){
+		$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	} else{
+		$web_host = 'Unknown';
+	}
 
 	// Get environment name
 	$environment_name = get_post_meta($post_id,'environment_name',true );
@@ -143,7 +147,11 @@ function gmuw_websitesgmu_website_cms_login_link($post_id) {
 	$return_value='';
 
 	// Get website web host
-	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	if(count(wp_get_post_terms($post_id,'web_host')) > 0){
+		$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	} else{
+		$web_host = 'Unknown';
+	}
 
 	// Are we using a supported web host?
 	if ($web_host != 'wpengine' && $web_host != 'materiell' && $web_host != 'acquia-cloud-site-factory') {
@@ -177,7 +185,11 @@ function gmuw_websitesgmu_website_web_host_admin_link($post_id){
 	$return_value='';
 
 	// Get website web host
-	$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	if(count(wp_get_post_terms($post_id,'web_host')) > 0){
+		$web_host = wp_get_post_terms($post_id,'web_host')[0]->slug;
+	} else{
+		$web_host = 'Unknown';
+	}
 
 	// Are we using a supported web host?
 	if ($web_host != 'wpengine' && $web_host != 'materiell' && $web_host != 'acquia-cloud-site-factory') {
