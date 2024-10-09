@@ -57,7 +57,7 @@ function gmuw_websitesgmu_display_settings_page() {
 	//echo "<p>Mason WordPress database</p>";
 
 	// Do we have a theme update action to perform
-	if ($_GET["action"]=='update_theme') { 
+	if (isset($_GET["action"]) && $_GET["action"]=='update_theme') {
 		gmuw_websitesgmu_website_action_update_theme();
 	}
 
