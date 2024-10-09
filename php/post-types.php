@@ -115,6 +115,7 @@ function gmuw_websitesgmu_display_marked_record($post_id,$show_post_type=0,$mark
 
     //Initialize variables
     $return_value='';
+    $css_class='';
 
     // Set CSS class for displayed record
     switch ($mark_type){
