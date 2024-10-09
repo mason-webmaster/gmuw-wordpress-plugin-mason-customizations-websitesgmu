@@ -817,6 +817,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<thead>';
 		$return_value .= '<tr>';
 		$return_value .= '<th>Environment Name</th>';
+		$return_value .= '<th>Deleted</th>';
 		$return_value .= '<th>PHP Version</th>';
 		$return_value .= '<th>Post ID</th>';
 		$return_value .= '<th>Department</th>';
@@ -845,6 +846,10 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '">';
 			// Output row data
 			$return_value .= '<td>' . $post->environment_name.'</td>';
+			//deleted
+			$return_value .= '<td>';
+			$return_value .= ($post->deleted==1) ? 'deleted' : 'not_deleted';
+			$return_value .= '</td>';
 			$return_value .= '<td>' . $post->php_version.'</td>';
 			$return_value .= '<td>' . $post->ID . '</td>';
 
