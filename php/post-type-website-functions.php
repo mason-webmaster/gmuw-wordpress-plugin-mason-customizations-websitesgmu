@@ -342,61 +342,157 @@ function gmuw_websitesgmu_websites_content_statistics() {
 		// Display stats
 
 		$return_value .= '<h3>Total Website Records</h3>';
-		$return_value .= '<p>' . count(gmuw_websitesgmu_get_custom_posts('website','not-deleted')) . ' current website records.</p>';
-		$return_value .= '<p>(' . count(gmuw_websitesgmu_get_custom_posts('website','deleted')) . ' deleted; ' . count(gmuw_websitesgmu_get_custom_posts('website','all')) . ' total records)</p>';
+		//calculate using transients
+		$mytransientname='stats_total_website_records';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
+
+			$mydata .= '<p>' . count(gmuw_websitesgmu_get_custom_posts('website','not-deleted')) . ' current website records.</p>';
+			$mydata .= '<p>(' . count(gmuw_websitesgmu_get_custom_posts('website','deleted')) . ' deleted; ' . count(gmuw_websitesgmu_get_custom_posts('website','all')) . ' total records)</p>';
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		$return_value .= '<h3>Production Websites</h3>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
-		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+		//calculate using transients
+		$mytransientname='stats_prod_websites';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
 
-		$return_value .= '<p>' . gmuw_websitesgmu_websites_using_php7_only_production() . ' production websites using PHP 7.x';
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
+			$mydata .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+			$mydata .= '<p>' . gmuw_websitesgmu_websites_using_php7_only_production() . ' production websites using PHP 7.x';
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		$return_value .= '<h3>WordPress Websites</h3>';
+		//calculate using transients
+		$mytransientname='stats_wp_websites';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
 
-		// calculate stats
-			//how many instances are wordpress?
-				$wordpress_instances = count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
-			//how many wordpress instances are production?
-				$production_wordpress_instances=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','','cms','wordpress'));
-			//how many instances are using official wordpress theme?
-				$wordpress_instances_using_theme=gmuw_websitesgmu_websites_using_theme();
-			// how many wordpress instances using the theme are production?
-				$wordpress_production_instances_using_theme=gmuw_websitesgmu_websites_using_theme_only_production();
-			//how many instances are using Elementor?
-				$wordpress_instances_using_elementor=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
+			// calculate stats
+				//how many instances are wordpress?
+					$wordpress_instances = count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','','','cms','wordpress'));
+				//how many wordpress instances are production?
+					$production_wordpress_instances=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain','','cms','wordpress'));
+				//how many instances are using official wordpress theme?
+					$wordpress_instances_using_theme=gmuw_websitesgmu_websites_using_theme();
+				// how many wordpress instances using the theme are production?
+					$wordpress_production_instances_using_theme=gmuw_websitesgmu_websites_using_theme_only_production();
+				//how many instances are using Elementor?
+					$wordpress_instances_using_elementor=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
 
-		// display stats
-		$return_value .= '<p>'.$wordpress_instances . ' WordPress instances ('.gmuw_websitesgmu_get_website_total_percentage($wordpress_instances).')'.'</p>';
+			// display stats
+			$mydata .= '<p>'.$wordpress_instances . ' WordPress instances ('.gmuw_websitesgmu_get_website_total_percentage($wordpress_instances).')'.'</p>';
 
-		$return_value .= '<p>'.$production_wordpress_instances . ' WordPress instances are production ('.round($production_wordpress_instances/$wordpress_instances*100,2).'%)'.'</p>';
+			$mydata .= '<p>'.$production_wordpress_instances . ' WordPress instances are production ('.round($production_wordpress_instances/$wordpress_instances*100,2).'%)'.'</p>';
 
-		$return_value .= '<p>'.$wordpress_instances_using_theme . ' WordPress instances on official theme ('.round($wordpress_instances_using_theme/$wordpress_instances*100,2).'%)'.'</p>';
+			$mydata .= '<p>'.$wordpress_instances_using_theme . ' WordPress instances on official theme ('.round($wordpress_instances_using_theme/$wordpress_instances*100,2).'%)'.'</p>';
 
-		$return_value .= '<p>'.$wordpress_production_instances_using_theme . ' <em>production</em> WordPress instances on official theme ('.round($wordpress_production_instances_using_theme/$production_wordpress_instances*100,2).'%)'.'</p>';
+			$mydata .= '<p>'.$wordpress_production_instances_using_theme . ' <em>production</em> WordPress instances on official theme ('.round($wordpress_production_instances_using_theme/$production_wordpress_instances*100,2).'%)'.'</p>';
 
-		$return_value .= '<p>'.$wordpress_instances_using_elementor . ' WordPress instances are using Elementor ('.round($wordpress_instances_using_elementor/$wordpress_instances*100,2).'%)'.'</p>';
+			$mydata .= '<p>'.$wordpress_instances_using_elementor . ' WordPress instances are using Elementor ('.round($wordpress_instances_using_elementor/$wordpress_instances*100,2).'%)'.'</p>';
+
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		$return_value .= '<h3>GA/GTM Info</h3>';
+		//calculate using transients
+		$mytransientname='stats_analytics';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
 
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
-		$return_value .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','production_domain'));
+			$mydata .= '<p>'.$count . ' production websites ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		$count=count(gmuw_websitesgmu_production_websites_needing_analytics());
-		$return_value .= '<p>'.$count . ' production websites need analytics ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
+			$count=count(gmuw_websitesgmu_production_websites_needing_analytics());
+			$mydata .= '<p>'.$count . ' production websites need analytics ('.gmuw_websitesgmu_get_website_total_percentage($count).')'.'</p>';
 
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_gtm_container_post_id'));
-		$return_value .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
-		$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
-		$return_value .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_gtm_container_post_id'));
+			$mydata .= '<p>'.$count . ' with GTM ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
+			$count=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','website_ga_property_post_id'));
+			$mydata .= '<p>'.$count . ' with GA4 ('.round($count/count(gmuw_websitesgmu_production_websites_needing_analytics())*100,2).'%)'.'</p>';
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		// taxonomy: cms
-		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
+		//calculate using transients
+		$mytransientname='stats_taxonomy_cms';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
+
+			$mydata .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('cms');
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		// taxonomy: web_host
-		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('web_host');
+		//calculate using transients
+		$mytransientname='stats_taxonomy_webhost';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
+
+			$mydata .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('web_host');
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 		// taxonomy: department
-		$return_value .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('department');
+		//calculate using transients
+		$mytransientname='stats_taxonomy_dept';
+		$mytransient=get_transient($mytransientname);
+		if($mytransient) {
+			$return_value .= $mytransient;
+		} else {
+			$mydata='';
+
+			$mydata .= gmuw_websitesgmu_websites_display_stats_by_taxonomy('department');
+
+			//store data in transient
+			set_transient($mytransientname, $mydata, HOUR_IN_SECONDS/4);
+			//append my data to output
+			$return_value .= $mydata;
+		}
 
 	// Return value
 	return $return_value;
