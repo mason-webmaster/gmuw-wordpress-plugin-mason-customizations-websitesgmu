@@ -396,6 +396,8 @@ function gmuw_websitesgmu_websites_content_statistics() {
 					$wordpress_instances_using_theme=gmuw_websitesgmu_websites_using_theme();
 				// how many wordpress instances using the theme are production?
 					$wordpress_production_instances_using_theme=gmuw_websitesgmu_websites_using_theme_only_production();
+				// how many wordpress instances using the theme are production and have been updated to the new brand look?
+					$wordpress_production_instances_using_theme_updated_brand=gmuw_websitesgmu_websites_using_theme_only_production_updated_brand();
 				//how many instances are using Elementor?
 					$wordpress_instances_using_elementor=count(gmuw_websitesgmu_get_custom_posts('website','not-deleted','uses_elementor','1'));
 
@@ -407,6 +409,8 @@ function gmuw_websitesgmu_websites_content_statistics() {
 			$mydata .= '<p>'.$wordpress_instances_using_theme . ' WordPress instances on official theme ('.round($wordpress_instances_using_theme/$wordpress_instances*100,2).'%)'.'</p>';
 
 			$mydata .= '<p>'.$wordpress_production_instances_using_theme . ' <em>production</em> WordPress instances on official theme ('.round($wordpress_production_instances_using_theme/$production_wordpress_instances*100,2).'%)'.'</p>';
+
+			$mydata .= '<p>'.$wordpress_production_instances_using_theme_updated_brand . ' <em>production</em> WordPress instances on official theme with the updated brand look ('.round($wordpress_production_instances_using_theme_updated_brand/$wordpress_production_instances_using_theme*100,2).'%)'.'</p>';
 
 			$mydata .= '<p>'.$wordpress_instances_using_elementor . ' WordPress instances are using Elementor ('.round($wordpress_instances_using_elementor/$wordpress_instances*100,2).'%)'.'</p>';
 
@@ -597,6 +601,60 @@ function gmuw_websitesgmu_websites_using_theme_only_production() {
 		          'key'   => 'production_domain',
 		          'value' => '',
 		          'compare' => '!=',
+		        ),
+		      )
+		    )
+			)
+		)
+	);
+
+}
+
+/**
+ * Gets count of website environments using the official theme with the updated brand look
+ */
+function gmuw_websitesgmu_websites_using_theme_only_production_updated_brand() {
+
+	// Get total number of production wordpress websites using the official theme with the updated brand look
+
+	return count(
+		get_posts(
+			array(
+		    'post_type'  => 'website',
+		    'post_status' => 'publish',
+		    'nopaging' => true,
+		    'meta_query' => array(
+		      array(
+		        'relation' => 'AND',
+		        array(
+		          'relation' => 'OR',
+		          array(
+		            'key'   => 'deleted',
+		            'compare' => 'NOT EXISTS',
+		          ),
+		          array(
+		            'key'   => 'deleted',
+		            'value' => '1',
+		            'compare' => '!=',
+		          ),
+		        ),
+		        array(
+							'key'   => 'wordpress_theme',
+							'value' => 'gmuj|Mason Twenty Twenty Theme',
+		          'compare' => 'REGEXP',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'compare' => 'EXISTS',
+		        ),
+		        array(
+		          'key'   => 'production_domain',
+		          'value' => '',
+		          'compare' => '!=',
+		        ),
+		        array(
+		          'key'   => 'brand_update_completed',
+		          'value' => '1',
 		        ),
 		      )
 		    )
