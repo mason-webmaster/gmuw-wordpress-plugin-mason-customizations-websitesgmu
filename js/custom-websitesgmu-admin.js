@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 	//Implement datatables
 	jQuery('table.data_table').DataTable({
 	 	paging: false,
-		dom: 'Bfrtip',
+		dom: 'Bfritip',
 		buttons: [
 			'copy', 'excel', 'csv', 'print'
 		]
