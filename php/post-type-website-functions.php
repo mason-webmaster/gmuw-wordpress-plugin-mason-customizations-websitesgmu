@@ -879,6 +879,13 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>' . ($post->brand_update_completed==1?'YES':'') . '</td>';
 
 			$return_value .= '<td>';
+
+			//has production domain?
+			$return_value .= ($post->production_domain ? 'has_prod_domain' : 'no_prod_domain') . '<br/>';
+
+			//brand update completed?
+			$return_value .= ($post->brand_update_completed==1 ? 'wp_theme_brand_updated' : 'wp_theme_brand_not_updated') . '<br/>';
+
 			if (substr($post->php_version, 0, 1)=='7') {
 				$return_value .= 'PHP 7.x';
 				$return_value .= get_userdata($post->website_task_upgrade_php_user) ? ' ('.get_userdata($post->website_task_upgrade_php_user)->user_login.')' : '';
