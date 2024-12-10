@@ -821,6 +821,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>PHP Version</th>';
 		$return_value .= '<th>Post ID</th>';
 		$return_value .= '<th>Department</th>';
+		$return_value .= '<th>Contact</th>';
 		$return_value .= '<th>Web Host</th>';
 		$return_value .= '<th>CMS</th>';
 		$return_value .= '<th>Hosting Domain</th>';
@@ -858,6 +859,8 @@ function gmuw_websitesgmu_custom_website_list(){
 				$return_value .= $term->name;
 			}
 			$return_value .= '</td>';
+
+			$return_value .= '<td><a href="mailto:'.$post->website_primary_contact_person_email.'">' . $post->website_primary_contact_person_email . '</a></td>';
 
 			$return_value .= '<td>';
 			foreach ( wp_get_post_terms($post->ID,'web_host') as $term ) {
