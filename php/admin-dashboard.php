@@ -24,6 +24,9 @@ function gmuw_websitesgmu_custom_dashboard_meta_boxes() {
   /* Add 'follow-up' meta box */
   add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_follow_up", "Follow-up Records", "gmuw_websitesgmu_custom_dashboard_meta_box_follow_up", "dashboard","normal");
 
+  /* Add 'sites pending deletion' meta box */
+  add_meta_box("gmuw_websitesgmu_custom_dashboard_meta_box_sites_pending_deletion", "Sites Pending Deletion", "gmuw_websitesgmu_custom_dashboard_meta_box_sites_pending_deletion", "dashboard","normal");
+
 }
 
 /**
@@ -71,5 +74,61 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_links() {
   echo '<h3>Mason ITS</h3>';
   echo '<p><a href="https://its.gmu.edu/service/web-hosting/" target="_blank">ITS Website Web Hosting Service Page</a></p>';
   echo '<p><a href="https://gmu.teamdynamix.com/TDNext/Home/Desktop/Default.aspx" target="_blank">TeamDynamix</a></p>';
+
+}
+
+/**
+ * Provides content for the dashboard 'sites pending deletion' meta box
+ */
+function gmuw_websitesgmu_custom_dashboard_meta_box_sites_pending_deletion() {
+
+  //Get posts
+  $args = array(
+    'post_type'  => 'website',
+    'post_status' => 'publish',
+    'nopaging' => true,
+    'meta_key' => 'deletion_date',
+    'orderby' => 'meta_value_num',
+    'order' => 'DESC',
+    'meta_query' => array(
+      array(
+        'key'   => 'marked_for_deletion',
+        'value' => '1',
+        'compare' => '=',
+      ),
+    ),
+  );
+
+  $myposts = get_posts($args);
+
+  //if we have posts
+  if ($myposts) {
+
+    //start display table
+    echo '<table>';
+    echo '<thead>';
+    echo '<tr>';
+    echo '<th>Website</th>';
+    echo '<th>Deletion Date</th>';
+    echo '<th>&nbsp;</th>';
+    echo '</tr>';
+    echo '</thead>';
+
+    //loop through posts
+    foreach($myposts as $mypost) {
+
+        //display fields
+        echo '<tr>';
+        echo '<td>'.$mypost->post_title.'</td>';
+        echo '<td>'.DateTime::createFromFormat('Ymd',$mypost->deletion_date)->format('Y-m-d').'</td>';
+        echo '<td>'.gmuw_websitesgmu_record_get_utility_link($mypost->ID,'edit').'</td>';
+        echo '</tr>';
+
+    }
+
+    //end display table
+    echo '</table>';
+
+  }
 
 }
