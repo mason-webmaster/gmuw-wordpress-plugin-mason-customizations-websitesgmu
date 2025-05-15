@@ -120,7 +120,7 @@ function gmuw_websitesgmu_custom_dashboard_meta_box_sites_pending_deletion() {
         //display fields
         echo '<tr>';
         echo '<td>'.$mypost->post_title.'</td>';
-        echo '<td>'.DateTime::createFromFormat('Ymd',$mypost->deletion_date)->format('Y-m-d').'</td>';
+        echo '<td>'.($mypost->deletion_date ? DateTime::createFromFormat('Ymd',$mypost->deletion_date)->format('Y-m-d') : 'no date set').'</td>';
         echo '<td>'.gmuw_websitesgmu_record_get_utility_link($mypost->ID,'edit').'</td>';
         echo '</tr>';
 
