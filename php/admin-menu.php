@@ -81,6 +81,17 @@ function gmuw_websitesgmu_add_sublevel_menu() {
 		2
 	);
 
+	// Add admin menu item under Mason for this plugin's plugin lookup tool generator
+	add_submenu_page(
+		'gmuw',
+		'Website Plugin Lookup Tool',
+		'Website Plugin Lookup Tool',
+		'manage_options',
+		'gmuw_websitesgmu_website_plugin_tool',
+		'gmuw_websitesgmu_website_plugin_tool_page',
+		2
+	);
+
 }
 
 /**

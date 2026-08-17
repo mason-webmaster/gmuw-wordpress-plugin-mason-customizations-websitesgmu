@@ -69,3 +69,6 @@ require('php/taxonomies.php');
 
 // custom URL handling
   include('php/custom-urls.php');
+
+// custom lookup plugins feature
+  include('php/custom-lookup-plugins.php');

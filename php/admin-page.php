@@ -645,3 +645,35 @@ function gmuw_websitesgmu_website_analytics_implementation_tool_page() {
 	echo '</div>';
 
 }
+
+
+/**
+ * Generates the plugin plugin tool page
+ */
+function gmuw_websitesgmu_website_plugin_tool_page() {
+
+	// Only continue if this user has the 'manage options' capability
+	if (!current_user_can('manage_options')) return;
+
+	// Begin HTML output
+	echo "<div class='wrap'>";
+
+	// Page title
+	echo '<h1>' . esc_html(get_admin_page_title()) . '</h1>';
+
+	//get random wpengine site post id
+	$my_post_id=gmuw_websitesgmu_get_random_array_element(gmuw_websitesgmu_get_wpengine_site_ids());
+
+	echo '<p>Random WPEngine site: '.get_the_title($my_post_id).'</p>';
+
+	echo '<p>Updating plugins list...</p>';
+
+	//update plugin list postmeta
+	gmuw_websitesgmu_update_site_plugins_list($my_post_id);
+
+	echo wpautop(get_post_meta($my_post_id,'gmuw_plugin_list',true));
+	echo '<p>Last updated: '.wp_date( 'Y-m-D, H:i:s', get_post_meta($my_post_id,'gmuw_plugin_list_updated',true) ).'</p>';
+
+	echo '</div>';
+
+}
