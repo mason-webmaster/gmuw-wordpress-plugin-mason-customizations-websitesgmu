@@ -672,7 +672,7 @@ function gmuw_websitesgmu_website_plugin_tool_page() {
 	gmuw_websitesgmu_update_site_plugins_list($my_post_id);
 
 	echo wpautop(get_post_meta($my_post_id,'gmuw_plugin_list',true));
-	echo '<p>Last updated: '.wp_date( 'Y-m-D, H:i:s', get_post_meta($my_post_id,'gmuw_plugin_list_updated',true) ).'</p>';
+	echo '<p>Last updated: '.wp_date( 'Y-m-d, H:i:s', get_post_meta($my_post_id,'gmuw_plugin_list_updated',true) ).'</p>';
 
 	echo '</div>';
 
