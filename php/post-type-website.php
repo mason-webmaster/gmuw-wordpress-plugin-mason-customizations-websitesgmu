@@ -153,7 +153,7 @@ function gmuw_websitesgmu_website_custom_column ($column, $post_id) {
         case 'wordpress_theme_live':
             if (get_post_meta($post_id, 'deleted', true)!=1) {
                 if (has_term('wordpress', 'cms')) {
-                    if ($_GET['live_theme_check']=='1') {
+                    if (isset($_GET['live_theme_check']) && $_GET['live_theme_check']=='1') {
                         echo gmuw_websitesgmu_get_live_website_theme($post_id);
                     } else {
                         echo '<a href="'.$_SERVER['REQUEST_URI'].'&live_theme_check=1">enable</a>';
