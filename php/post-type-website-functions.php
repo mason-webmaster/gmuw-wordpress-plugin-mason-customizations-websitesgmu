@@ -750,7 +750,7 @@ function gmuw_websitesgmu_get_live_website_theme($post_id){
       //$return_value.='Domain: '.$domain.'<br />';
 
       // Set URL for REST endpoint
-      $mason_site_check_in_theme_info_endpoint_url='https://' . $domain . '/wp-json/gmuj-sci/theme-info';
+      $mason_site_check_in_theme_info_endpoint_url='https://' . $domain . '/wp-json/gmuw-sci/theme-info';
       //$return_value.='URL: '.$mason_site_check_in_theme_info_endpoint_url.'<br />';
 
       // Try to get the info
