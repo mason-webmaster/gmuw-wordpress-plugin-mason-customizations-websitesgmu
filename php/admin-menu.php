@@ -92,6 +92,17 @@ function gmuw_websitesgmu_add_sublevel_menu() {
 		2
 	);
 
+	// Add admin menu item under Mason for this plugin's website check tool
+	add_submenu_page(
+		'gmuw',
+		'Website Check Tool',
+		'Website Check Tool',
+		'manage_options',
+		'gmuw_websitesgmu_website_check_tool',
+		'gmuw_websitesgmu_website_check_tool_page',
+		2
+	);
+
 }
 
 /**

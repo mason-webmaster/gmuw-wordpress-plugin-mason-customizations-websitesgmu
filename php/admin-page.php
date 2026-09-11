@@ -683,3 +683,92 @@ function gmuw_websitesgmu_website_plugin_tool_page() {
 	echo '</div>';
 
 }
+
+/**
+ * Generates the site check admin page
+ */
+function gmuw_websitesgmu_website_check_tool_page() {
+
+	// Only continue if this user has the 'manage options' capability
+	if (!current_user_can('manage_options')) return;
+
+	// Begin HTML output
+	echo "<div class='wrap'>";
+
+	// Page title
+	echo '<h1>' . esc_html(get_admin_page_title()) . '</h1>';
+
+	//get post id from querystring
+	$my_post_id = absint($_GET['post_id'] ?? 0);
+
+	//if post id is not valid, exit
+	if (!$my_post_id) {
+	    wp_die('No post ID');
+	}
+
+	//get post from post id
+	$my_post=get_post($my_post_id);
+
+	//if post is not valid, exit
+	if (!$my_post || $my_post->post_type !== 'website') {
+	    wp_die('Not a valid website post');
+	}
+
+	//update plugin list postmeta
+	gmuw_websitesgmu_update_site_plugins_list($my_post_id);
+
+	//get plugin list postmeta
+	$my_plugins_list = get_post_meta($my_post_id,'gmuw_plugin_list',true);
+
+	//output
+	echo '<h2>Website Check Results</h2>';
+
+	//has production domain?
+	echo '<h3>Production Domain?</h3>';
+	echo '<p>' . ($my_post->production_domain ? 'has_prod_domain' : 'no_prod_domain') . '</p>';
+
+	//has dubbot id?
+	echo '<h3>DubBot?</h3>';
+	echo '<p>' . ($my_post->dubbot_site_id ? 'has_dubbot_id' : 'no_dubbot_id') . '</p>';
+
+	//php 7?
+	echo '<h3>PHP 7?</h3>';
+	if (substr($my_post->php_version, 0, 1)=='7') {
+		echo '<p>Yes</p>';
+	} else {
+		echo '<p>No</p>';
+	}
+
+	//login page secured?
+	echo '<h3>Login page secured?</h3>';
+	//todo
+
+	echo '<h3>Prohibited Plugins?</h3>';
+	//plugin: elementor
+	if (str_contains(strtolower($my_plugins_list), 'elementor')) {
+		echo '<p>Uses Elementor</p>';
+	}
+
+	//plugin: amr shortcode
+	if (str_contains(strtolower($my_plugins_list), 'amr-shortcode-any-widget')) {
+		echo '<p>Uses AMR Shortcode Any Widget</p>';
+	}
+
+	//plugin: collapse-o-matic
+	if (str_contains(strtolower($my_plugins_list), 'collapse-o-matic')) {
+		echo '<p>Uses Collapse-O-Matic</p>';
+	}
+
+	//theme
+	echo '<h3>Theme</h3>';
+	echo gmuw_websitesgmu_get_live_website_theme($my_post_id);
+
+	//plugins
+	echo '<h3>All Plugins</h3>';
+	echo wpautop($my_plugins_list);
+	echo '<p>Last updated: '.wp_date( 'Y-m-d, H:i:s', get_post_meta($my_post_id,'gmuw_plugin_list_updated',true) ).'</p>';
+
+	//end html output
+	echo '</div>';
+
+}
