@@ -5,6 +5,56 @@
 
 
 /**
+ * gets a general website name
+ */
+function gmuw_websitesgmu_website_name_general($post_id) {
+
+	// Initialize variables
+	$return_value='';
+	$web_host_name='';
+	$site_name='';
+
+	//get web host
+	//retrieve web host terms assigned to the post
+	$terms = wp_get_post_terms( $post_id, 'web_host' );
+
+	//verify no error occurred and at least one term exists
+	if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+	    $web_host_name .= $terms[0]->name;
+	} else {
+	    // Optional fallback if no term is assigned or taxonomy doesn't exist
+	    $web_host_name .= 'unknown';
+	}
+
+	//get site name
+
+	//use env. name if available
+	$site_name .= get_post_meta($post_id,'environment_name',true);
+
+	//if no env. name, fall back to production domain
+	if (!$site_name) {
+		$site_name .= get_post_meta($post_id,'production_domain',true);
+	}
+
+	//if no prod domain, fall back to hosting domain
+	if (!$site_name) {
+		$site_name .= gmuw_websitesgmu_website_hosting_domain($post_id,false);
+	}
+
+	//if no hosting domain, fall back to 'unknown'
+	if (!$site_name) {
+		$site_name .= 'unknown';
+	}
+
+	//build general site name
+	$return_value.=$site_name . ' ('.$web_host_name.')';
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
  * Builds hosting domain URLs
  */
 function gmuw_websitesgmu_website_hosting_domain($post_id,$include_protocol=True) {
@@ -816,6 +866,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<table class="data_table">';
 		$return_value .= '<thead>';
 		$return_value .= '<tr>';
+		$return_value .= '<th>Name</th>';
 		$return_value .= '<th>Links</th>';
 		$return_value .= '<th>Environment Name</th>';
 		$return_value .= '<th>Deleted</th>';
@@ -844,6 +895,9 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= $post->working==1 ? 'working ' : '';
 			$return_value .= '">';
 			// Output row data
+
+			//general name
+			$return_value .= '<td>' . gmuw_websitesgmu_website_name_general($post->ID) . '</td>';
 
 			//links
 			$return_value .= '<td>';
