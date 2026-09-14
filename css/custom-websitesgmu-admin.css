@@ -71,6 +71,10 @@
 	content: "\f106";
 }
 
+.admin-site-check:before {
+	content: "\f13a";
+}
+
 /* editor styles */
 
 /* post deleted */

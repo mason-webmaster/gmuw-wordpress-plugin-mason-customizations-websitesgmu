@@ -78,6 +78,8 @@ function gmuw_websitesgmu_website_links($post_id) {
 	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_website_web_host_admin_link($post_id);
 	//dubbot link
 	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_dubbot_link($post_id);
+	//site check link
+	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_website_wp_site_check_page_link($post_id);
 
 	// Return value
 	return $return_value;
@@ -162,6 +164,33 @@ function gmuw_websitesgmu_website_wp_plugin_page_link($post_id) {
 
 		// build link element
 		$return_value.='<a class="admin-icon admin-plugin" target="_blank" href="'.$link_url.'"></a>';
+
+	}
+
+	// Return value
+	return $return_value;
+
+}
+
+/**
+ * Builds wordpress site check page link
+ */
+function gmuw_websitesgmu_website_wp_site_check_page_link($post_id) {
+
+	// Initialize variables
+	$return_value='';
+
+	// Get CMS
+	$cms = wp_get_post_terms($post_id,'cms') ? wp_get_post_terms($post_id,'cms')[0]->slug : 'unknown';
+
+	// Build CMS plugin link
+	if ($cms=='wordpress') {
+
+		//build url
+		$link_url = '/wp-admin/admin.php?page=gmuw_websitesgmu_website_check_tool&post_id='.$post_id;
+
+		// build link element
+		$return_value.='<a class="admin-icon admin-site-check" target="_blank" href="'.$link_url.'"></a>';
 
 	}
 
