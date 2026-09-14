@@ -5,6 +5,14 @@
 .data_table .deleted {text-decoration: line-through;}
 .data_table .working {background-color: #99ffcc;}
 
+.data_table tr:nth-child(even) {
+	background-color: lightgray;
+}
+
+.data_table td {
+	vertical-align: top
+}
+
 /* dashboard meta boxes */
 #dashboard-widgets-wrap .postbox ul ul {
 	margin-left: 1em;
