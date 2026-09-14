@@ -54,6 +54,34 @@ function gmuw_websitesgmu_website_name_general($post_id) {
 
 }
 
+
+/**
+ * gets general website links
+ */
+function gmuw_websitesgmu_website_links($post_id) {
+
+	// Initialize variables
+	$return_value='';
+
+	//is post deleted?
+	$post_deleted = get_post_meta($post_id,'deleted',true);
+
+	//view
+	$return_value .= gmuw_websitesgmu_record_get_utility_link($post_id,'view');
+	//edit
+	$return_value .= gmuw_websitesgmu_record_get_utility_link($post_id,'edit');
+	//login link
+	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_website_cms_login_link($post_id);
+	//web host admin link
+	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_website_web_host_admin_link($post_id);
+	//dubbot link
+	if (!$post_deleted==1) $return_value .= gmuw_websitesgmu_dubbot_link($post_id);
+
+	// Return value
+	return $return_value;
+
+}
+
 /**
  * Builds hosting domain URLs
  */
@@ -900,20 +928,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>' . gmuw_websitesgmu_website_name_general($post->ID) . '</td>';
 
 			//links
-			$return_value .= '<td>';
-
-			//view
-			$return_value .= gmuw_websitesgmu_record_get_utility_link($post->ID,'view');
-			//edit
-			$return_value .= gmuw_websitesgmu_record_get_utility_link($post->ID,'edit');
-			//login link
-			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_website_cms_login_link($post->ID);
-			//web host admin link
-			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_website_web_host_admin_link($post->ID);
-			//dubbot link
-			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_dubbot_link($post->ID);
-
-			$return_value .= '</td>';
+			$return_value .= '<td>'. gmuw_websitesgmu_website_links($post->ID) . '</td>';
 
 			//environment name
 			//$return_value .= '<td>' . $post->environment_name.'</td>';
