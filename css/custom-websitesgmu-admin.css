@@ -146,3 +146,16 @@
 	background-color:green;
 	color:white;
 }
+
+/* website links */
+.data_table .website_links a {
+	margin-right:0.25em;
+}
+
+.data_table .website_links {
+	display:flex;
+}
+
+.data_table .website_links a img {
+	width:20px !important;
+}

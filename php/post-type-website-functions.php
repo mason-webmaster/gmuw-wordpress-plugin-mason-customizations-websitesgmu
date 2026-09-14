@@ -163,7 +163,7 @@ function gmuw_websitesgmu_website_wp_plugin_page_link($post_id) {
 		$link_url = gmuw_websitesgmu_website_hosting_domain($post_id) . '/wp-admin/plugins.php';
 
 		// build link element
-		$return_value.='<a class="admin-icon admin-plugin" target="_blank" href="'.$link_url.'"></a>';
+		$return_value.='<a class="admin-icon admin-plugin" target="_blank" title="Plugins" href="'.$link_url.'"></a>';
 
 	}
 
@@ -190,7 +190,7 @@ function gmuw_websitesgmu_website_wp_site_check_page_link($post_id) {
 		$link_url = '/wp-admin/admin.php?page=gmuw_websitesgmu_website_check_tool&post_id='.$post_id;
 
 		// build link element
-		$return_value.='<a class="admin-icon admin-site-check" target="_blank" href="'.$link_url.'"></a>';
+		$return_value.='<a class="admin-icon admin-site-check" target="_blank" title="Check site" href="'.$link_url.'"></a>';
 
 	}
 
@@ -985,7 +985,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td>' . gmuw_websitesgmu_website_name_general($post->ID) . '</td>';
 
 			//links
-			$return_value .= '<td>'. gmuw_websitesgmu_website_links($post->ID) . '</td>';
+			$return_value .= '<td class="website_links">'. gmuw_websitesgmu_website_links($post->ID) . '</td>';
 
 			//environment name
 			//$return_value .= '<td>' . $post->environment_name.'</td>';
