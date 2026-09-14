@@ -853,23 +853,11 @@ function gmuw_websitesgmu_custom_website_list(){
 			//edit
 			$return_value .= gmuw_websitesgmu_record_get_utility_link($post->ID,'edit');
 			//login link
-			if ($post->deleted==1) {
-				$return_value .= '&nbsp;';
-			} else {
-				$return_value .= gmuw_websitesgmu_website_cms_login_link($post->ID);
-			}
+			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_website_cms_login_link($post->ID);
 			//web host admin link
-			if ($post->deleted==1) {
-				$return_value .= '&nbsp;';
-			} else {
-				$return_value .= gmuw_websitesgmu_website_web_host_admin_link($post->ID);
-			}
+			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_website_web_host_admin_link($post->ID);
 			//dubbot link
-			if ($post->deleted==1) {
-				$return_value .= '&nbsp;';
-			} else {
-				$return_value .= gmuw_websitesgmu_dubbot_link($post->ID);
-			}
+			if (!$post->deleted==1) $return_value .= gmuw_websitesgmu_dubbot_link($post->ID);
 
 			$return_value .= '</td>';
 
