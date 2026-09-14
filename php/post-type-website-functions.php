@@ -151,9 +151,6 @@ function gmuw_websitesgmu_website_wp_plugin_page_link($post_id) {
 	// Initialize variables
 	$return_value='';
 
-	// Get web hosting domain
-	//$return_value.=gmuw_websitesgmu_website_hosting_domain($post_id);
-
 	// Get CMS
 	$cms = wp_get_post_terms($post_id,'cms') ? wp_get_post_terms($post_id,'cms')[0]->slug : 'unknown';
 
