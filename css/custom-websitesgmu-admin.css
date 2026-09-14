@@ -67,6 +67,10 @@
 	content: "\f464";
 }
 
+.admin-plugin:before {
+	content: "\f106";
+}
+
 /* editor styles */
 
 /* post deleted */
