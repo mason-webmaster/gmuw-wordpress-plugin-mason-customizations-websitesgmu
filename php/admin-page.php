@@ -725,11 +725,11 @@ function gmuw_websitesgmu_website_check_tool_page() {
 
 	//has production domain?
 	echo '<h3>Production Domain?</h3>';
-	echo '<p>' . ($my_post->production_domain ? 'has_prod_domain' : 'no_prod_domain') . '</p>';
+	echo '<p>' . ($my_post->production_domain ? 'YES' : 'NO') . '</p>';
 
 	//has dubbot id?
 	echo '<h3>DubBot?</h3>';
-	echo '<p>' . ($my_post->dubbot_site_id ? 'has_dubbot_id' : 'no_dubbot_id') . '</p>';
+	echo '<p>' . ($my_post->dubbot_site_id ? 'YES' : 'NO') . '</p>';
 
 	//php 7?
 	echo '<h3>PHP 7?</h3>';
