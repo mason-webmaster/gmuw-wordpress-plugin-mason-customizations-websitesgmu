@@ -832,11 +832,7 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>Notes</th>';
 		$return_value .= '<th>Follow-Up</th>';
 		$return_value .= '<th>Data Feeds</th>';
-		$return_value .= '<th>View</th>';
-		$return_value .= '<th>Edit</th>';
-		$return_value .= '<th>Admin Login</th>';
-		$return_value .= '<th>Web Host Admin</th>';
-		$return_value .= '<th>DubBot</th>';
+		$return_value .= '<th>Links</th>';
 		$return_value .= '</tr>';
 		$return_value .= '</thead>';
 		$return_value .= '<tbody>';
@@ -926,27 +922,32 @@ function gmuw_websitesgmu_custom_website_list(){
 			}
 			$return_value .= '</td>';
 
-			$return_value .= '<td>' . gmuw_websitesgmu_record_get_utility_link($post->ID,'view') .'</td>';
+			$return_value .= '<td>';
 
-			$return_value .= '<td>' . gmuw_websitesgmu_record_get_utility_link($post->ID,'edit') .'</td>';
-
+			//view
+			$return_value .= gmuw_websitesgmu_record_get_utility_link($post->ID,'view');
+			//edit
+			$return_value .= gmuw_websitesgmu_record_get_utility_link($post->ID,'edit');
+			//login link
 			if ($post->deleted==1) {
-				$return_value .= '<td>&nbsp;</td>';
+				$return_value .= '&nbsp;';
 			} else {
-				$return_value .= '<td>'.gmuw_websitesgmu_website_cms_login_link($post->ID).'</td>';
+				$return_value .= gmuw_websitesgmu_website_cms_login_link($post->ID);
+			}
+			//web host admin link
+			if ($post->deleted==1) {
+				$return_value .= '&nbsp;';
+			} else {
+				$return_value .= gmuw_websitesgmu_website_web_host_admin_link($post->ID);
+			}
+			//dubbot link
+			if ($post->deleted==1) {
+				$return_value .= '&nbsp;';
+			} else {
+				$return_value .= gmuw_websitesgmu_dubbot_link($post->ID);
 			}
 
-			if ($post->deleted==1) {
-				$return_value .= '<td>&nbsp;</td>';
-			} else {
-				$return_value .= '<td>'.gmuw_websitesgmu_website_web_host_admin_link($post->ID).'</td>';
-			}
-
-			if ($post->deleted==1) {
-				$return_value .= '<td>&nbsp;</td>';
-			} else {
-				$return_value .= '<td>'.gmuw_websitesgmu_dubbot_link($post->ID).'</td>';
-			}
+			$return_value .= '</td>';
 
 			// Finish row
 			$return_value .= '</tr>';
