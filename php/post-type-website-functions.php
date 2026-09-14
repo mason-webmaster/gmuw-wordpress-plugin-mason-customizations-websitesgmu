@@ -868,13 +868,13 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<tr>';
 		$return_value .= '<th>Name</th>';
 		$return_value .= '<th>Links</th>';
-		$return_value .= '<th>Environment Name</th>';
+		//$return_value .= '<th>Environment Name</th>';
 		$return_value .= '<th>Deleted</th>';
 		$return_value .= '<th>PHP Version</th>';
 		$return_value .= '<th>Post ID</th>';
 		$return_value .= '<th>Department</th>';
 		$return_value .= '<th>Contact</th>';
-		$return_value .= '<th>Web Host</th>';
+		//$return_value .= '<th>Web Host</th>';
 		$return_value .= '<th>CMS</th>';
 		$return_value .= '<th>Hosting Domain</th>';
 		$return_value .= '<th>Production Domain</th>';
@@ -916,7 +916,8 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '</td>';
 
 			//environment name
-			$return_value .= '<td>' . $post->environment_name.'</td>';
+			//$return_value .= '<td>' . $post->environment_name.'</td>';
+
 			//deleted
 			$return_value .= '<td>';
 			$return_value .= ($post->deleted==1) ? 'deleted' : 'not_deleted';
@@ -932,11 +933,13 @@ function gmuw_websitesgmu_custom_website_list(){
 
 			$return_value .= '<td><a href="mailto:'.$post->website_primary_contact_person_email.'">' . $post->website_primary_contact_person_email . '</a></td>';
 
+			/*
 			$return_value .= '<td>';
 			foreach ( wp_get_post_terms($post->ID,'web_host') as $term ) {
 				$return_value .= $term->name;
 			}
 			$return_value .= '</td>';
+			*/
 
 			$return_value .= '<td>';
 			foreach ( wp_get_post_terms($post->ID,'cms') as $term ) {
