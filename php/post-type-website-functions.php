@@ -1024,7 +1024,7 @@ function gmuw_websitesgmu_custom_website_list(){
 			$return_value .= '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
 			$return_value .= '<td>' . $post->wordpress_theme . '</td>';
 
-			$return_value .= '<td>' . wpautop($post->gmuw_plugin_list) .wp_date( 'Y-m-d, H:i:s', $post->gmuw_plugin_list_updated ). '</td>';
+			$return_value .= '<td>' . nl2br($post->gmuw_plugin_list) .wp_date( 'Y-m-d, H:i:s', $post->gmuw_plugin_list_updated ). '</td>';
 
 			$return_value .= '<td>';
 
