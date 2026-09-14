@@ -907,7 +907,6 @@ function gmuw_websitesgmu_custom_website_list(){
 		$return_value .= '<th>Hosting Domain</th>';
 		$return_value .= '<th>Production Domain</th>';
 		$return_value .= '<th>Theme</th>';
-		$return_value .= '<th>New Brand?</th>';
 		$return_value .= '<th>Plugins</th>';
 		$return_value .= '<th>Notes</th>';
 		$return_value .= '<th>Follow-Up</th>';
@@ -966,8 +965,6 @@ function gmuw_websitesgmu_custom_website_list(){
 
 			$return_value .= '<td><a href="https://'.$post->production_domain.'" target="_blank">' . $post->production_domain . '</a></td>';
 			$return_value .= '<td>' . $post->wordpress_theme . '</td>';
-
-			$return_value .= '<td>' . ($post->brand_update_completed==1?'YES':'') . '</td>';
 
 			$return_value .= '<td>' . wpautop($post->gmuw_plugin_list) .wp_date( 'Y-m-d, H:i:s', $post->gmuw_plugin_list_updated ). '</td>';
 
