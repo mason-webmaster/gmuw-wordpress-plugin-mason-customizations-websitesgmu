@@ -741,7 +741,7 @@ function gmuw_websitesgmu_website_check_tool_page() {
 
 	//login page secured?
 	echo '<h3>Login page secured?</h3>';
-	//todo
+	echo gmuw_websitesgmu_check_website_login_page(gmuw_websitesgmu_website_hosting_domain($my_post_id));
 
 	echo '<h3>Prohibited Plugins?</h3>';
 	//plugin: elementor
@@ -770,5 +770,55 @@ function gmuw_websitesgmu_website_check_tool_page() {
 
 	//end html output
 	echo '</div>';
+
+}
+
+/**
+ * Get the HTTP response code for a URL.
+ *
+ * @param string $url
+ * @return int|false
+ */
+function gmuw_websitesgmu_get_url_response_code($url) {
+
+    $response = wp_remote_head(
+        $url,
+        array(
+            'timeout'     => 10,
+            'redirection' => 0, // optional
+        )
+    );
+
+    if ( is_wp_error( $response ) ) {
+        return false;
+    }
+
+    return wp_remote_retrieve_response_code( $response );
+}
+
+// function to check the http response status code for the WP login page for a given domain
+function gmuw_websitesgmu_check_website_login_page($domain){
+
+	//get login page url
+	$url  = $domain.'/wp-login.php';
+
+	//get response code
+	$code = gmuw_websitesgmu_get_url_response_code($url);
+
+	//set return value
+	switch ($code) {
+		case '403':
+			$return_value = 'Secure (HTTP 403)';
+			break;
+		case '200':
+			$return_value = 'Insecure (HTTP 200)';
+			break;
+		default:
+			$return_value = $code;
+			break;
+	}
+
+	//return value
+	return $return_value;
 
 }
