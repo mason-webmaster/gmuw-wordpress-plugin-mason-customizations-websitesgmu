@@ -741,7 +741,7 @@ function gmuw_websitesgmu_website_check_tool_page() {
 
 	//login page secured?
 	echo '<h3>Login page secured?</h3>';
-	echo gmuw_websitesgmu_check_website_login_page(gmuw_websitesgmu_website_hosting_domain($my_post_id));
+	//echo gmuw_websitesgmu_check_website_login_page(gmuw_websitesgmu_website_hosting_domain($my_post_id));
 
 	echo '<h3>Prohibited Plugins?</h3>';
 	//plugin: elementor
@@ -796,7 +796,7 @@ function gmuw_websitesgmu_get_url_response_code($url) {
     return wp_remote_retrieve_response_code( $response );
 }
 
-// function to check the http response status code for the WP login page for a given domain
+//function to check whether the URL for the WP login page for a domain is accessible from this website/server. Unfortunately this always returns 200 for another website within the same hosting account, which is not an accurate reflection of how it appears publicly.
 function gmuw_websitesgmu_check_website_login_page($domain){
 
 	//get login page url
